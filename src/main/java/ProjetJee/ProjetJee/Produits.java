@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -16,6 +17,8 @@ public class Produits {
 	private Long id;
 	private String name;
 	private double prix;
+	@Lob
+	private byte[] image;
 	private int stock;
 	private String numeroPlace;
 	@ManyToOne
@@ -27,6 +30,21 @@ public class Produits {
 	public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
+	public Long getId() {
+	    return id;
+	}
+	
+
+
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	public void setId(Long id) {
+	    this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

@@ -18,7 +18,6 @@ public class CategorieController {
 
 	@GetMapping(path = "/addCategorie")
 	public String showForm(Model model) {
-		System.out.println("CDCSDCDSCSDCDCDCDSCD");
 		model.addAttribute("categorie", new Categorie());
 		return "categorieForm";
 	}

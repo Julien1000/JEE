@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ajouter un Produit</title>
+</head>
+<body>
+    <form th:action="@{/saveProduits}" th:object="${produits}" method="post" enctype="multipart/form-data">
+        Nom du produits: <input type="text" th:field="*{name}" />
+        Prix du produits: <input type="number" th:field="*{prix}" />
+        Nombres de stocks: <input type="number" th:field="*{stock}" />
+        Numéro de place: <input type="text" th:field="*{numeroPlace}" />
+        Image :  <input type="file" id="image" name="image" required />
+		<input type="hidden" th:field="*{id}" />
+        
+        <input type="submit" value="Ajouter" />
+    </form>
+</body>
+</html>
