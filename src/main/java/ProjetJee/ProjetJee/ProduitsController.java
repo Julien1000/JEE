@@ -43,28 +43,28 @@ public class ProduitsController {
 	public String saveProduct(
 	    @RequestParam(value="id", required=false) Long id,
 	    @RequestParam("name") String name,
-	    @RequestParam("prix") double prix,
-	    @RequestParam("stock") int stock,
+	    @RequestParam("prix") String prix,
+	    @RequestParam("stock") String stock,
 	    @RequestParam("numeroPlace") String numeroPlace,
 	    @RequestParam("categorie") Long categorieId,   // Modification ici: Utilisation de "categorie" comme nom du paramètre
 	    @RequestParam("image") MultipartFile file
 	) throws IOException {
 
-	    Produits produit;
+	    Produits produits;
 
 	    // Si un ID est fourni, tentez de récupérer le produit existant.
 	    // Sinon, créez un nouveau produit.
 	    if (id != null) {
-	        produit = produitsRepository.findById(id).orElse(new Produits());
+	        produits = produitsRepository.findById(id).orElse(new Produits());
 	    } else {
-	        produit = new Produits();
+	        produits = new Produits();
 	    }
 
-	    // Mettez à jour les attributs du produit.
-	    produit.setName(name);
-	    produit.setPrix(prix);
-	    produit.setStock(stock);
-	    produit.setNumeroPlace(numeroPlace);
+//	    // Mettez à jour les attributs du produit.
+	    produits.setName(name);
+	    produits.setPrix(Double.parseDouble(prix));
+	    produits.setStock(Integer.parseInt(stock));
+	    produits.setNumeroPlace(numeroPlace);
 
 	    // Gérer l'affectation de la catégorie.
 	    Categorie cat = categorieRepository.findById(categorieId).orElse(null);
@@ -73,17 +73,17 @@ public class ProduitsController {
 	        // Par exemple, rediriger vers un message d'erreur ou une page spécifique.
 	        return "errorPage";  // Assurez-vous d'avoir une vue ou une page pour gérer cette erreur.
 	    } else {
-	        produit.setCategorie(cat);
+	        produits.setCategorie(cat);
 	    }
 
 	    // Traitez l'image si elle est fournie.
 	    if (file != null && !file.isEmpty()) {
 	        byte[] bytes = file.getBytes();
-	        produit.setImage(bytes);
+	        produits.setImage(bytes);
 	    }
 
 	    // Sauvegardez le produit, qu'il soit nouveau ou modifié.
-	    produitsRepository.save(produit);
+	    produitsRepository.save(produits);
 
 	    return "redirect:/produits";
 	}
