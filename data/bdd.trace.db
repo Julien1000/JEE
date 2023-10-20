@@ -1088,3 +1088,12 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /home/cytech/AA-
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
 2023-10-20 10:12:22 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+<<<<<<< HEAD
+=======
+2023-10-20 11:21:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+>>>>>>> 51fd9ca7184873e1e19c0dc6fa10cc0a471e5286
+2023-10-20 13:06:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+2023-10-20 13:08:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
