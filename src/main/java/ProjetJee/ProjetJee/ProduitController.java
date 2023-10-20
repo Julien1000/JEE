@@ -24,22 +24,22 @@ import org.springframework.ui.Model;
 
 
 @Controller
-public class ProduitsController {
+public class ProduitController {
 
 	@Autowired
-	private ProduitsRepository produitsRepository;
+	private ProduitRepository produitRepository;
 	@Autowired
 	private CategorieRepository categorieRepository;
 
-	@GetMapping(path = "/addProduits")
+	@GetMapping(path = "/addProduit")
 	public String showForm(Model model) {
 		List<Categorie> categories = (List<Categorie>) categorieRepository.findAll();
 	    model.addAttribute("categories", categories);
-		model.addAttribute("produits", new Produits());
-		return "produitsForm";
+		model.addAttribute("produit", new Produit());
+		return "produitForm";
 	}
 
-	@PostMapping("/saveProduits")
+	@PostMapping("/saveProduit")
 	public String saveProduct(
 	    @RequestParam(value="id", required=false) Long id,
 	    @RequestParam("name") String name,
@@ -50,21 +50,21 @@ public class ProduitsController {
 	    @RequestParam("image") MultipartFile file
 	) throws IOException {
 
-	    Produits produits;
+	    Produit produit;
 
 	    // Si un ID est fourni, tentez de récupérer le produit existant.
 	    // Sinon, créez un nouveau produit.
 	    if (id != null) {
-	        produits = produitsRepository.findById(id).orElse(new Produits());
+	        produit = produitRepository.findById(id).orElse(new Produit());
 	    } else {
-	        produits = new Produits();
+	        produit = new Produit();
 	    }
 
 //	    // Mettez à jour les attributs du produit.
-	    produits.setName(name);
-	    produits.setPrix(Double.parseDouble(prix));
-	    produits.setStock(Integer.parseInt(stock));
-	    produits.setNumeroPlace(numeroPlace);
+	    produit.setName(name);
+	    produit.setPrix(Double.parseDouble(prix));
+	    produit.setStock(Integer.parseInt(stock));
+	    produit.setNumeroPlace(numeroPlace);
 
 	    // Gérer l'affectation de la catégorie.
 	    Categorie cat = categorieRepository.findById(categorieId).orElse(null);
@@ -73,32 +73,32 @@ public class ProduitsController {
 	        // Par exemple, rediriger vers un message d'erreur ou une page spécifique.
 	        return "errorPage";  // Assurez-vous d'avoir une vue ou une page pour gérer cette erreur.
 	    } else {
-	        produits.setCategorie(cat);
+	        produit.setCategorie(cat);
 	    }
 
 	    // Traitez l'image si elle est fournie.
 	    if (file != null && !file.isEmpty()) {
 	        byte[] bytes = file.getBytes();
-	        produits.setImage(bytes);
+	        produit.setImage(bytes);
 	    }
 
 	    // Sauvegardez le produit, qu'il soit nouveau ou modifié.
-	    produitsRepository.save(produits);
+	    produitRepository.save(produit);
 
-	    return "redirect:/produits";
+	    return "redirect:/produit";
 	}
 
 
 
-	@GetMapping(path = "/produits")
-	public String listProduits(Model model) {
-	    List<Produits> allProducts = (List<Produits>) produitsRepository.findAll();
+	@GetMapping(path = "/produit")
+	public String listProduit(Model model) {
+	    List<Produit> allProducts = (List<Produit>) produitRepository.findAll();
 	    model.addAttribute("produits", allProducts);
-	    return "produitsList";
+	    return "produitList";
 	}
 	@GetMapping("/displayImage/{id}")
 	public ResponseEntity<byte[]> displayImage(@PathVariable Long id) {
-	    java.util.Optional<Produits> produit = produitsRepository.findById(id);
+	    java.util.Optional<Produit> produit = produitRepository.findById(id);
 	    
 	    if (produit.isPresent() && produit.get().getImage() != null) {
 	        return ResponseEntity.ok()
@@ -112,12 +112,12 @@ public class ProduitsController {
 	
 	@GetMapping("/deleteProduct/{id}")
 	public String deleteProduct(@PathVariable Long id) {
-	    produitsRepository.deleteById(id);
+	    produitRepository.deleteById(id);
 	    return "redirect:/produits";
 	}
 	@GetMapping("/editProduct/{id}")
 	public String editProduct(@PathVariable Long id, Model model) {
-	    java.util.Optional<Produits> produit = produitsRepository.findById(id);
+	    java.util.Optional<Produit> produit = produitRepository.findById(id);
 	    if (produit.isPresent()) {
 	        model.addAttribute("produits", produit.get());
 	        model.addAttribute("categories", categorieRepository.findAll());
@@ -129,7 +129,7 @@ public class ProduitsController {
 	
 	@GetMapping(path = "/produits/{idCategorie}")
 	public String listProductsByCategory(@PathVariable("idCategorie") Long idCategorie, Model model) {
-	    List<Produits> produits = produitsRepository.findByCategorieId(idCategorie);
+	    List<Produit> produits = produitRepository.findByCategorieId(idCategorie);
 	    model.addAttribute("produits", produits);
 	    return "productsByCategory";  // Name of the Thymeleaf template
 	}

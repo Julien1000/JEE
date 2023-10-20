@@ -11,7 +11,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Produits {
+public class Produit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -82,7 +82,7 @@ public class Produits {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produits other = (Produits) obj;
+		Produit other = (Produit) obj;
 		return Objects.equals(categorie, other.categorie) && Objects.equals(id, other.id)
 				&& Objects.equals(name, other.name) && Objects.equals(numeroPlace, other.numeroPlace)
 				&& Double.doubleToLongBits(prix) == Double.doubleToLongBits(other.prix) && stock == other.stock;
