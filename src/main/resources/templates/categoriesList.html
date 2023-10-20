@@ -16,6 +16,8 @@
             <tr th:each="categorie : ${categories}">
                 <td th:text="${categorie.id}"></td>
                 <td th:text="${categorie.name}"></td>
+                <td><a th:href="@{'/editCategorie/' + ${categorie.id}}">Edit</a></td>
+        		<td><a th:href="@{'/deleteCategorie/' + ${categorie.id}}">Delete</a></td>
             </tr>
         </tbody>
     </table>

@@ -1,11 +1,13 @@
 package ProjetJee.ProjetJee;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
@@ -14,6 +16,8 @@ public class Categorie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	@OneToMany(mappedBy = "categorie")
+	private List<Produits> produits;
 	
 	public Long getId() {
 		return id;
