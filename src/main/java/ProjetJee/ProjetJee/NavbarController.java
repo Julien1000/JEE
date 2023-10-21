@@ -33,10 +33,10 @@ import org.springframework.ui.Model;
 
 
 @Controller
-public class IndexController {
+public class NavbarController {
 
-    @GetMapping("/index")
+    @GetMapping("/navbar")
     public String afficherMaPage() {
-        return "index"; // Le nom de votre template HTML
+        return "navbar"; // Le nom de votre template HTML
     }
 }
