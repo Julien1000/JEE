@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Navbar</title>
@@ -37,13 +40,25 @@
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Accueil</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Concert</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Spectacle</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Sport</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Loisirs</a>
-
+			  <a href="/index" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Accueil</a>
+			  <p th:each="categorie : ${categories}">
+				  <a th:href="@{'/produit/' + ${categorie.id}}" th:text="${categorie.name}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"></a>
+			  </p>
+			  
+			  <tr th:each="categorie : ${categories}">
+                <td th:text="${categorie.id}"></td>
+                <td th:text="${categorie.name}"></td>
+                <td><a th:href="@{'/editCategorie/' + ${categorie.id}}">Edit</a></td>
+        		<td><a th:href="@{'/deleteCategorie/' + ${categorie.id}}">Delete</a></td>
+            </tr>
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" 
+              <a href="/index" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Accueil</a>
+               th:each="categorie : ${categories}" 
+              <a href="/produit/44" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Concert</a>
+              <a href="/produit/42" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Spectacle</a>
+              <a href="/produit/41" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Sport</a>
+              <a href="/produit/45" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Loisirs</a> -->
+				
             </div>
           </div>
         </div>
@@ -100,3 +115,4 @@
     </div>
   </nav>
   
+</html> 
