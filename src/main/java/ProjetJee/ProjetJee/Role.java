@@ -1,40 +1,33 @@
 package ProjetJee.ProjetJee;
-import java.io.Serializable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
+
 
 @Entity
-public class Role implements Serializable {
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String name;
 
-	private static final long serialVersionUID = 1L;
+    public Role() {
 
-	@Id
-	private Integer id;
+    }
 
-	private String roleName;
+    public Integer getId() {
+        return id;
+    }
 
-	public Role() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
 }

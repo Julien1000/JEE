@@ -35,57 +35,34 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
 
     @Bean
-    EmbeddedDatabase datasource() {
-        return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)
-                .setName("dashboard")
-                .addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
-                .build();
-    }
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests((authorize) ->
+                        authorize.requestMatchers("/home").permitAll()
+                                .requestMatchers("/main/**").hasRole("USER")
+                                .anyRequest().authenticated()
 
-    @Bean
-    MvcRequestMatcher.Builder matcher(HandlerMappingIntrospector handlerMappingIntrospector) {
-        return new MvcRequestMatcher.Builder(handlerMappingIntrospector);
-    }
 
-    @Bean
-    JdbcUserDetailsManager users(DataSource dataSource, PasswordEncoder encoder) {
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(encoder.encode("my_super_secret_password_1234_$%@!"))
-                .roles("ADMIN")
-                .build();
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        jdbcUserDetailsManager.createUser(admin);
-        return jdbcUserDetailsManager;
+                ).formLogin(
+                form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/main/deck", true)
+                        .permitAll()
+        ).logout(
+                logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .permitAll()
+        );
+        return http.build();
     }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
-    //	  MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-    	  http
-    	    .authorizeHttpRequests((requests) -> requests
-    	      .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-    	      .anyRequest().authenticated()
-    	    )
-    	    .httpBasic(Customizer.withDefaults())
-    	    .formLogin(Customizer.withDefaults())
-    	    .formLogin(form -> form
-    	      .loginPage("/login")
-    	      .permitAll()
-    	    );
-    	  return http.build();
-    	}
     
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
     
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(new AntPathRequestMatcher("/h2-console/**"));
-    }
+
 
 
 }
