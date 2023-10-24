@@ -7,15 +7,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Produits {
+public class Produit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private double prix;
+	@Lob
+	private byte[] image;
 	private int stock;
 	private String numeroPlace;
 	@ManyToOne
@@ -27,6 +30,21 @@ public class Produits {
 	public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
+	public Long getId() {
+	    return id;
+	}
+	
+
+
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	public void setId(Long id) {
+	    this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -64,7 +82,7 @@ public class Produits {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produits other = (Produits) obj;
+		Produit other = (Produit) obj;
 		return Objects.equals(categorie, other.categorie) && Objects.equals(id, other.id)
 				&& Objects.equals(name, other.name) && Objects.equals(numeroPlace, other.numeroPlace)
 				&& Double.doubleToLongBits(prix) == Double.doubleToLongBits(other.prix) && stock == other.stock;
