@@ -113,24 +113,26 @@ public class ProduitController {
 	@GetMapping("/deleteProduct/{id}")
 	public String deleteProduct(@PathVariable Long id) {
 	    produitRepository.deleteById(id);
-	    return "redirect:/produits";
+	    return "redirect:/produit";
 	}
 	@GetMapping("/editProduct/{id}")
 	public String editProduct(@PathVariable Long id, Model model) {
 	    java.util.Optional<Produit> produit = produitRepository.findById(id);
 	    if (produit.isPresent()) {
-	        model.addAttribute("produits", produit.get());
+	        model.addAttribute("produit", produit.get());
 	        model.addAttribute("categories", categorieRepository.findAll());
-	        return "produitsForm"; // utilisez le même formulaire que pour ajouter un produit, mais avec les données pré-remplies.
+	        return "produitForm"; // utilisez le même formulaire que pour ajouter un produit, mais avec les données pré-remplies.
 	    } else {
-	        return "redirect:/produits"; // ou redirigez vers une page d'erreur si vous le souhaitez.
+	        return "redirect:/produit"; // ou redirigez vers une page d'erreur si vous le souhaitez.
 	    }
 	}
 	
-	@GetMapping(path = "/produits/{idCategorie}")
+	@GetMapping(path = "/produit/{idCategorie}")
 	public String listProductsByCategory(@PathVariable("idCategorie") Long idCategorie, Model model) {
 	    List<Produit> produits = produitRepository.findByCategorieId(idCategorie);
 	    model.addAttribute("produits", produits);
+	    List<Categorie> categorie = (List<Categorie>) categorieRepository.findAll();
+		model.addAttribute("categories", categorie);
 	    return "productsByCategory";  // Name of the Thymeleaf template
 	}
 

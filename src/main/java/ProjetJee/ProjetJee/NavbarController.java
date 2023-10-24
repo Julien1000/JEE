@@ -34,9 +34,13 @@ import org.springframework.ui.Model;
 
 @Controller
 public class NavbarController {
+	@Autowired
+	private CategorieRepository categorieRepository;
 
     @GetMapping("/navbar")
-    public String afficherMaPage() {
+    public String afficherMaPage(Model model) {
+    	 List<Categorie> categorie = (List<Categorie>) categorieRepository.findAll();
+		model.addAttribute("categories", categorie);
         return "navbar"; // Le nom de votre template HTML
     }
 }
