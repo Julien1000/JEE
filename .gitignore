@@ -1,9 +1,10 @@
 HELP.md
+application.properties
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
+data/bdd.mv.db
 ### STS ###
 .apt_generated
 .classpath

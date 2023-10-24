@@ -2,6 +2,7 @@ package ProjetJee.ProjetJee;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Produit {
 	private String name;
 	private double prix;
 	@Lob
+	@Column(columnDefinition = "MEDIUMBLOB")
 	private byte[] image;
 	private int stock;
 	private String numeroPlace;
