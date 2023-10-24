@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Produits</title>
+</head>
+<body>
+    <h2>Produits</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Stock</th>
+                <th>Numero de place</th>
+            </tr>
+        </thead>
+        <tbody>
+		    <tr>
+		        <td th:text="${produit.id}"></td>
+		        <td th:text="${produit.name}"></td>
+		        <td th:text="${produit.prix}"></td>
+		        <td th:text="${produit.stock}"></td>
+		        <td th:text="${produit.numeroPlace}"></td>
+		        <td><img th:src="@{/displayImage/{id}(id=${produit.id})}" alt="Image" width="100" height="100" /></td>
+		    </tr>
+		</tbody>
+
+
+    </table>
+</body>
+</html>

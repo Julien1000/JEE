@@ -115,6 +115,18 @@ public class ProduitController {
 	    produitRepository.deleteById(id);
 	    return "redirect:/produit";
 	}
+	@GetMapping("/produit/perso/{id}")
+	public String persoProduct(@PathVariable Long id, Model model) {
+	    java.util.Optional<Produit> produitOptional = produitRepository.findById(id);
+	    if (produitOptional.isPresent()) {
+	        Produit produit = produitOptional.get();
+	        model.addAttribute("produit", produit);
+	    } else {
+	        // Gérer le cas où le produit n'est pas trouvé, par exemple, rediriger vers une page d'erreur
+	        return "produitNotFound";
+	    }
+	    return "produitPerso";
+	}
 	@GetMapping("/editProduct/{id}")
 	public String editProduct(@PathVariable Long id, Model model) {
 	    java.util.Optional<Produit> produit = produitRepository.findById(id);
@@ -136,4 +148,6 @@ public class ProduitController {
 	    return "productsByCategory";  // Name of the Thymeleaf template
 	}
 
+
+    
 }

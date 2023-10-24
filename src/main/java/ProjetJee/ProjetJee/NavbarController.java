@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,9 @@ import org.springframework.ui.Model;
 public class NavbarController {
 	@Autowired
 	private CategorieRepository categorieRepository;
+	
+	@Autowired
+	private ProduitRepository produitRepository;
 
     @GetMapping("/navbar")
     public String afficherMaPage(Model model) {

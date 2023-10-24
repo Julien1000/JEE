@@ -242,6 +242,39 @@ Use the modern Firefox focus style for all focusable elements.
   outline: auto;
 }
 
+#search-container {
+  position: relative;
+}
+
+#searchbar {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#list {
+  position: absolute;
+  top: 50px; /* Ajustez cette valeur en fonction de la hauteur de votre navbar */
+  left: 0;
+  width: 200px; /* ou la largeur que vous souhaitez */
+  box-sizing: border-box;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ccc;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.produits {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.produits:hover {
+  background-color: #f0f0f0;
+}
+
+
 /*
 Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
 */

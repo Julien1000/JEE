@@ -41,14 +41,19 @@
 	          <div class="hidden sm:ml-6 sm:block">
 	            <div class="flex space-x-4">
 	              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-	              <a th:href="@{/index}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Accueil</a>
+	              <a th:href="@{/index}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Accueil</a>
 	             <div th:each="categorie : ${categories}">
-			            <a th:href="@{/produit/{idCategorie}(idCategorie=${categorie.id})}" th:text="${categorie.name}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"></a>
+			            <a th:href="@{/produit/{idCategorie}(idCategorie=${categorie.id})}" th:text="${categorie.name}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" ></a>
 			      </div>
 	
 	            </div>
 	          </div>
 	        </div>
+	        <div id="search-container">
+			    <input type="text" name="q" id="searchbar" placeholder="Rechercher un produit" />
+			</div>
+
+
 	        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 	          <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
 	            <span class="absolute -inset-1.5"></span>
@@ -98,7 +103,75 @@
 	            <a th:href="@{/produit/{idCategorie}(idCategorie=${categorie.id})}" th:text="${categorie.name}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"></a>
 	      </div>
 	    </div>
+	    
+				
+				
+			
 	  </nav>
+	  <ol id='list' style="display: none;">
+		    <li th:each="produit : ${produits}" class="produits" th:text="${produit.name}" th:attr="data-id=${produit.id}"></li>
+	  </ol>
+	  <script>
+			document.addEventListener('DOMContentLoaded', (event) => {
+			  const searchBar = document.getElementById('searchbar');
+			  const produitsList = document.getElementById('list');
+			  const produitsItems = produitsList.getElementsByClassName('produits');
+			
+			  const MAX_VISIBLE_ITEMS = 5;
+			
+			  const positionProduitsList = () => {
+			    const rect = searchBar.getBoundingClientRect();
+			    produitsList.style.top = (rect.bottom + window.scrollY) + 'px';
+			    produitsList.style.left = (rect.left + window.scrollX) + 'px';
+			    produitsList.style.width = rect.width + 'px';
+			  };
+			
+			 searchBar.addEventListener('focus', function() {
+			   positionProduitsList();
+			 });
+			
+			  searchBar.addEventListener('keyup', function() {
+			    const searchText = searchBar.value.toLowerCase();
+			
+			    let visibleCount = 0;
+			    let produitFound = false;
+			    for (let produit of produitsItems) {
+			      const produitName = produit.textContent.toLowerCase();
+			      const isMatch = produitName.includes(searchText);
+			      
+			      if (isMatch && visibleCount < MAX_VISIBLE_ITEMS) {
+			        produit.style.display = '';
+			        visibleCount++;
+			        produitFound = true;
+			      } else {
+			        produit.style.display = 'none';
+			      }
+			    }
+			
+			    produitsList.style.display = produitFound ? 'block' : 'none';
+			  });
+			
+			  document.addEventListener('click', function(event) {
+			    if (!searchBar.contains(event.target) && !produitsList.contains(event.target)) {
+			      produitsList.style.display = 'none';
+			    }
+			  });
+			
+			  window.addEventListener('resize', function() {
+			    if (produitsList.style.display === 'block') {
+			      positionProduitsList();
+			    }
+			  });
+			  for (let produit of produitsItems) {
+			    produit.addEventListener('click', function() {
+			      const produitId = produit.getAttribute('data-id');
+			      window.location.href = '/produit/perso/' + produitId;
+			    });
+			  }
+			  
+			});
+
+		</script>
   
 </div>
 
