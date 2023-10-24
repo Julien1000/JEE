@@ -1,4 +1,4 @@
-package ProjetJee.ProjetJee;
+package ProjetJee.ProjetJee.Controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,19 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import ProjetJee.ProjetJee.Entity.Categorie;
+import ProjetJee.ProjetJee.Entity.Produit;
 import jakarta.servlet.http.HttpServletRequest;
+import ProjetJee.ProjetJee.Repository.CategorieRepository;
+import ProjetJee.ProjetJee.Repository.ProduitRepository;
+
 
 import org.springframework.ui.Model;
-
-//@Controller
-//public class IndexController {
-	
-//	@GetMapping(path = "/index")
-//	public String index() {
-//		return "redirect:/categoriesList.html";
-//	}
-	
-//}
 
 
 @Controller

@@ -20,13 +20,16 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/index").permitAll()
+                        authorize.requestMatchers("/","/index").permitAll()
+                        .requestMatchers("/register").permitAll()
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/css/**").permitAll()
 
 
-                                .requestMatchers("/main/**").hasRole("USER")
-                                .anyRequest().authenticated()
+                         .requestMatchers("/panier").hasRole("USER")
+                         .requestMatchers("/addProduit").hasRole("ADMIN")
+                         .requestMatchers("/addCategorie").hasRole("ADMIN")
+                         .anyRequest().authenticated()
 
 
                 ).formLogin(
