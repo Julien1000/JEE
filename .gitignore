@@ -5,6 +5,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 data/bdd.mv.db
+waitPorductCategory.html
 ### STS ###
 .apt_generated
 .classpath
