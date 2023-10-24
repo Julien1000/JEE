@@ -20,7 +20,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/home").permitAll()
+                        authorize.requestMatchers("/index").permitAll()
+                        .requestMatchers("/js/**").permitAll()
+                        .requestMatchers("/css/**").permitAll()
+
+
                                 .requestMatchers("/main/**").hasRole("USER")
                                 .anyRequest().authenticated()
 
@@ -29,7 +33,7 @@ public class SecurityConfig {
                 form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/main/deck", true)
+                        .defaultSuccessUrl("/index", true)
                         .permitAll()
         ).logout(
                 logout -> logout
