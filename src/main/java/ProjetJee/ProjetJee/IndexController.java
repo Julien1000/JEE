@@ -36,10 +36,14 @@ import org.springframework.ui.Model;
 public class IndexController {
 	@Autowired
 	private CategorieRepository categorieRepository;
+	@Autowired
+	private ProduitRepository produitRepository;
     @GetMapping("/index")
     public String afficherMaPage(Model model) {
     	List<Categorie> categorie = (List<Categorie>) categorieRepository.findAll();
 		model.addAttribute("categories", categorie);
+		List<Produit> produits = (List<Produit>) produitRepository.findAll();
+	    model.addAttribute("produits", produits);
         return "index"; // Le nom de votre template HTML
     }
 }
