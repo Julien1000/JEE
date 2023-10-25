@@ -1,0 +1,7 @@
+input, select, textarea, button {
+    pointer-events: auto !important;
+    opacity: 1 !important;
+}
+form input, form select, form textarea, form button {
+        all: revert;
+}
