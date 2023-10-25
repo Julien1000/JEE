@@ -1,4 +1,4 @@
-package ProjetJee.ProjetJee;
+package ProjetJee.ProjetJee.Entity;
 
 import java.util.Objects;
 
