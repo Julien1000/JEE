@@ -1,9 +1,11 @@
-package ProjetJee.ProjetJee;
+package ProjetJee.ProjetJee.Controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.zip.GZIPOutputStream;
 
 import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import ProjetJee.ProjetJee.Repository.ProduitRepository;
+import ProjetJee.ProjetJee.Repository.CategorieRepository;
+import ProjetJee.ProjetJee.Entity.Categorie;
+import ProjetJee.ProjetJee.Entity.Produit;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
@@ -65,7 +71,7 @@ public class ProduitController {
 	    @RequestParam("prix") String prix,
 	    @RequestParam("stock") String stock,
 	    @RequestParam("numeroPlace") String numeroPlace,
-	    @RequestParam("categorie") Long categorieId,   // Modification ici: Utilisation de "categorie" comme nom du paramètre
+	    @RequestParam("categorie") Long categorieId,
 	    @RequestParam("image") MultipartFile file
 	) throws IOException {
 
@@ -97,7 +103,10 @@ public class ProduitController {
 
 	    // Traitez l'image si elle est fournie.
 	    if (file != null && !file.isEmpty()) {
+	        // Compression de l'image
 	        byte[] bytes = file.getBytes();
+
+	        // Assignation de l'image compressée au produit.
 	        produit.setImage(bytes);
 	    }
 
@@ -106,6 +115,7 @@ public class ProduitController {
 
 	    return "redirect:/produit";
 	}
+
 
 
 

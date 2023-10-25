@@ -1,4 +1,4 @@
-package ProjetJee.ProjetJee;
+package ProjetJee.ProjetJee.Controller;
 
 import java.util.List;
 
@@ -9,6 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import ProjetJee.ProjetJee.Repository.CategorieRepository;
+import ProjetJee.ProjetJee.Entity.Categorie;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
