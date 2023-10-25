@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import ProjetJee.ProjetJee.Entity.Categorie;
+import ProjetJee.ProjetJee.Repository.CategorieRepository;
+
 import java.util.List;
 
 @Controller
