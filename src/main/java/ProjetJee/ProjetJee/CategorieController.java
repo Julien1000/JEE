@@ -1,6 +1,10 @@
 package ProjetJee.ProjetJee;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,26 +22,80 @@ public class CategorieController {
 	
 
 	@GetMapping(path = "/addCategorie")
-	public String showForm(Model model) {
+	public String showForm(Model model,Authentication authentication) {
 		model.addAttribute("categorie", new Categorie());
+		List<Categorie> categories = (List<Categorie>) categorieRepository.findAll();
+        model.addAttribute("categories", categories);
+        boolean isAdmin = false;
+	    boolean isUserLoggedIn = false;
+        // Vérifier si l'utilisateur est authentifié
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Ajouter le nom de l'utilisateur au modèle
+            model.addAttribute("currentUser", authentication.getName());
+            isUserLoggedIn = true;
+            
+            // Vérifier si l'utilisateur a le rôle "ROLE_ADMIN"
+            isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+        }
+
+        // Ajouter la variable isAdmin au modèle
+        model.addAttribute("isUserLoggedIn", isUserLoggedIn);
+        model.addAttribute("isAdmin", isAdmin);
 		return "categorieForm";
 	}
 
 	@PostMapping(path = "/saveCategorie")
 	public String saveCategorie(@ModelAttribute Categorie categorie) {
 		categorieRepository.save(categorie);
-		return "redirect:/categories";
+		return "redirect:/categorie";
 	}
 
-	@GetMapping(path = "/categories")
-	public String listCategories(Model model) {
+	@GetMapping(path = "/categorie")
+	public String listCategories(Model model, Authentication authentication) {
 		((Model) model).addAttribute("categories", categorieRepository.findAll());
+		boolean isAdmin = false;
+	    boolean isUserLoggedIn = false;
+        // Vérifier si l'utilisateur est authentifié
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Ajouter le nom de l'utilisateur au modèle
+            model.addAttribute("currentUser", authentication.getName());
+            isUserLoggedIn = true;
+            
+            // Vérifier si l'utilisateur a le rôle "ROLE_ADMIN"
+            isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+        }
+
+        // Ajouter la variable isAdmin au modèle
+        model.addAttribute("isUserLoggedIn", isUserLoggedIn);
+        model.addAttribute("isAdmin", isAdmin);
 		return "categoriesList";
 	}
 	@GetMapping("/editCategorie/{id}")
-    public String editCategorieForm(@PathVariable("id") Long id, Model model) {
+    public String editCategorieForm(@PathVariable("id") Long id, Model model,Authentication authentication) {
         Categorie existingCategorie = categorieRepository.findById(id).orElse(null);
         model.addAttribute("categorie", existingCategorie);
+        boolean isAdmin = false;
+	    boolean isUserLoggedIn = false;
+        // Vérifier si l'utilisateur est authentifié
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Ajouter le nom de l'utilisateur au modèle
+            model.addAttribute("currentUser", authentication.getName());
+            isUserLoggedIn = true;
+            
+            // Vérifier si l'utilisateur a le rôle "ROLE_ADMIN"
+            isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+        }
+
+        // Ajouter la variable isAdmin au modèle
+        model.addAttribute("isUserLoggedIn", isUserLoggedIn);
+        model.addAttribute("isAdmin", isAdmin);
+        
         return "categorieForm";  // Reuse the same form for editing
     }
 
@@ -46,14 +104,14 @@ public class CategorieController {
     public String updateCategorie(@PathVariable("id") Long id, @ModelAttribute Categorie categorie) {
         // Ideally, you'd check if the category exists first, but for simplicity, we're directly saving
         categorieRepository.save(categorie);
-        return "redirect:/categories";
+        return "redirect:/categorie";
     }
 
     // Handler to handle the deletion of a category
     @GetMapping("/deleteCategorie/{id}")
     public String deleteCategorie(@PathVariable("id") Long id) {
         categorieRepository.deleteById(id);
-        return "redirect:/categories";
+        return "redirect:/categorie";
     }
 
 }
