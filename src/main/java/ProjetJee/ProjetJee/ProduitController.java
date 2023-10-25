@@ -9,6 +9,8 @@ import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,10 +34,27 @@ public class ProduitController {
 	private CategorieRepository categorieRepository;
 
 	@GetMapping(path = "/addProduit")
-	public String showForm(Model model) {
+	public String showForm(Model model,Authentication authentication) {
 		List<Categorie> categories = (List<Categorie>) categorieRepository.findAll();
 	    model.addAttribute("categories", categories);
 		model.addAttribute("produit", new Produit());
+		boolean isAdmin = false;
+	    boolean isUserLoggedIn = false;
+        // Vérifier si l'utilisateur est authentifié
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Ajouter le nom de l'utilisateur au modèle
+            model.addAttribute("currentUser", authentication.getName());
+            isUserLoggedIn = true;
+            
+            // Vérifier si l'utilisateur a le rôle "ROLE_ADMIN"
+            isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+        }
+
+        // Ajouter la variable isAdmin au modèle
+        model.addAttribute("isUserLoggedIn", isUserLoggedIn);
+        model.addAttribute("isAdmin", isAdmin);
 		return "produitForm";
 	}
 
@@ -91,9 +110,28 @@ public class ProduitController {
 
 
 	@GetMapping(path = "/produit")
-	public String listProduit(Model model) {
+	public String listProduit(Model model,Authentication authentication ) {
 	    List<Produit> allProducts = (List<Produit>) produitRepository.findAll();
 	    model.addAttribute("produits", allProducts);
+	    List<Categorie> categories = (List<Categorie>) categorieRepository.findAll();
+	    model.addAttribute("categories", categories);
+	    boolean isAdmin = false;
+	    boolean isUserLoggedIn = false;
+        // Vérifier si l'utilisateur est authentifié
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Ajouter le nom de l'utilisateur au modèle
+            model.addAttribute("currentUser", authentication.getName());
+            isUserLoggedIn = true;
+            
+            // Vérifier si l'utilisateur a le rôle "ROLE_ADMIN"
+            isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+        }
+
+        // Ajouter la variable isAdmin au modèle
+        model.addAttribute("isUserLoggedIn", isUserLoggedIn);
+        model.addAttribute("isAdmin", isAdmin);
 	    return "produitList";
 	}
 	@GetMapping("/displayImage/{id}")
@@ -140,11 +178,28 @@ public class ProduitController {
 	}
 	
 	@GetMapping(path = "/produit/{idCategorie}")
-	public String listProductsByCategory(@PathVariable("idCategorie") Long idCategorie, Model model) {
+	public String listProductsByCategory(@PathVariable("idCategorie") Long idCategorie, Model model,Authentication authentication) {
 	    List<Produit> produits = produitRepository.findByCategorieId(idCategorie);
 	    model.addAttribute("produits", produits);
 	    List<Categorie> categorie = (List<Categorie>) categorieRepository.findAll();
 		model.addAttribute("categories", categorie);
+		boolean isAdmin = false;
+	    boolean isUserLoggedIn = false;
+        // Vérifier si l'utilisateur est authentifié
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Ajouter le nom de l'utilisateur au modèle
+            model.addAttribute("currentUser", authentication.getName());
+            isUserLoggedIn = true;
+            
+            // Vérifier si l'utilisateur a le rôle "ROLE_ADMIN"
+            isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+        }
+
+        // Ajouter la variable isAdmin au modèle
+        model.addAttribute("isUserLoggedIn", isUserLoggedIn);
+        model.addAttribute("isAdmin", isAdmin);
 	    return "productsByCategory";  // Name of the Thymeleaf template
 	}
 

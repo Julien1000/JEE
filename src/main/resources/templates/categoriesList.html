@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Categories</title>
+	<meta charset="UTF-8">
+	<title>Accueil</title>
+	<link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}">
+	<link rel="stylesheet" href="/css/form.css" th:href="@{/css/form.css}">
+	<script src="/js/index.js" th:src="@{/js/index.js}" type="text/javascript"></script>
 </head>
+
 <body>
-    <h2>Categories</h2>
+	<div class="bg-white">
+		<header class="absolute inset-x-0 top-0 z-50">
+			<header class="absolute inset-x-0 top-0 z-50">
+				<div th:replace="~{navbar :: navbar}"></div>
+
+		    </header>
+    <h2 style="margin-top: 200px;">Categories</h2>
     <table>
         <thead>
             <tr>
