@@ -24,6 +24,7 @@ public class SecurityConfig {
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/img/**").permitAll()
 
 
                          .requestMatchers("/panier").hasRole("USER")
@@ -41,6 +42,7 @@ public class SecurityConfig {
         ).logout(
                 logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/")
                         .permitAll()
         );
         return http.build();

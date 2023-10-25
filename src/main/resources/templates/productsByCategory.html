@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}">
 	<link rel="stylesheet" href="/css/produitList.css" th:href="@{/css/produitList.css}">
+
 
     <title>Produits par Catégorie</title>
 </head>
@@ -51,8 +53,8 @@
 						</div>
 						<h3 class="mt-4 text-sm text-gray-700" th:text="${produit.name}"></h3>
 						<p class="mt-1 text-lg font-medium text-gray-900" th:text="${produit.prix + '€'}"></p>
-						<a th:href="@{/deleteProduct/{id}(id=${produit.id})}" onclick="return confirm('Are you sure you want to delete this product?')">Supprimer</a>
-							<a th:href="@{/editProduct/{id}(id=${produit.id})}">Modifier</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/deleteProduct/{id}(id=${produit.id})}" onclick="return confirm('Are you sure you want to delete this product?')">Supprimer</a>
+							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/editProduct/{id}(id=${produit.id})}">Modifier</a>
 						</div>
 				
 						<!-- More products... -->
@@ -60,9 +62,6 @@
 
 
 			
-					<div th:each="categorie : ${categories}">
-						<a th:href="@{/produit/{idCategorie}(idCategorie=${categorie.id})}" th:text="${categorie.name}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" ></a>
-						</div>
 					</div>
 				</div>
 		</div>
