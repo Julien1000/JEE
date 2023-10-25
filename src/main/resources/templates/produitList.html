@@ -17,46 +17,6 @@
 		    </header>
 
     <h2 style="margin-top: 200px;">Produits</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Prix</th>
-                <th>Stock</th>
-                <th>Numero de place</th>
-                <th>Catégorie</th>
-            </tr>
-        </thead>
-        <tbody>
-
-         <tr th:each="produits : ${produits}">
-		    <td th:text="${produits.id}"></td>
-		    <td th:text="${produits.name}"></td>
-		    <td th:text="${produits.prix}"></td>
-		    <td th:text="${produits.stock}"></td>
-		    <td th:text="${produits.numeroPlace}"></td>
-		    <td th:text="${produits.categorie != null ? produits.categorie.name : 'N/A'}"></td>
-		    <td><img th:src="@{/displayImage/{id}(id=${produits.id})}" alt="Image" width="100" height="100" /></td>
-		    <td><a th:href="@{/deleteProduct/{id}(id=${produits.id})}" onclick="return confirm('Are you sure you want to delete this product?')">Supprimer</a></td>
-		    <td><a th:href="@{/editProduct/{id}(id=${produits.id})}">Modifier</a></td>
-		    <td>
-		        <button onclick="changeQuantity(this, 'minus')" th:attr="data-product-id=${produits.id},data-stock=${produits.stock}">-</button>
-		        <input type="number" th:id="'quantity' + ${produits.id}" value="0" readonly style="width: 40px; text-align: center;" />
-		        <button onclick="changeQuantity(this, 'plus')" th:attr="data-product-id=${produits.id},data-stock=${produits.stock}">+</button>
-		    </td>
-		    <td><button th:attr="data-product-id=${produits.id}, data-product-prix=${produits.prix}" onclick="addToCart(this)">Ajouter au panier</button></td>
-
-		</tr>
-
-
-    	
-      
-
-        
-
-        </tbody>
-    </table> -->
 
 
 	<div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
