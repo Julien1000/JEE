@@ -164,8 +164,30 @@ public class ProduitController {
 	    return "redirect:/produit";
 	}
 	@GetMapping("/produit/perso/{id}")
-	public String persoProduct(@PathVariable Long id, Model model) {
+	public String persoProduct(@PathVariable Long id, Model model,Authentication authentication) {
 	    java.util.Optional<Produit> produitOptional = produitRepository.findById(id);
+		List<Produit> allProducts = (List<Produit>) produitRepository.findAll();
+	    model.addAttribute("produits", allProducts);
+		List<Categorie> categorie = (List<Categorie>) categorieRepository.findAll();
+		model.addAttribute("categories", categorie);
+		boolean isAdmin = false;
+	    boolean isUserLoggedIn = false;
+        // Vérifier si l'utilisateur est authentifié
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Ajouter le nom de l'utilisateur au modèle
+            model.addAttribute("currentUser", authentication.getName());
+            isUserLoggedIn = true;
+            
+            // Vérifier si l'utilisateur a le rôle "ROLE_ADMIN"
+            isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+        }
+
+        // Ajouter la variable isAdmin au modèle
+        model.addAttribute("isUserLoggedIn", isUserLoggedIn);
+        model.addAttribute("isAdmin", isAdmin);
+	    
 	    if (produitOptional.isPresent()) {
 	        Produit produit = produitOptional.get();
 	        model.addAttribute("produit", produit);

@@ -37,7 +37,7 @@
 	        </div>
 	        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 	          <div class="flex flex-shrink-0 items-center">
-	            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+	            <img class="h-8 w-auto" th:src="@{/img/logo_ticketwave.png}" alt="Your Company">
 	          </div>
 	          <div class="hidden sm:ml-6 sm:block">
 	            <div class="flex space-x-4">
@@ -53,6 +53,7 @@
 			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >All Produit</a>
 			      
 				  <a th:if="${isUserLoggedIn == null}" th:href="@{/login}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Connexion</a>
+				  <a th:if="${isUserLoggedIn == null}" th:href="@{/register}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >S'inscrire</a>
 
 	            </div>
 	          </div>
@@ -110,6 +111,15 @@
 	        <div th:each="categorie : ${categories}">
 	            <a th:href="@{/produit/{idCategorie}(idCategorie=${categorie.id})}" th:text="${categorie.name}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"></a>
 	      </div>
+		  <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addProduit}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >+ Produit</a>
+			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addCategorie}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >+ Categorie</a>
+			      <a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/logout}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Déconnexion</a>
+			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >All Categorie</a>
+			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >All Produit</a>
+			      
+				  <a th:if="${isUserLoggedIn == null}" th:href="@{/login}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Connexion</a>
+				  <a th:if="${isUserLoggedIn == null}" th:href="@{/register}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >S'inscrire</a>
+
 	    </div>
 	    
 				
