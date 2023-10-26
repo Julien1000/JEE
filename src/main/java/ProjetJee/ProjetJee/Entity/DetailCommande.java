@@ -2,6 +2,7 @@ package ProjetJee.ProjetJee.Entity;
 
 import jakarta.persistence.Entity;
 
+
 import jakarta.persistence.GeneratedValue;
 
 import jakarta.persistence.GenerationType;
@@ -12,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class DetailCommande {
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,3 +62,4 @@ public class DetailCommande {
 	}
 
 }
+

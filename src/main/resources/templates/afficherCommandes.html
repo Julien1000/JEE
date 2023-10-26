@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Afficher les Commandes</title>
+</head>
+<body>
+    <h1>Liste des Commandes</h1>
+    <h2>Commandes en cours de validation</h2>
+    <table border="1">
+        <tr>
+            <th>ID Commande</th>
+            <th>ID Utilisateur</th>
+            <th>Status</th>
+            <th>Détails</th>
+        </tr>
+        <tr th:each="commande : ${commandes}" th:if="${commande.status == 1}">
+            <td th:text="${commande.idCommande}"></td>
+            <td th:text="${commande.idUtilisateur}"></td>
+            <td th:text="${commande.status}"></td>
+            <td>
+                <ul>
+                    <li th:each="detail : ${commande.detailCommande}">
+                        Produit: <span th:text="${detail.produit.name}"></span>, 
+                        Quantité: <span th:text="${detail.quantite}"></span>
+                    </li>
+                </ul>
+            </td>
+            <td>
+			    <form th:action="'/validerPanier/changerStatut2/' + ${commande.idCommande}" method="post">
+			        <button type="submit">Passer au Statut 2</button>
+			    </form>
+			</td>
+
+        </tr>
+    </table>
+    <h2>Commandes en cours de préparation</h2>
+    <table border="1">
+		<tr>
+			<th>ID Commande</th>
+	        <th>ID Utilisateur</th>
+	        <th>Status</th>
+	        <th>Détails</th>
+		</tr>
+		<tr th:each="commande : ${commandes}" th:if="${commande.status == 2}">
+            <td th:text="${commande.idCommande}"></td>
+            <td th:text="${commande.idUtilisateur}"></td>
+            <td th:text="${commande.status}"></td>
+            <td>
+                <ul>
+                    <li th:each="detail : ${commande.detailCommande}">
+                        Produit: <span th:text="${detail.produit.name}"></span>, 
+                        Quantité: <span th:text="${detail.quantite}"></span>
+                    </li>
+                </ul>
+            </td>
+            <td>
+			    <form th:action="'/validerPanier/changerStatut3/' + ${commande.idCommande}" method="post">
+			        <button type="submit">Passer au Statut 3</button>
+			    </form>
+			</td>
+
+        </tr>
+	</table>
+	<h2>Commandes en cours de Livraison</h2>
+    <table border="1">
+		<tr>
+			<th>ID Commande</th>
+	        <th>ID Utilisateur</th>
+	        <th>Status</th>
+	        <th>Détails</th>
+		</tr>
+		<tr th:each="commande : ${commandes}" th:if="${commande.status == 3}">
+            <td th:text="${commande.idCommande}"></td>
+            <td th:text="${commande.idUtilisateur}"></td>
+            <td th:text="${commande.status}"></td>
+            <td>
+                <ul>
+                    <li th:each="detail : ${commande.detailCommande}">
+                        Produit: <span th:text="${detail.produit.name}"></span>, 
+                        Quantité: <span th:text="${detail.quantite}"></span>
+                    </li>
+                </ul>
+            </td>
+            <td>
+			    <form th:action="'/validerPanier/changerStatut4/' + ${commande.idCommande}" method="post">
+			        <button type="submit">Passer au Statut 4</button>
+			    </form>
+			</td>
+
+        </tr>
+       </table>
+        <h2>Commandes livrés au clients</h2>
+	    <table border="1">
+			<tr>
+				<th>ID Commande</th>
+		        <th>ID Utilisateur</th>
+		        <th>Status</th>
+		        <th>Détails</th>
+			</tr>
+			<tr th:each="commande : ${commandes}" th:if="${commande.status == 4}">
+	            <td th:text="${commande.idCommande}"></td>
+	            <td th:text="${commande.idUtilisateur}"></td>
+	            <td th:text="${commande.status}"></td>
+	            <td>
+	                <ul>
+	                    <li th:each="detail : ${commande.detailCommande}">
+	                        Produit: <span th:text="${detail.produit.name}"></span>, 
+	                        Quantité: <span th:text="${detail.quantite}"></span>
+	                    </li>
+	                </ul>
+	            </td>
+	           
+	
+	        </tr>
+		</table>
+</body>
+</html>

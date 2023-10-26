@@ -11,6 +11,7 @@ import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,7 @@ public class ProduitController {
 	private CategorieRepository categorieRepository;
 
 	@GetMapping(path = "/addProduit")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String showForm(Model model,Authentication authentication) {
 		List<Categorie> categories = (List<Categorie>) categorieRepository.findAll();
 	    model.addAttribute("categories", categories);
@@ -120,6 +122,7 @@ public class ProduitController {
 
 
 	@GetMapping(path = "/produit")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String listProduit(Model model,Authentication authentication ) {
 	    List<Produit> allProducts = (List<Produit>) produitRepository.findAll();
 	    model.addAttribute("produits", allProducts);
@@ -159,6 +162,7 @@ public class ProduitController {
 	
 	
 	@GetMapping("/deleteProduct/{id}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String deleteProduct(@PathVariable Long id) {
 	    produitRepository.deleteById(id);
 	    return "redirect:/produit";
@@ -198,6 +202,7 @@ public class ProduitController {
 	    return "produitPerso";
 	}
 	@GetMapping("/editProduct/{id}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String editProduct(@PathVariable Long id, Model model) {
 	    java.util.Optional<Produit> produit = produitRepository.findById(id);
 	    if (produit.isPresent()) {

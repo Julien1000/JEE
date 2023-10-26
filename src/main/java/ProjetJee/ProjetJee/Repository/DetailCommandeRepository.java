@@ -7,5 +7,5 @@ import ProjetJee.ProjetJee.Entity.DetailCommande;
 
 @Repository
 public interface DetailCommandeRepository extends JpaRepository<DetailCommande, Long> {
-    // Vous pouvez ajouter des méthodes personnalisées si nécessaire
+
 }
