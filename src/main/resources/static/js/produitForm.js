@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   const listbox = document.querySelector(".list-category");
   const button = document.querySelector(".button_select_category");
 
@@ -27,5 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
       svg.classList.remove("svg_select");
       svg.classList.add("svg_selected");
     });
+  });
+
+  const fileInput = document.querySelector(".input_file");
+  const fileUploadDiv = document.querySelector(".input_file_area");
+
+  fileUploadDiv.addEventListener("click", function () {
+    fileInput.click();
   });
 });

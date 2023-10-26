@@ -542,10 +542,6 @@ video {
   pointer-events: none
 }
 
-.absolute{
-  position: absolute
-}
-
 .relative{
   position: relative
 }
@@ -1097,4 +1093,8 @@ video {
 
 .mb-52 {
   margin-bottom: 13rem;
+}
+
+.pt-10 {
+  padding-top: 2.5rem;
 }
