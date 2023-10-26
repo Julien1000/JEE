@@ -16,7 +16,7 @@
         </tr>
         <tr th:each="commande : ${commandes}" th:if="${commande.status == 1}">
             <td th:text="${commande.idCommande}"></td>
-            <td th:text="${commande.idUtilisateur}"></td>
+            <td th:text="${commande.user.username}"></td>
             <td th:text="${commande.status}"></td>
             <td>
                 <ul>
@@ -27,7 +27,7 @@
                 </ul>
             </td>
             <td>
-			    <form th:action="'/validerPanier/changerStatut2/' + ${commande.idCommande}" method="post">
+			    <form th:action="'/commande/changerStatut2/' + ${commande.idCommande}" method="post">
 			        <button type="submit">Passer au Statut 2</button>
 			    </form>
 			</td>
@@ -44,8 +44,8 @@
 		</tr>
 		<tr th:each="commande : ${commandes}" th:if="${commande.status == 2}">
             <td th:text="${commande.idCommande}"></td>
-            <td th:text="${commande.idUtilisateur}"></td>
-            <td th:text="${commande.status}"></td>
+           <td th:text="${commande.user.id}"></td>
+          <td th:text="${commande.status}"></td>
             <td>
                 <ul>
                     <li th:each="detail : ${commande.detailCommande}">
@@ -55,7 +55,7 @@
                 </ul>
             </td>
             <td>
-			    <form th:action="'/validerPanier/changerStatut3/' + ${commande.idCommande}" method="post">
+			    <form th:action="'/commande/changerStatut3/' + ${commande.idCommande}" method="post">
 			        <button type="submit">Passer au Statut 3</button>
 			    </form>
 			</td>
@@ -72,8 +72,8 @@
 		</tr>
 		<tr th:each="commande : ${commandes}" th:if="${commande.status == 3}">
             <td th:text="${commande.idCommande}"></td>
-            <td th:text="${commande.idUtilisateur}"></td>
-            <td th:text="${commande.status}"></td>
+            <td th:text="${commande.user.id}"></td>
+           <td th:text="${commande.status}"></td>
             <td>
                 <ul>
                     <li th:each="detail : ${commande.detailCommande}">
@@ -83,7 +83,7 @@
                 </ul>
             </td>
             <td>
-			    <form th:action="'/validerPanier/changerStatut4/' + ${commande.idCommande}" method="post">
+			    <form th:action="'/commande/changerStatut4/' + ${commande.idCommande}" method="post">
 			        <button type="submit">Passer au Statut 4</button>
 			    </form>
 			</td>
@@ -100,8 +100,8 @@
 			</tr>
 			<tr th:each="commande : ${commandes}" th:if="${commande.status == 4}">
 	            <td th:text="${commande.idCommande}"></td>
-	            <td th:text="${commande.idUtilisateur}"></td>
-	            <td th:text="${commande.status}"></td>
+            <td th:text="${commande.user.id}"></td>
+           <td th:text="${commande.status}"></td>
 	            <td>
 	                <ul>
 	                    <li th:each="detail : ${commande.detailCommande}">

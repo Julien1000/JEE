@@ -32,6 +32,12 @@
     <div class="chart-container">
         <canvas id="barChart"></canvas>
     </div>
+    
+    <div class="chart-container">
+        <canvas id="barChart1"></canvas>
+    </div>
+    
+    
 
     <div class="clear"></div>
 
@@ -46,5 +52,19 @@
         var valeurs = /*[[${produitsParCategorie.values()}]]*/ 'default';
         /*]]>*/
     </script>
+    <h2>Total de Produits Vendus: <span th:text="${totalProduitsVendus}"></span></h2>
+		<h3>Top 5 des Produits les Plus Vendus</h3>
+		<ul>
+		    <li th:each="entry, stat : ${top5ProduitsNoms}" th:index="index">
+		        <span th:text="${entry}"></span> : <span th:text="${top5ProduitsQuantites[__${stat.index}__]}"></span>
+		    </li>
+		</ul>
+		<script th:inline="javascript">
+        /*<![CDATA[*/
+        var top5ProduitsNoms = /*[[${top5ProduitsNoms}]]*/ 'default';
+        var top5ProduitsQuantites = /*[[${top5ProduitsQuantites}]]*/ 'default';
+        /*]]>*/
+    </script>
+
 </body>
 </html>

@@ -3,9 +3,9 @@
 	import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import ProjetJee.ProjetJee.Entity.ValiderPanier;
+import ProjetJee.ProjetJee.Entity.Commande;
 
 @Repository
-public interface ValiderPanierRepository extends JpaRepository<ValiderPanier, Long> {
+public interface CommandeRepository extends JpaRepository<Commande, Long> {
     // Vous pouvez ajouter des méthodes personnalisées ici si nécessaire
 }

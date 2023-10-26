@@ -1,5 +1,8 @@
 package ProjetJee.ProjetJee.Entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
 
 
@@ -24,6 +27,23 @@ public class DetailCommande {
 	private Produit produit;
 
 	private int quantite;
+	@ManyToOne
+	@JoinColumn(name = "id_commande") // Assurez-vous que le nom de la colonne est correct
+	private Commande commande;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_panier", nullable = true)
+	@OnDelete(action = OnDeleteAction.SET_NULL)
+	private Panier panier;
+
+
+	public Panier getPanier() {
+		return panier;
+	}
+
+	public void setPanier(Panier panier) {
+		this.panier = panier;
+	}
 
 	public Long getId() {
 
@@ -60,6 +80,13 @@ public class DetailCommande {
 		this.quantite = quantite;
 
 	}
+
+	public void setCommande(Commande commande) {
+		// TODO Auto-generated method stub
+		this.commande = commande;
+	}
+
+
 
 }
 

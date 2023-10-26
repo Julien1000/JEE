@@ -23,8 +23,8 @@ public class Panier {
     @JoinColumn(name = "id_User")
     private User user;
     
-	@OneToMany
-    @JoinColumn(name = "id_DetailCommande")
+	
+    @OneToMany(mappedBy = "panier")
     private List<DetailCommande> detailCommande;
 
 	public Long getIdPanier() {
