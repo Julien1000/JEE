@@ -1,7 +1,9 @@
 package ProjetJee.ProjetJee.Controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -114,12 +116,18 @@ public class ValiderPanierController {
         int nombreCommandesStatus1 = 0;
         int nombreCommandesStatus2 = 0;
         int nombreCommandesStatus3 = 0;
+        Map<String, Integer> produitsParCategorie = new HashMap<>();
 
         for (ValiderPanier commande : commandes) {
             System.out.println("Commande ID: " + commande.getIdCommande());
             if (commande.getDetailCommande() != null) {
                 for (DetailCommande detail : commande.getDetailCommande()) {
-                    System.out.println("Produit: " + detail.getProduit().getName() + ", Quantité: " + detail.getQuantite());
+                    Produit produit = detail.getProduit();
+                    System.out.println("Produit: " + produit.getName() + ", Quantité: " + detail.getQuantite());
+
+                    // Compter les produits par catégorie
+                    String nomCategorie = produit.getCategorie().getName();
+                    produitsParCategorie.put(nomCategorie, produitsParCategorie.getOrDefault(nomCategorie, 0) + detail.getQuantite());
                 }
             } else {
                 System.out.println("Pas de détails pour cette commande");
@@ -138,10 +146,12 @@ public class ValiderPanierController {
         model.addAttribute("nombreCommandesStatus1", nombreCommandesStatus1);
         model.addAttribute("nombreCommandesStatus2", nombreCommandesStatus2);
         model.addAttribute("nombreCommandesStatus3", nombreCommandesStatus3);
+        model.addAttribute("produitsParCategorie", produitsParCategorie);
         model.addAttribute("commandes", commandes);
 
         return "afficherStats";
     }
+
 
 
 }
