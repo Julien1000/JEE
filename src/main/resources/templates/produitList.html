@@ -45,6 +45,7 @@
 		        <input type="number" th:id="'quantity' + ${produits.id}" value="0" readonly style="width: 40px; text-align: center;" />
 		        <button onclick="changeQuantity(this, 'plus')" th:attr="data-product-id=${produits.id},data-stock=${produits.stock}">+</button>
 		    </td>
+		    
 		    <td><button th:attr="data-product-id=${produits.id}, data-product-prix=${produits.prix}" onclick="addToCart(this)">Ajouter au panier</button></td>
 
 		</tr>

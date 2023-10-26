@@ -1,8 +1,12 @@
 package ProjetJee.ProjetJee.Entity;
 
 import jakarta.persistence.Entity;
+
+
 import jakarta.persistence.GeneratedValue;
+
 import jakarta.persistence.GenerationType;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -10,51 +14,52 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class DetailCommande {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_Produit")
-    private Produit produit;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private int quantite;
+	@ManyToOne
+	@JoinColumn(name = "id_Produit")
+	private Produit produit;
 
-    @ManyToOne
-    @JoinColumn(name = "id_commande")
-    private ValiderPanier validerPanier;
+	private int quantite;
 
-    // getters et setters
+	public Long getId() {
 
-    public Long getId() {
-        return id;
-    }
+		return id;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	}
 
-    public Produit getProduit() {
-        return produit;
-    }
+	public void setId(Long id) {
 
-    public void setProduit(Produit produit) {
-        this.produit = produit;
-    }
+		this.id = id;
 
-    public int getQuantite() {
-        return quantite;
-    }
+	}
 
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
-    }
+	public Produit getProduit() {
 
-    public ValiderPanier getValiderPanier() {
-        return validerPanier;
-    }
+		return this.produit;
 
-    public void setValiderPanier(ValiderPanier validerPanier) {
-        this.validerPanier = validerPanier;
-    }
+	}
+
+	public void setProduit(Produit produit) {
+
+		this.produit = produit;
+
+	}
+
+	public int getQuantite() {
+
+		return quantite;
+
+	}
+
+	public void setQuantite(int quantite) {
+
+		this.quantite = quantite;
+
+	}
+
 }
+
