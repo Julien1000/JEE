@@ -12,16 +12,34 @@
 
         <h2>Produits</h2>
         <div th:each="produit, iterStat : ${produits}">
-		    <input type="checkbox" th:name="'idProduits'" th:value="${produit.id}">
+		    <input type="checkbox" class="product-checkbox" th:name="'idProduits'" th:value="${produit.id}">
 		    <span th:text="${produit.name}"></span>
 		    <label for="quantites">Quantité:</label>
-		    <input type="number" th:name="'quantites'" required>
+		    <input type="number" class="quantity-input" th:name="'quantites'" >
 		    <br>
 		</div>
+
         
 
         <br>
         <button type="submit">Soumettre</button>
     </form>
+    <script>
+	document.addEventListener('DOMContentLoaded', (event) => {
+	    const form = document.querySelector('form');
+	    form.addEventListener('submit', function (e) {
+	        const checkboxes = document.querySelectorAll('.product-checkbox');
+	        const quantities = document.querySelectorAll('.quantity-input');
+	        
+	        checkboxes.forEach((checkbox, index) => {
+	            if (!checkbox.checked) {
+	                checkbox.disabled = true;
+	                quantities[index].disabled = true;
+	            }
+	        });
+	    });
+	});
+	</script>
+
 </body>
 </html>

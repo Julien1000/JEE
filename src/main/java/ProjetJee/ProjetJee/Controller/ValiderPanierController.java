@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -82,5 +83,65 @@ public class ValiderPanierController {
 
         return "redirect:/validerPanier/afficher"; // ajustez selon vos besoins
     }
+    @PostMapping("/changerStatut2/{idCommande}")
+    public String changerStatut2(@PathVariable Long idCommande) {
+        ValiderPanier commande = validerPanierRepository.findById(idCommande)
+                .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
+        commande.setStatus(2);
+        validerPanierRepository.save(commande);
+        return "redirect:/validerPanier/afficher";
+    }
+    @PostMapping("/changerStatut3/{idCommande}")
+    public String changerStatut3(@PathVariable Long idCommande) {
+        ValiderPanier commande = validerPanierRepository.findById(idCommande)
+                .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
+        commande.setStatus(3);
+        validerPanierRepository.save(commande);
+        return "redirect:/validerPanier/afficher";
+    }
+    @PostMapping("/changerStatut4/{idCommande}")
+    public String changerStatut4(@PathVariable Long idCommande) {
+        ValiderPanier commande = validerPanierRepository.findById(idCommande)
+                .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
+        commande.setStatus(4);
+        validerPanierRepository.save(commande);
+        return "redirect:/validerPanier/afficher";
+    }
+    @GetMapping("/afficherStats")
+    public String afficherStats(Model model) {
+        List<ValiderPanier> commandes = validerPanierRepository.findAll();
+
+        int nombreCommandesStatus1 = 0;
+        int nombreCommandesStatus2 = 0;
+        int nombreCommandesStatus3 = 0;
+
+        for (ValiderPanier commande : commandes) {
+            System.out.println("Commande ID: " + commande.getIdCommande());
+            if (commande.getDetailCommande() != null) {
+                for (DetailCommande detail : commande.getDetailCommande()) {
+                    System.out.println("Produit: " + detail.getProduit().getName() + ", Quantité: " + detail.getQuantite());
+                }
+            } else {
+                System.out.println("Pas de détails pour cette commande");
+            }
+
+            // Compter le nombre de commandes pour chaque statut
+            if (commande.getStatus() == 1) {
+                nombreCommandesStatus1++;
+            } else if (commande.getStatus() == 2) {
+                nombreCommandesStatus2++;
+            } else if (commande.getStatus() == 3) {
+                nombreCommandesStatus3++;
+            }
+        }
+
+        model.addAttribute("nombreCommandesStatus1", nombreCommandesStatus1);
+        model.addAttribute("nombreCommandesStatus2", nombreCommandesStatus2);
+        model.addAttribute("nombreCommandesStatus3", nombreCommandesStatus3);
+        model.addAttribute("commandes", commandes);
+
+        return "afficherStats";
+    }
+
 
 }
