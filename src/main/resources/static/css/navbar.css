@@ -222,18 +222,6 @@ select {
 2. Remove default button styles.
 */
 
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-  -webkit-appearance: button;
-  /* 1 */
-  background-color: transparent;
-  /* 2 */
-  background-image: none;
-  /* 2 */
-}
-
 /*
 Use the modern Firefox focus style for all focusable elements.
 */
@@ -1000,14 +988,6 @@ video {
   display: inline-block
 }
 
-.flex{
-  display: flex
-}
-
-.inline-flex{
-  display: inline-flex
-}
-
 .h-5{
   height: 1.25rem
 }
@@ -1250,4 +1230,26 @@ video {
   opacity:1;
   transform: translate(0) scale(1);
   visibility: visible;
+}
+
+.button-active {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
+.button-inactive {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+
+.button-inactive:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity))
+}
+
+.button-inactive:hover{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity))
 }

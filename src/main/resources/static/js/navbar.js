@@ -1,4 +1,5 @@
 window.onload = function () {
+  console.log("navbar.js");
   const profile = document.getElementById("user-menu-button");
   const profileMenu = document.getElementById("user-menu");
 
@@ -12,6 +13,24 @@ window.onload = function () {
   mobileMenuButton.addEventListener("click", function () {
     mobileMenu.classList.toggle("hidden");
   });
+
+  // Sélectionnez tous les boutons de la navbar
+const buttons = document.querySelectorAll('.navbar-button');
+
+// Gestionnaire d'événement clic pour chaque bouton
+buttons.forEach(button => {
+  button.addEventListener('click', function() {
+    // Retirez la classe "button-active" de tous les boutons
+    buttons.forEach(btn => {
+      btn.classList.remove('button-active');
+      btn.classList.add('button-inactive');
+    });
+
+    // Ajoutez la classe "button-active" au bouton actuel
+    button.classList.add('button-active');
+  });
+});
+
 
 };
 

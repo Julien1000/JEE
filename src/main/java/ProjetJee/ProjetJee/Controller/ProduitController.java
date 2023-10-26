@@ -62,6 +62,10 @@ public class ProduitController {
         // Ajouter la variable isAdmin au modèle
         model.addAttribute("isUserLoggedIn", isUserLoggedIn);
         model.addAttribute("isAdmin", isAdmin);
+        Long categorieId1 = categories.get(0).getId();
+        model.addAttribute("idCategorie1", categorieId1);
+		String categorieName1 = categories.get(0).getName();
+        model.addAttribute("nameCategorie1", categorieName1);
 		return "produitForm";
 	}
 

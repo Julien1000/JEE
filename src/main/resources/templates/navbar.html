@@ -6,35 +6,36 @@
 		<meta charset="UTF-8">
 		<title>Navbar</title>
 		<link rel="stylesheet" href="/css/navbar.css" th:href="@{/css/navbar.css}">
-		<script src="/js/button_dropdown.js" th:src="@{/js/navbar.js}" type="text/javascript"></script>
+		<script src="/js/navbar.js" th:src="@{/js/navbar.js}" type="text/javascript"></script>
 	</head>
 	
 	<nav class="bg-gray-800">
 	    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 	      <div class="relative flex h-16 items-center justify-between">
 	        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-	          <!-- Mobile menu button-->
+	           <!-- Mobile menu button -->
 	          <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" id="mobile-menu-button" aria-controls="mobile-menu" aria-expanded="false">
 	            <span class="absolute -inset-0.5"></span>
 	            <span class="sr-only">Open main menu</span>
-	            <!--
+<!-- 	            
 	              Icon when menu is closed.
 	  
-	              Menu open: "hidden", Menu closed: "block"
-	            -->
+	              Menu open: "hidden", Menu closed: "block" -->
+	            
 	            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
 	              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 	            </svg>
-	            <!--
-	              Icon when menu is open.
+	            
+	              <!-- Icon when menu is open.
 	  
-	              Menu open: "block", Menu closed: "hidden"
-	            -->
+	              Menu open: "block", Menu closed: "hidden" -->
+	        
 	            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
 	              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 	            </svg>
 	          </button>
 	        </div>
+		
 	        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 	          <div class="flex flex-shrink-0 items-center">
 	            <img class="h-8 w-auto" th:src="@{/img/logo_ticketwave.png}" alt="Your Company">
@@ -42,9 +43,9 @@
 	          <div class="hidden sm:ml-6 sm:block">
 	            <div class="flex space-x-4">
 	              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-	              <a th:href="@{/index}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Accueil</a>
+	              <a th:href="@{/index}" th:classappend="${activePage == '@{/index}'} ? 'button-active' : 'button-inactive'" class="navbar-button block rounded-md px-3 py-2 text-base font-medium" >Accueil</a>
 	             <div th:each="categorie : ${categories}">
-			            <a th:href="@{/produit/{idCategorie}(idCategorie=${categorie.id})}" th:text="${categorie.name}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" ></a>
+			            <a th:href="@{/produit/{idCategorie}(idCategorie=${categorie.id})}" th:text="${categorie.name}" th:classappend="${activePage == '@{/produit/{idCategorie}(idCategorie=${categorie.id})}'} ? 'button-active' : 'button-inactive'" class="navbar-button block rounded-md px-3 py-2 text-base font-medium" ></a>
 			      </div>
 
 
@@ -75,7 +76,7 @@
 						<div th:if="${isUserLoggedIn != null && isAdmin}" class="py-1">
 						  <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addProduit}" tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" >+ Produit</a>
 						  <a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/addCategorie}"  tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" >+ Catégorie</a>
-						  <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" tabindex="2" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >All produit</span>
+						  <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" tabindex="2" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >All produit</a>
 						  <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" tabindex="3" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >All categorie</a>
 						</div>
 					  </div>
@@ -136,32 +137,34 @@
 	    <div class="hidden sm:hidden" id="mobile-menu">
 	      <div class="space-y-1 px-2 pb-3 pt-2">
 	        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-	        <a th:href="@{/index}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Accueil</a>
-	        <div th:each="categorie : ${categories}">
+			<div>
+	        <a th:href="@{/index}" class="bg-gray-300 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Accueil</a>
+			</div>
+			<div th:each="categorie : ${categories}">
 	            <a th:href="@{/produit/{idCategorie}(idCategorie=${categorie.id})}" th:text="${categorie.name}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"></a>
-	      </div>
+	      	</div>
 		  <!-- <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addProduit}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >+ Produit</a>
 			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addCategorie}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >+ Categorie</a>
 			      <a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/logout}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Déconnexion</a>
 			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >All Categorie</a>
 			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >All Produit</a>
 			       -->
-				   <div class="flex items-center justify-center p-12">
-					<div class=" relative inline-block text-left dropdown">
-					  <span class="rounded-md shadow-sm">
-						  <button class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-gray-800 border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800" 
-						 type="button" aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-117" id="admin-menu-button">
-						  <span>Options</span>
-						  <svg class="w-5 h-5 ml-2 -mr-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+				   <div th:if="${isUserLoggedIn != null && isAdmin}" class="flex items-center justify-center p-12">
+					<div th:if="${isUserLoggedIn != null && isAdmin}" class=" relative inline-block text-left dropdown">
+					  <span th:if="${isUserLoggedIn != null && isAdmin}" class="rounded-md shadow-sm">
+						  <button th:if="${isUserLoggedIn != null && isAdmin}" class="admin-menu-button inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-gray-800 border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800" 
+						 type="button" aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-117">
+						  <span th:if="${isUserLoggedIn != null && isAdmin}" >Options</span>
+						  <svg th:if="${isUserLoggedIn != null && isAdmin}" class="w-5 h-5 ml-2 -mr-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 						  </button>
 					  </span>
-					  <div class="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95" id="dropdown-menu">
-						<div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none" aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
-						  <div class="py-1">
-							<a href="javascript:void(0)" tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" >+ Produit</a>
-							<a href="javascript:void(0)" tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" >+ Catégorie</a>
-							<a href="javascript:void(0)" tabindex="2" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >All produit</span>
-							<a href="javascript:void(0)" tabindex="3" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >All categorie</a>
+					  <div th:if="${isUserLoggedIn != null && isAdmin}" class="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95" id="dropdown-menu">
+						<div th:if="${isUserLoggedIn != null && isAdmin}" class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none" aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
+						  <div th:if="${isUserLoggedIn != null && isAdmin}" class="py-1">
+							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addProduit}" tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" >+ Produit</a>
+							<a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/addCategorie}"  tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" >+ Catégorie</a>
+							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" tabindex="2" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >All produit</a>
+							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" tabindex="3" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >All categorie</a>
 						  </div>
 						</div>
 					  </div>

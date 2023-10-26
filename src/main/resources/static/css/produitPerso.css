@@ -222,18 +222,6 @@ select {
 2. Remove default button styles.
 */
 
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-  -webkit-appearance: button;
-  /* 1 */
-  background-color: transparent;
-  /* 2 */
-  background-image: none;
-  /* 2 */
-}
-
 /*
 Use the modern Firefox focus style for all focusable elements.
 */
@@ -965,11 +953,6 @@ video {
   
   .gap-x-6{
     column-gap: 1.5rem
-  }
-  
-  .bg-indigo-600{
-    --tw-bg-opacity: 1;
-    background-color: rgb(79 70 229 / var(--tw-bg-opacity))
   }
   
   .px-3{
