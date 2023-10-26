@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -191,6 +192,8 @@ public class ProduitController {
 	    if (produitOptional.isPresent()) {
 	        Produit produit = produitOptional.get();
 	        model.addAttribute("produit", produit);
+	        Long categorieId = produit.getCategorie().getId();
+	        model.addAttribute("idCategorie", categorieId);
 	    } else {
 	        // Gérer le cas où le produit n'est pas trouvé, par exemple, rediriger vers une page d'erreur
 	        return "produitNotFound";
@@ -234,7 +237,7 @@ public class ProduitController {
         model.addAttribute("isAdmin", isAdmin);
 	    return "productsByCategory";  // Name of the Thymeleaf template
 	}
-
+	
 
     
 }

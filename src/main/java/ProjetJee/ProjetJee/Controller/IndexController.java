@@ -58,8 +58,7 @@ public class IndexController {
         // Ajouter la variable isAdmin au modèle
         model.addAttribute("isUserLoggedIn", isUserLoggedIn);
         model.addAttribute("isAdmin", isAdmin);
-        System.out.println("Is Admin: " + isAdmin);
-        System.out.println("Authorities: " + authentication.getAuthorities());
+        
 
         return "index"; // Le nom de votre template HTML
     }

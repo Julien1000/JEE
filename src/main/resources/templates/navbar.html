@@ -74,7 +74,7 @@
 					  <div th:if="${isUserLoggedIn != null && isAdmin}" class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none" aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
 						<div th:if="${isUserLoggedIn != null && isAdmin}" class="py-1">
 						  <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addProduit}" tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" >+ Produit</a>
-						  <a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/logout}"  tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" >+ Catégorie</a>
+						  <a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/addCategorie}"  tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left"  role="menuitem" >+ Catégorie</a>
 						  <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" tabindex="2" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >All produit</span>
 						  <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" tabindex="3" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left" role="menuitem" >All categorie</a>
 						</div>
