@@ -1,10 +1,11 @@
-window.onload = function () {
+document.addEventListener('DOMContentLoaded', function() {
   console.log("navbar.js");
   const profile = document.getElementById("user-menu-button");
   const profileMenu = document.getElementById("user-menu");
 
   profile.addEventListener("click", function () {
     profileMenu.classList.toggle("hidden");
+    console.log("click");
   });
 
   const mobileMenuButton = document.getElementById("mobile-menu-button");
@@ -32,7 +33,7 @@ buttons.forEach(button => {
 });
 
 
-};
+});
 
 document.addEventListener('DOMContentLoaded', (event) => {
   const searchBar = document.getElementById('searchbar');

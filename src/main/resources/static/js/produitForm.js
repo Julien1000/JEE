@@ -1,5 +1,4 @@
-window.onload = function () {
-  console.log("produitForm.js");
+document.addEventListener('DOMContentLoaded', function() {
   const listbox = document.querySelector(".list-category");
   const button = document.querySelector(".button_select_category");
 
@@ -29,4 +28,4 @@ window.onload = function () {
       svg.classList.add("svg_selected");
     });
   });
-};
+});
