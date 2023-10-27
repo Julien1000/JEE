@@ -1,4 +1,5 @@
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('index.js');
   const navbar = document.getElementById('navbar');
   navbar.classList.add('hidden');
   const closeButton = document.getElementById('close-nav');
@@ -15,4 +16,4 @@ window.onload = function() {
 
 
 
-};
+});
