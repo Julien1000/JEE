@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mon Panier</title>
+</head>
+<body>
+    <h1>Mon Panier</h1>
+    <table>
+        <tr>
+            <th>Produit</th>
+            <th>Quantité</th>
+        </tr>
+        <tr th:each="detail : ${panier.detailCommande}">
+            <td th:text="${detail.produit.name}"></td>
+            <td th:text="${detail.quantite}"></td>
+        </tr>
+    </table>
+    
+    <form th:action="'/enregistrerPanier'" method="post">
+        <button type="submit">Valider Panier</button>
+    </form>
+</body>
+</html>

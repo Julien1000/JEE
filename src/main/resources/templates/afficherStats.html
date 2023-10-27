@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/stat.js" th:src="@{/js/stat.js}" type="text/javascript"></script>
+    <title>Statistiques des Commandes</title>
+    <style>
+        .chart-container {
+            width: 400px;
+            height: 400px;
+            margin: 20px;
+            float: left;
+        }
+        .clear {
+            clear: both;
+        }
+        .stats-text {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="stats-text">Statistiques des Commandes</h2>
+    <p class="stats-text">Nombre de commandes avec statut 1: <span id="status1" th:text="${nombreCommandesStatus1}"></span></p>
+    <p class="stats-text">Nombre de commandes avec statut 2: <span id="status2" th:text="${nombreCommandesStatus2}"></span></p>
+    <p class="stats-text">Nombre de commandes avec statut 3: <span id="status3" th:text="${nombreCommandesStatus3}"></span></p>
+
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="barChart"></canvas>
+    </div>
+    
+    <div class="chart-container">
+        <canvas id="barChart1"></canvas>
+    </div>
+    
+    
+
+    <div class="clear"></div>
+
+    <h2 class="stats-text">Produits Vendus par Catégorie</h2>
+    <div th:each="entry : ${produitsParCategorie}" class="stats-text">
+        <p th:text="${entry.key} + ': ' + ${entry.value}"></p>
+    </div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var categories = /*[[${produitsParCategorie.keySet()}]]*/ 'default';
+        var valeurs = /*[[${produitsParCategorie.values()}]]*/ 'default';
+        /*]]>*/
+    </script>
+    <h2>Total de Produits Vendus: <span th:text="${totalProduitsVendus}"></span></h2>
+		<h3>Top 5 des Produits les Plus Vendus</h3>
+		<ul>
+		    <li th:each="entry, stat : ${top5ProduitsNoms}" th:index="index">
+		        <span th:text="${entry}"></span> : <span th:text="${top5ProduitsQuantites[__${stat.index}__]}"></span>
+		    </li>
+		</ul>
+		<script th:inline="javascript">
+        /*<![CDATA[*/
+        var top5ProduitsNoms = /*[[${top5ProduitsNoms}]]*/ 'default';
+        var top5ProduitsQuantites = /*[[${top5ProduitsQuantites}]]*/ 'default';
+        /*]]>*/
+    </script>
+
+</body>
+</html>
