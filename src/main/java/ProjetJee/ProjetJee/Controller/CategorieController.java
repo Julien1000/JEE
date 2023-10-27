@@ -3,6 +3,7 @@ package ProjetJee.ProjetJee.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ public class CategorieController {
 	
 
 	@GetMapping(path = "/addCategorie")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String showForm(Model model,Authentication authentication) {
 		model.addAttribute("categorie", new Categorie());
 		List<Categorie> categories = (List<Categorie>) categorieRepository.findAll();
@@ -47,6 +49,7 @@ public class CategorieController {
         // Ajouter la variable isAdmin au modèle
         model.addAttribute("isUserLoggedIn", isUserLoggedIn);
         model.addAttribute("isAdmin", isAdmin);
+        
 		return "categorieForm";
 	}
 
@@ -57,6 +60,7 @@ public class CategorieController {
 	}
 
 	@GetMapping(path = "/categorie")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String listCategories(Model model, Authentication authentication) {
 		((Model) model).addAttribute("categories", categorieRepository.findAll());
 		boolean isAdmin = false;
@@ -76,9 +80,14 @@ public class CategorieController {
         // Ajouter la variable isAdmin au modèle
         model.addAttribute("isUserLoggedIn", isUserLoggedIn);
         model.addAttribute("isAdmin", isAdmin);
-		return "categoriesList";
+        if (isAdmin) {
+        	return "categoriesList";
+        }else {
+        	return "index";
+        }
 	}
 	@GetMapping("/editCategorie/{id}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String editCategorieForm(@PathVariable("id") Long id, Model model,Authentication authentication) {
         Categorie existingCategorie = categorieRepository.findById(id).orElse(null);
         model.addAttribute("categorie", existingCategorie);
@@ -105,6 +114,7 @@ public class CategorieController {
 
     // Handler to handle the POST request for editing a category
     @PostMapping("/editCategorie/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String updateCategorie(@PathVariable("id") Long id, @ModelAttribute Categorie categorie) {
         // Ideally, you'd check if the category exists first, but for simplicity, we're directly saving
         categorieRepository.save(categorie);
@@ -113,6 +123,7 @@ public class CategorieController {
 
     // Handler to handle the deletion of a category
     @GetMapping("/deleteCategorie/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteCategorie(@PathVariable("id") Long id) {
         categorieRepository.deleteById(id);
         return "redirect:/categorie";
