@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+/*document.addEventListener('DOMContentLoaded', function() {
   console.log('index.js');
   const navbar = document.getElementById('navbar');
   navbar.classList.add('hidden');
@@ -16,4 +16,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-});
+});*/
