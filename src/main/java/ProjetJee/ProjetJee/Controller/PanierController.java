@@ -53,7 +53,7 @@ public class PanierController {
 	    
 	    // Créer un nouvel élément dans le panier (DetailCommande)
 	    DetailCommande detailCommande = new DetailCommande();
-	    detailCommande.setProduit(produit);
+	    detailCommande.(produit);
 	    detailCommande.setQuantite(quantite);
 	    
 	    // Récupérer le panier de l'utilisateur, ou en créer un nouveau s'il n'en a pas

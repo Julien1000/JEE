@@ -16,16 +16,22 @@ public class Produit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
-	private double prix;
+	
+	private String description;
+	
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private byte[] image;
-	private int stock;
-	private String numeroPlace;
+	
 	@ManyToOne
     @JoinColumn(name = "idCategories")
     private Categorie categorie;
+	
+
+	
+	
 	public Categorie getCategorie() {
         return categorie;
     }
@@ -35,8 +41,6 @@ public class Produit {
 	public Long getId() {
 	    return id;
 	}
-	
-
 
 	public byte[] getImage() {
 		return image;
@@ -53,28 +57,19 @@ public class Produit {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public double getPrix() {
-		return prix;
+	
+	
+
+	public String getDescription() {
+		return description;
 	}
-	public void setPrix(double prix) {
-		this.prix = prix;
-	}
-	public int getStock() {
-		return stock;
-	}
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-	public String getNumeroPlace() {
-		return numeroPlace;
-	}
-	public void setNumeroPlace(String numeroPlace) {
-		this.numeroPlace = numeroPlace;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(categorie, id, name, numeroPlace, prix, stock);
+		return Objects.hash(categorie, id, name);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -86,8 +81,7 @@ public class Produit {
 			return false;
 		Produit other = (Produit) obj;
 		return Objects.equals(categorie, other.categorie) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(numeroPlace, other.numeroPlace)
-				&& Double.doubleToLongBits(prix) == Double.doubleToLongBits(other.prix) && stock == other.stock;
+				&& Objects.equals(name, other.name);
 	}
 	
 	

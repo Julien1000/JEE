@@ -43,7 +43,7 @@ public class CommandeController {
             System.out.println("Commande ID: " + commande.getIdCommande());
             if (commande.getDetailCommande() != null) {
                 for (DetailCommande detail : commande.getDetailCommande()) {
-                    System.out.println("Produit: " + detail.getProduit().getName() + ", Quantité: " + detail.getQuantite());
+                    System.out.println("Produit: " + detail.getCategoriePlace().getDetailProduit().getProduit() + ", Quantité: " + detail.getQuantite());
                 }
             } else {
                 System.out.println("Pas de détails pour cette commande");
@@ -124,7 +124,7 @@ public class CommandeController {
         for (Commande commande : commandes) {
             if (commande.getDetailCommande() != null) {
                 for (DetailCommande detail : commande.getDetailCommande()) {
-                    Produit produit = detail.getProduit();
+                    Produit produit = detail.getCategoriePlace().getDetailProduit().getProduit();
                     int quantite = detail.getQuantite();
 
                     // Compter les produits par catégorie
