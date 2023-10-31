@@ -75,9 +75,6 @@ public class ProduitController {
 	public String saveProduct(
 	    @RequestParam(value="id", required=false) Long id,
 	    @RequestParam("name") String name,
-	    @RequestParam("prix") String prix,
-	    @RequestParam("stock") String stock,
-	    @RequestParam("numeroPlace") String numeroPlace,
 	    @RequestParam("categorie") Long categorieId,
 	    @RequestParam("image") MultipartFile file
 	) throws IOException {
@@ -94,9 +91,7 @@ public class ProduitController {
 
 //	    // Mettez à jour les attributs du produit.
 	    produit.setName(name);
-	    produit.setPrix(Double.parseDouble(prix));
-	    produit.setStock(Integer.parseInt(stock));
-	    produit.setNumeroPlace(numeroPlace);
+
 
 	    // Gérer l'affectation de la catégorie.
 	    Categorie cat = categorieRepository.findById(categorieId).orElse(null);

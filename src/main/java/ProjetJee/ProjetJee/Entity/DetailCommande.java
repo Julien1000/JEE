@@ -23,10 +23,11 @@ public class DetailCommande {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "id_Produit")
-	private Produit produit;
+	@JoinColumn(name = "id_CategoriePlace")
+	private CategoriePlace categoriePlace;
 
 	private int quantite;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_commande") // Assurez-vous que le nom de la colonne est correct
 	private Commande commande;
@@ -57,16 +58,17 @@ public class DetailCommande {
 
 	}
 
-	public Produit getProduit() {
 
-		return this.produit;
-
+	public CategoriePlace getCategoriePlace() {
+		return categoriePlace;
 	}
 
-	public void setProduit(Produit produit) {
+	public void setCategoriePlace(CategoriePlace categoriePlace) {
+		this.categoriePlace = categoriePlace;
+	}
 
-		this.produit = produit;
-
+	public Commande getCommande() {
+		return commande;
 	}
 
 	public int getQuantite() {
