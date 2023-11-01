@@ -35,11 +35,9 @@ buttons.forEach(button => {
 
 });
 
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', function() {
   const searchBar = document.getElementById('searchbar');
-  const produitsList = document.getElementById('list');
-  const produitsItems = produitsList.getElementsByClassName('produits');
-
+  const produitsList = document.getElementById('results-list');
   const MAX_VISIBLE_ITEMS = 5;
 
   const positionProduitsList = () => {
@@ -49,29 +47,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
     produitsList.style.width = rect.width + 'px';
   };
 
- searchBar.addEventListener('focus', function() {
-   positionProduitsList();
- });
+  searchBar.addEventListener('focus', positionProduitsList);
 
   searchBar.addEventListener('keyup', function() {
     const searchText = searchBar.value.toLowerCase();
 
-    let visibleCount = 0;
-    let produitFound = false;
-    for (let produit of produitsItems) {
-      const produitName = produit.textContent.toLowerCase();
-      const isMatch = produitName.includes(searchText);
+    if (searchText.length >= 3) {
+      fetch(`/api/produits/search?query=${searchText}`)
+        .then(response => response.json())
+        .then(produits => {
+          produitsList.innerHTML = '';
+          produits.slice(0, MAX_VISIBLE_ITEMS).forEach(produit => {
+            const li = document.createElement('li');
+            li.classList.add('produits');
+            li.textContent = produit.name;
+            li.setAttribute('data-id', produit.id);
+            produitsList.appendChild(li);
+          });
 
-      if (isMatch && visibleCount < MAX_VISIBLE_ITEMS) {
-        produit.style.display = '';
-        visibleCount++;
-        produitFound = true;
-      } else {
-        produit.style.display = 'none';
-      }
+          produitsList.style.display = 'block';
+          positionProduitsList();
+          console.log("Produits chargés", produits);
+        })
+        .catch(error => console.error('Erreur lors de la récupération des produits:', error));
+    } else {
+      produitsList.style.display = 'none';
     }
-
-    produitsList.style.display = produitFound ? 'block' : 'none';
   });
 
   document.addEventListener('click', function(event) {
@@ -85,14 +86,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
       positionProduitsList();
     }
   });
-  for (let produit of produitsItems) {
-    produit.addEventListener('click', function() {
-      const produitId = produit.getAttribute('data-id');
-      window.location.href = '/produit/perso/' + produitId;
-    });
-  }
 
+  produitsList.addEventListener('click', function(event) {
+    if (event.target.classList.contains('produits')) {
+      const produitId = event.target.getAttribute('data-id');
+      window.location.href = '/produit/perso/' + produitId;
+    }
+  });
 });
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
