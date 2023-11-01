@@ -24,8 +24,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import ProjetJee.ProjetJee.Repository.ProduitRepository;
+import ProjetJee.ProjetJee.Repository.CategoriePlaceRepository;
 import ProjetJee.ProjetJee.Repository.CategorieRepository;
+import ProjetJee.ProjetJee.Repository.DetailProduitRepository;
 import ProjetJee.ProjetJee.Entity.Categorie;
+import ProjetJee.ProjetJee.Entity.CategoriePlace;
+import ProjetJee.ProjetJee.Entity.DetailProduit;
 import ProjetJee.ProjetJee.Entity.Produit;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -40,6 +44,13 @@ public class ProduitController {
 	private ProduitRepository produitRepository;
 	@Autowired
 	private CategorieRepository categorieRepository;
+	
+	@Autowired
+	private CategoriePlaceRepository categoriePlaceRepository;
+	
+	@Autowired
+	private DetailProduitRepository detailProduitRepository;
+
 
 	@GetMapping(path = "/addProduit")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -75,9 +86,6 @@ public class ProduitController {
 	public String saveProduct(
 	    @RequestParam(value="id", required=false) Long id,
 	    @RequestParam("name") String name,
-	    @RequestParam("prix") String prix,
-	    @RequestParam("stock") String stock,
-	    @RequestParam("numeroPlace") String numeroPlace,
 	    @RequestParam("categorie") Long categorieId,
 	    @RequestParam("image") MultipartFile file
 	) throws IOException {
@@ -94,9 +102,7 @@ public class ProduitController {
 
 //	    // Mettez à jour les attributs du produit.
 	    produit.setName(name);
-	    produit.setPrix(Double.parseDouble(prix));
-	    produit.setStock(Integer.parseInt(stock));
-	    produit.setNumeroPlace(numeroPlace);
+
 
 	    // Gérer l'affectation de la catégorie.
 	    Categorie cat = categorieRepository.findById(categorieId).orElse(null);
@@ -200,6 +206,13 @@ public class ProduitController {
 	    if (produitOptional.isPresent()) {
 	        Produit produit = produitOptional.get();
 	        model.addAttribute("produit", produit);
+	        
+			DetailProduit detailProduit = detailProduitRepository.findByProduit(produit);
+	        model.addAttribute("detailProduit", detailProduit);
+
+	        // Récupérer les CategoriePlace associées
+	        List<CategoriePlace> categoriePlaces = categoriePlaceRepository.findByDetailProduit(detailProduit);
+	        model.addAttribute("categoriePlaces", categoriePlaces);
 	        Long categorieId = produit.getCategorie().getId();
 	        model.addAttribute("idCategorie", categorieId);
 	    } else {

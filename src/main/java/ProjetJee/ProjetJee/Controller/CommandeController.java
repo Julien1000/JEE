@@ -1,6 +1,7 @@
 package ProjetJee.ProjetJee.Controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,18 +39,10 @@ public class CommandeController {
 
     @GetMapping("/afficher")
     public String afficherCommandes(Model model) {
-    	List<Commande> commandes = commandeRepository.findAll();
-        for (Commande commande : commandes) {
-            System.out.println("Commande ID: " + commande.getIdCommande());
-            if (commande.getDetailCommande() != null) {
-                for (DetailCommande detail : commande.getDetailCommande()) {
-                    System.out.println("Produit: " + detail.getProduit().getName() + ", Quantité: " + detail.getQuantite());
-                }
-            } else {
-                System.out.println("Pas de détails pour cette commande");
-            }
-        }
+        List<Commande> commandes = commandeRepository.findAll();
         model.addAttribute("commandes", commandes);
+        model.addAttribute("statusList", Arrays.asList(1, 2, 3, 4));
+
         return "afficherCommandes";
     }
     
@@ -124,7 +117,7 @@ public class CommandeController {
         for (Commande commande : commandes) {
             if (commande.getDetailCommande() != null) {
                 for (DetailCommande detail : commande.getDetailCommande()) {
-                    Produit produit = detail.getProduit();
+                    Produit produit = detail.getCategoriePlace().getDetailProduit().getProduit();
                     int quantite = detail.getQuantite();
 
                     // Compter les produits par catégorie

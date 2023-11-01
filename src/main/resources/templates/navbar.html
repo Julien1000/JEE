@@ -9,7 +9,7 @@
 		<script src="/js/navbar.js" th:src="@{/js/navbar.js}" type="text/javascript"></script>
 	</head>
 	
-	<nav class="bg-gray-800">
+	<nav class="bg-gray-800" >
 	    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 	      <div class="relative flex h-16 items-center justify-between">
 	        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -88,9 +88,17 @@
 				<a th:if="${isUserLoggedIn == null}" th:href="@{/login}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Connexion</a>
 				<a th:if="${isUserLoggedIn == null}" th:href="@{/register}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >S'inscrire</a> -->
 
-	        <div id="search-container">
+	        <!--
+				BARRE DE RECHERCHE 
+				<div id="search-container">
 			    <input type="text" name="q" id="searchbar" placeholder="Rechercher un produit" />
 			</div>
+-->
+			<div id="search-container" style="position: absolute;">
+			  <input type="text" name="q" id="searchbar" placeholder="Rechercher un produit" />
+			  <ol id='results-list' style="position: absolute; "></ol>
+			</div>
+
 
 
 	        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -180,10 +188,10 @@
 				
 			
 	  </nav>
-	  <ol id='list' style="display: none;">
-		    <li th:each="produit : ${produits}" class="produits" th:text="${produit.name}" th:attr="data-id=${produit.id}"></li>
-	  </ol>
-	  
+
+		
+		
+ 
 
 
 </div>

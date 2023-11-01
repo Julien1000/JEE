@@ -1,122 +1,123 @@
 package ProjetJee.ProjetJee.Controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ProjetJee.ProjetJee.Entity.Panier;
-import ProjetJee.ProjetJee.Entity.User;
-import ProjetJee.ProjetJee.Entity.Produit;
-import ProjetJee.ProjetJee.Repository.CommandeRepository;
-import ProjetJee.ProjetJee.Repository.DetailCommandeRepository;
-import ProjetJee.ProjetJee.Repository.PanierRepository;
-import ProjetJee.ProjetJee.Repository.ProduitRepository;
-import ProjetJee.ProjetJee.Repository.UserRepository;
+import ProjetJee.ProjetJee.Entity.*;
+import ProjetJee.ProjetJee.Repository.*;
 
-import ProjetJee.ProjetJee.Entity.Commande;
-import ProjetJee.ProjetJee.Entity.DetailCommande;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PanierController {
 
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private PanierRepository panierRepository;
-	@Autowired
-	private ProduitRepository produitRepository;
-	@Autowired
-	private DetailCommandeRepository detailCommandeRepository;
-	@Autowired 
-	private CommandeRepository commandeRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PanierRepository panierRepository;
+    @Autowired
+    private CategoriePlaceRepository categoriePlaceRepository;
+    @Autowired
+    private DetailCommandeRepository detailCommandeRepository;
+    @Autowired
+    private CommandeRepository commandeRepository;
+    
+    @Autowired 
+    private DetailProduitRepository detailProduitRepository;
+    
+    @Autowired 
+    private ProduitRepository produitRepository;
 
-	@PostMapping("/ajouterPanier")
-	public String ajouterElementAuPanier(Model model, @RequestParam("idProduit") Long idProduit,
-	                                     @RequestParam("quantite") int quantite, Authentication authentication) {
-	    // Vérifier si la quantité est valide
-	    if (quantite < 1) {
-	        model.addAttribute("erreurQuantite", "Quantité non conforme");
-	        return "redirect:/produit/perso/" + idProduit;
-	    }
-	    
-	    // Récupérer l'utilisateur connecté
-	    User user = userRepository.findByUsername(authentication.getName());
-	    
-	    // Récupérer le produit par son ID
-	    Produit produit = produitRepository.findById(idProduit)
-	                                       .orElseThrow(() -> new RuntimeException("Produit non trouvé"));
-	    
-	    // Créer un nouvel élément dans le panier (DetailCommande)
-	    DetailCommande detailCommande = new DetailCommande();
-	    detailCommande.setProduit(produit);
-	    detailCommande.setQuantite(quantite);
-	    
-	    // Récupérer le panier de l'utilisateur, ou en créer un nouveau s'il n'en a pas
-	    Panier panier = panierRepository.findByUserId(user.getId());
-	    if (panier == null) {
-	        panier = new Panier();
-	        panier.setUser(user);
-	        panier.setDetailCommande(new ArrayList<>());
-	    }
-	    
-	    // Ajouter le DetailCommande au panier et sauvegarder
-	    panier.getDetailCommande().add(detailCommande);
-	    detailCommande.setPanier(panier);
-	    panierRepository.save(panier);
-	    detailCommandeRepository.save(detailCommande);
+    @PostMapping("/ajouterPanier")
+    public String ajouterElementAuPanier(Model model, @RequestParam("idCategoriePlace") Long idCategoriePlace,
+                                         @RequestParam("quantite") int quantite, Authentication authentication) {
+        if (quantite < 1) {
+            model.addAttribute("erreurQuantite", "Quantité non conforme");
+            return "redirect:/produit";  // Remplacez par la page de produit appropriée
+        }
 
-	    return "redirect:/produit";
-	}
+        User user = userRepository.findByUsername(authentication.getName());
+        CategoriePlace categoriePlace = categoriePlaceRepository.findById(idCategoriePlace)
+                .orElseThrow(() -> new RuntimeException("CategoriePlace non trouvée"));
 
-	@PostMapping("/enregistrerPanier")
-	public String enregistrerPanier(Authentication authentication) {
-	    User user = userRepository.findByUsername(authentication.getName());
-	    Panier panier = panierRepository.findByUserId(user.getId());
+        DetailCommande detailCommande = new DetailCommande();
+        detailCommande.setCategoriePlace(categoriePlace);
+        detailCommande.setQuantite(quantite);
 
-	    if (panier == null || panier.getDetailCommande() == null || panier.getDetailCommande().isEmpty()) {
-	        System.out.println("Le panier est vide ou n'existe pas.");
-	        return "redirect:/monPanier"; // Redirigez vers une page appropriée
-	    }
+        Panier panier = panierRepository.findByUserId(user.getId());
+        if (panier == null) {
+            panier = new Panier();
+            panier.setUser(user);
+            panier.setDetailCommande(new ArrayList<>());
+        }
 
-	    Commande commande = new Commande();
-	    commande.setStatus(1);
-	    commande.setUser(user);
-	    commande.setDetailCommande(new ArrayList<>(panier.getDetailCommande()));
+        panier.getDetailCommande().add(detailCommande);
+        detailCommande.setPanier(panier);
+        panierRepository.save(panier);
+        detailCommandeRepository.save(detailCommande);
 
-	    System.out.println("Enregistrement de la commande avec " + commande.getDetailCommande().size() + " produits.");
+        return "redirect:/produit";
+    }
 
-	    commandeRepository.save(commande);
+    @PostMapping("/enregistrerPanier")
+    public String enregistrerPanier(Authentication authentication) {
+        User user = userRepository.findByUsername(authentication.getName());
+        Panier panier = panierRepository.findByUserId(user.getId());
 
-	    // Mettez à jour les relations inverses (si nécessaire)
-	    for (DetailCommande detailCommande : commande.getDetailCommande()) {
-	        detailCommande.setCommande(commande);
-	        detailCommande.setPanier(null);
-	        detailCommandeRepository.save(detailCommande);
-	    }
+        if (panier == null || panier.getDetailCommande() == null || panier.getDetailCommande().isEmpty()) {
+            System.out.println("Le panier est vide ou n'existe pas.");
+            return "redirect:/monPanier";
+        }
 
-	    // Videz le panier
-	 // Videz le panier
-	    
-	    panierRepository.delete(panier);
+        Commande commande = new Commande();
+        commande.setStatus(1);
+        commande.setUser(user);
+        commande.setDetailCommande(new ArrayList<>(panier.getDetailCommande()));
 
+        commandeRepository.save(commande);
 
-	    System.out.println("Commande enregistrée avec succès et panier vidé.");
+        for (DetailCommande detailCommande : commande.getDetailCommande()) {
+            detailCommande.setCommande(commande);
+            detailCommande.setPanier(null);
+            detailCommandeRepository.save(detailCommande);
+        }
 
-	    return "redirect:/index"; // Redirigez vers une page de confirmation
-	}
-	@GetMapping("/monPanier")
-	public String monPanier(Model model, Authentication authentication) {
-	    User user = userRepository.findByUsername(authentication.getName());
-	    Panier panier = panierRepository.findByUserId(user.getId());
-	    model.addAttribute("panier", panier);
-	    return "monPanier";
-	}
+        panierRepository.delete(panier);
 
+        System.out.println("Commande enregistrée avec succès et panier vidé.");
 
+        return "redirect:/index";
+    }
+
+    @GetMapping("/monPanier")
+    public String monPanier(Model model, Authentication authentication) {
+        User user = userRepository.findByUsername(authentication.getName());
+        Panier panier = panierRepository.findByUserId(user.getId());
+
+        if (panier != null && panier.getDetailCommande() != null) {
+            List<Map<String, Object>> detailPanierList = new ArrayList<>();
+            
+            for (DetailCommande detailCommande : panier.getDetailCommande()) {
+                Map<String, Object> detailPanier = new HashMap<>();
+                detailPanier.put("quantite", detailCommande.getQuantite());
+                detailPanier.put("categoriePlace", categoriePlaceRepository.findById(detailCommande.getCategoriePlace().getId()).orElse(null));
+                DetailProduit detailProduit = detailProduitRepository.findById(detailCommande.getCategoriePlace().getDetailProduit().getId()).orElse(null);
+                detailPanier.put("detailProduit", detailProduit);
+                detailPanier.put("produit", produitRepository.findById(detailProduit.getProduit().getId()).orElse(null));
+                
+                detailPanierList.add(detailPanier);
+            }
+            
+            model.addAttribute("detailPanierList", detailPanierList);
+        }
+        
+        model.addAttribute("panier", panier);
+        return "monPanier";
+    }
 
 }
