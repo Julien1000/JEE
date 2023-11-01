@@ -8,11 +8,17 @@
     <table>
         <tr>
             <th>Produit</th>
+            <th>Catégorie</th>
             <th>Quantité</th>
+            <th>Prix unitaire</th>
+            <th>Prix total</th>
         </tr>
-        <tr th:each="detail : ${panier.detailCommande}">
+        <tr th:each="detail : ${detailPanierList}">
             <td th:text="${detail.produit.name}"></td>
+            <td th:text="${detail.categoriePlace.nomCategoriePlace}"></td>
             <td th:text="${detail.quantite}"></td>
+            <td th:text="${detail.categoriePlace.prix}"></td>
+            <td th:text="${detail.quantite * detail.categoriePlace.prix}"></td>
         </tr>
     </table>
     

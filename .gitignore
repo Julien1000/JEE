@@ -7,6 +7,7 @@ target/
 application.properties
 data/bdd.mv.db
 waitPorductCategory.html
+application.properties
 ### STS ###
 .apt_generated
 .classpath
