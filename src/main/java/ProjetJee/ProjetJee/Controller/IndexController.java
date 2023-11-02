@@ -37,10 +37,6 @@ public class IndexController {
 	private ProduitRepository produitRepository;
     @GetMapping("/index")
     public String afficherMaPage(Model model,Authentication authentication) {
-//    	List<Categorie> categorie = (List<Categorie>) categorieRepository.findAll();
-//		model.addAttribute("categories", categorie);
-//		List<Produit> produits = (List<Produit>) produitRepository.findAll();
-//	    model.addAttribute("produits", produits);
 	    boolean isAdmin = false;
 	    boolean isUserLoggedIn = false;
         // Vérifier si l'utilisateur est authentifié
@@ -53,6 +49,10 @@ public class IndexController {
             isAdmin = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .anyMatch("ROLE_ADMIN"::equals);
+            List<Categorie> categorie = (List<Categorie>) categorieRepository.findAll();
+    		model.addAttribute("categories", categorie);
+    		List<Produit> produits = (List<Produit>) produitRepository.findAll();
+    	    model.addAttribute("produits", produits);
         }
 
         // Ajouter la variable isAdmin au modèle
@@ -62,4 +62,6 @@ public class IndexController {
 
         return "index"; // Le nom de votre template HTML
     }
+    
+    
 }
