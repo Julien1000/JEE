@@ -87,7 +87,9 @@ public class ProduitController {
 	    @RequestParam(value="id", required=false) Long id,
 	    @RequestParam("name") String name,
 	    @RequestParam("categorie") Long categorieId,
-	    @RequestParam("image") MultipartFile file
+	    @RequestParam("image") MultipartFile file,
+		@RequestParam("description") String description
+
 	) throws IOException {
 
 	    Produit produit;
@@ -122,6 +124,8 @@ public class ProduitController {
 	        // Assignation de l'image compressée au produit.
 	        produit.setImage(bytes);
 	    }
+
+		produit.setDescription(description);
 
 	    // Sauvegardez le produit, qu'il soit nouveau ou modifié.
 	    produitRepository.save(produit);
