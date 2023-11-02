@@ -37,10 +37,10 @@ public class IndexController {
 	private ProduitRepository produitRepository;
     @GetMapping("/index")
     public String afficherMaPage(Model model,Authentication authentication) {
-    	List<Categorie> categorie = (List<Categorie>) categorieRepository.findAll();
-		model.addAttribute("categories", categorie);
-		List<Produit> produits = (List<Produit>) produitRepository.findAll();
-	    model.addAttribute("produits", produits);
+//    	List<Categorie> categorie = (List<Categorie>) categorieRepository.findAll();
+//		model.addAttribute("categories", categorie);
+//		List<Produit> produits = (List<Produit>) produitRepository.findAll();
+//	    model.addAttribute("produits", produits);
 	    boolean isAdmin = false;
 	    boolean isUserLoggedIn = false;
         // Vérifier si l'utilisateur est authentifié
