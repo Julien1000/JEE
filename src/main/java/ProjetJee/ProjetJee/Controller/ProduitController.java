@@ -133,7 +133,6 @@ public class ProduitController {
 
 
 	@GetMapping(path = "/produit")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String listProduit(Model model,Authentication authentication ) {
 	    List<Produit> allProducts = (List<Produit>) produitRepository.findAll();
 	    model.addAttribute("produits", allProducts);

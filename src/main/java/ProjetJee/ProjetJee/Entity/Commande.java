@@ -1,5 +1,6 @@
 package ProjetJee.ProjetJee.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,18 +21,18 @@ public class Commande {
     @JoinColumn(name="id_user")
     private User user;
     
-    private int Status;
+    private int status;
     @OneToMany(mappedBy = "commande")
     private List<DetailCommande> detailCommande;
 
 
 
     public int getStatus() {
-		return Status;
+		return status;
 	}
 
 	public void setStatus(int status) {
-		Status = status;
+		this.status = status;
 	}
 
 	public Long getIdCommande() {

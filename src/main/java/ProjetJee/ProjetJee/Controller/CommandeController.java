@@ -104,6 +104,25 @@ public class CommandeController {
         commandeRepository.save(commande);
         return "redirect:/commande/afficher";
     }
+    @PostMapping("/changerStatut5/{idCommande}")
+    public String changerStatut5(@PathVariable Long idCommande) {
+        Commande commande = commandeRepository.findById(idCommande)
+                .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
+        commande.setStatus(5);
+        commandeRepository.save(commande);
+        return "redirect:/commande/afficher";
+    }
+    @PostMapping("/changerStatut6")
+    public String remettreCommandesAuStatut4() {
+        List<Commande> commandes = commandeRepository.findByStatus(5);
+        for (Commande commande : commandes) {
+            commande.setStatus(4);
+            commandeRepository.save(commande);
+        }
+        System.out.println("caca");
+        return "redirect:/commande/afficher";
+    }
+
     @GetMapping("/afficherStats")
     public String afficherStats(Model model) {
         List<Commande> commandes = commandeRepository.findAll();
