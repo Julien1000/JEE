@@ -11,6 +11,6 @@ import ProjetJee.ProjetJee.Entity.Produit;
 @Repository
 public interface DetailProduitRepository extends CrudRepository<DetailProduit, Long> {
     DetailProduit findByProduit(Produit produit);
-  List<DetailProduit> findByProduitId(long idProduit);
+    List<DetailProduit> findByProduitId(long idProduit);
 
 }
