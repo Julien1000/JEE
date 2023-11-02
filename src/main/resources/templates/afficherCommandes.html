@@ -38,9 +38,18 @@
 				        <button type="submit" th:text="'Passer au Statut ' + (${status} + 1)"></button>
 				    </form>
 				</td>
+				<td th:if="${status == 4}">
+				    <form th:action="'/commande/changerStatut' + (${status} + 1) + '/' + ${commande.idCommande}" method="post">
+				        <button type="submit" >Masquer la commande</button>
+				    </form>
+				</td>
 
             </tr>
         </table>
+        	
     </div>
+    <form th:action="'/commande/changerStatut6'" method="post">
+				        <button type="submit" >demasquer toutes les commande</button>
+	</form>
 </body>
 </html>

@@ -9,6 +9,7 @@ import ProjetJee.ProjetJee.Entity.*;
 import ProjetJee.ProjetJee.Repository.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,16 @@ public class PanierController {
         CategoriePlace categoriePlace = categoriePlaceRepository.findById(idCategoriePlace)
                 .orElseThrow(() -> new RuntimeException("CategoriePlace non trouvée"));
 
+        // Vérifier si la quantité demandée est disponible
+        if (categoriePlace.getStock() < quantite) {
+            model.addAttribute("erreurStock", "Stock insuffisant");
+            return "redirect:/produit";  // Remplacez par la page de produit appropriée
+        }
+
+        // Mettre à jour le stock
+        categoriePlace.setStock(categoriePlace.getStock() - quantite);
+        categoriePlaceRepository.save(categoriePlace);
+
         DetailCommande detailCommande = new DetailCommande();
         detailCommande.setCategoriePlace(categoriePlace);
         detailCommande.setQuantite(quantite);
@@ -63,6 +74,7 @@ public class PanierController {
 
         return "redirect:/produit";
     }
+
 
     @PostMapping("/enregistrerPanier")
     public String enregistrerPanier(Authentication authentication) {
@@ -115,9 +127,30 @@ public class PanierController {
             
             model.addAttribute("detailPanierList", detailPanierList);
         }
+        List<Commande> commandes = commandeRepository.findByUser(user);
+
+        model.addAttribute("commandes", commandes);
+        model.addAttribute("statusList", Arrays.asList(1, 2, 3, 4));
         
         model.addAttribute("panier", panier);
         return "monPanier";
+    }
+    @PostMapping("/supprimerPanier")
+    public String supprimerPanier(Authentication authentication) {
+        User user = userRepository.findByUsername(authentication.getName());
+        Panier panier = panierRepository.findByUserId(user.getId());
+
+        if (panier != null && panier.getDetailCommande() != null) {
+            for (DetailCommande detail : panier.getDetailCommande()) {
+                CategoriePlace categoriePlace = detail.getCategoriePlace();
+                categoriePlace.setStock(categoriePlace.getStock() + detail.getQuantite());
+                categoriePlaceRepository.save(categoriePlace);
+                detailCommandeRepository.delete(detail);
+            }
+            panierRepository.delete(panier);
+        }
+
+        return "redirect:/produit";  // Remplacez par la page de redirection appropriée
     }
 
 }
