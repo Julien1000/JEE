@@ -43,9 +43,37 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   fileInput.addEventListener("change", function () {
-    imageDisplay.style.display = "block";
     const file = fileInput.files[0];
     const fileName = file.name;
+
+    handleFile(file, fileName);
+  });
+
+  fileUploadDiv.addEventListener("dragover", function (e) {
+    e.preventDefault();
+    fileUploadDiv.classList.add("border-indigo-600");
+    fileUploadDiv.classList.remove("border-gray-900");
+  });
+
+  fileUploadDiv.addEventListener("dragleave", function (e) {
+    e.preventDefault();
+    fileUploadDiv.classList.add("border-gray-900");
+    fileUploadDiv.classList.remove("border-indigo-600");
+  });
+
+  fileUploadDiv.addEventListener("drop", function (e) {
+    e.preventDefault();
+    fileUploadDiv.classList.add("border-gray-900");
+    fileUploadDiv.classList.remove("border-indigo-600");
+    const file = e.dataTransfer.files[0];
+    const fileName = file.name;
+
+    handleFile(file, fileName);
+  });
+
+
+  function handleFile(file, fileName) {
+    imageDisplay.style.display = "block";
     file_text.textContent = fileName;
     file_text.classList.add("relative", "cursor-pointer", "rounded-md", "bg-white", "font-semibold", "text-indigo-600", "focus-within:outline-none", "focus-within:ring-2", "focus-within:ring-indigo-600", "focus-within:ring-offset-2", "hover:text-indigo-500");
 
@@ -59,5 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Lisez le fichier sélectionné
     reader.readAsDataURL(file);
-  });
+  }
+
 });
