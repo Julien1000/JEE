@@ -228,7 +228,7 @@ button,
 [type='submit'] {
   -webkit-appearance: button;
   /* 1 */
-  background-color: transparent;
+  /* background-color: transparent; */
   /* 2 */
   background-image: none;
   /* 2 */
@@ -1069,4 +1069,20 @@ object {
 
 header {
   height: 200px; /* ou une autre valeur en pixels */
+}
+
+.pt-24 {
+  padding-top: 6rem;
+}
+
+.pl-4 {
+  padding-left: 1rem;
+}
+
+.pr-4_4 {
+  padding-right: 4.4rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
 }
