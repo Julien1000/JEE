@@ -226,11 +226,34 @@ public class ProduitController {
 	}
 	@GetMapping("/editProduct/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public String editProduct(@PathVariable Long id, Model model) {
+	public String editProduct(@PathVariable Long id, Model model, Authentication authentication) {
 	    java.util.Optional<Produit> produit = produitRepository.findById(id);
+	    boolean isAdmin = false;
+	    boolean isUserLoggedIn = false;
+        // Vérifier si l'utilisateur est authentifié
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Ajouter le nom de l'utilisateur au modèle
+            model.addAttribute("currentUser", authentication.getName());
+            isUserLoggedIn = true;
+            
+            // Vérifier si l'utilisateur a le rôle "ROLE_ADMIN"
+            isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+        }
+
+        // Ajouter la variable isAdmin au modèle
+        model.addAttribute("isUserLoggedIn", isUserLoggedIn);
+        model.addAttribute("isAdmin", isAdmin);
 	    if (produit.isPresent()) {
-	        model.addAttribute("produit", produit.get());
+	    	Produit produitPresent = produit.get();
+	        model.addAttribute("produit", produitPresent);
 	        model.addAttribute("categories", categorieRepository.findAll());
+
+	        Long categorieId1 = produitPresent.getCategorie().getId();
+	        model.addAttribute("idCategorie1", categorieId1);
+			String categorieName1 = produitPresent.getCategorie().getName();
+	        model.addAttribute("nameCategorie1", categorieName1);
 	        return "produitForm"; // utilisez le même formulaire que pour ajouter un produit, mais avec les données pré-remplies.
 	    } else {
 	        return "redirect:/produit"; // ou redirigez vers une page d'erreur si vous le souhaitez.

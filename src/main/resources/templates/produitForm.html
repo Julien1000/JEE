@@ -82,6 +82,7 @@
                   id="imageDisplay"
                   class="mx-auto mt-6 max-w-sm rounded-lg block"
                 />
+                <img id="imageDisplay2" th:src="@{/displayImage/{id}(id=${produit.id})}" class="mx-auto mt-6 max-w-sm rounded-lg block" />
                 <div class="text_image text-center mt-6">
                   <svg
                     class="mx-auto h-12 w-12 text-gray-300"
@@ -110,6 +111,7 @@
               <input
                 id="image"
                 th:name="image"
+                th:value="${produit.image}"
                 type="file"
                 class="input_file sr-only"
                 required
