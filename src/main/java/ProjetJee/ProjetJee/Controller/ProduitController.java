@@ -192,6 +192,7 @@ public class ProduitController {
 	    produitRepository.deleteById(id);
 	    return "redirect:/produit";
 	}
+	
 	@GetMapping("/produit/perso/{id}")
 	public String persoProduct(@PathVariable Long id, Model model,Authentication authentication) {
 	    java.util.Optional<Produit> produitOptional = produitRepository.findById(id);
@@ -221,12 +222,20 @@ public class ProduitController {
 	        Produit produit = produitOptional.get();
 	        model.addAttribute("produit", produit);
 	        
-			DetailProduit detailProduit = detailProduitRepository.findByProduit(produit);
-	        model.addAttribute("detailProduit", detailProduit);
+	        List<DetailProduit> allDetailProduits = (List<DetailProduit>) detailProduitRepository.findAll();
+	        for (DetailProduit detailProduit : allDetailProduits) {
+				if(detailProduit.getProduit().getId() != produit.getId()) {
+					allDetailProduits.remove(detailProduit);
+				}
+			}
+		    model.addAttribute("detailProduit", allDetailProduits);
+	        
+//			DetailProduit detailProduit = detailProduitRepository.findByProduit(produit);
+//	        model.addAttribute("detailProduit", detailProduit);
 
 	        // Récupérer les CategoriePlace associées
-	        List<CategoriePlace> categoriePlaces = categoriePlaceRepository.findByDetailProduit(detailProduit);
-	        model.addAttribute("categoriePlaces", categoriePlaces);
+//	        List<CategoriePlace> categoriePlaces = categoriePlaceRepository.findByDetailProduit(detailProduit);
+//	        model.addAttribute("categoriePlaces", categoriePlaces);
 	        Long categorieId = produit.getCategorie().getId();
 	        model.addAttribute("idCategorie", categorieId);
 	    } else {
@@ -295,6 +304,25 @@ public class ProduitController {
         model.addAttribute("isUserLoggedIn", isUserLoggedIn);
         model.addAttribute("isAdmin", isAdmin);
 	    return "productsByCategory";  // Name of the Thymeleaf template
+	}
+	
+	@GetMapping(path = "/getCategoryByDetail/{detailProduitId}")
+	public ResponseEntity<List<CategoriePlace>> getDetailsByProduct(@PathVariable Long detailProduitId) {
+	    List<CategoriePlace> categories = categoriePlaceRepository.findByDetailProduitId(detailProduitId);
+	    return ResponseEntity.ok(categories);
+	}
+	
+	@GetMapping("/displayImageLieu/{id}")
+	public ResponseEntity<byte[]> displayImageLieu(@PathVariable Long id) {
+	    java.util.Optional<DetailProduit> detailProduit = detailProduitRepository.findById(id);
+	    
+	    if (detailProduit.isPresent() && detailProduit.get().getImageLieu() != null) {
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.IMAGE_JPEG) // Assurez-vous de définir le type de contenu approprié
+	                .body(detailProduit.get().getImageLieu());
+	    } else {
+	        return ResponseEntity.notFound().build();
+	    }
 	}
 	
 
