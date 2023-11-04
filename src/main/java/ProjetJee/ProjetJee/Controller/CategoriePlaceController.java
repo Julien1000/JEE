@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ProjetJee.ProjetJee.Entity.Categorie;
 import ProjetJee.ProjetJee.Entity.CategoriePlace;
@@ -60,10 +61,18 @@ public class CategoriePlaceController {
     }
 
     @PostMapping("/ajouterCategoriePlace")
-    public String sauvegarderCategoriePlace(@ModelAttribute CategoriePlace categoriePlace) {
+    public String sauvegarderCategoriePlace(@ModelAttribute CategoriePlace categoriePlace, RedirectAttributes redirectAttributes) {
         // Code pour sauvegarder la CategoriePlace dans la base de données
         // Assurez-vous de gérer les détailsProduit associés ici
-        categoriePlaceRepository.save(categoriePlace);
+//		try {
+	        categoriePlaceRepository.save(categoriePlace);
+			// Message de succès en cas de soumission réussie
+			redirectAttributes.addFlashAttribute("successMessage", "Catégorie ajouté avec succès !");
+//		} catch (Exception e) {
+//			// Message d'erreur en cas d'échec de la soumission
+//			redirectAttributes.addFlashAttribute("errorMessage",
+//					"Une erreur s'est produite lors de l'ajout de la catégorie.");
+//		}
         return "redirect:/ajouterCategoriePlace";
     }
 }

@@ -1,6 +1,8 @@
 package ProjetJee.ProjetJee.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 
 @Entity
@@ -8,6 +10,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+	@NotNull
     private String name;
 
     public Role() {

@@ -37,7 +37,8 @@ public class PanierController {
     @PostMapping("/ajouterPanier")
     public String ajouterElementAuPanier(Model model, @RequestParam("idCategoriePlace") Long idCategoriePlace,
                                          @RequestParam("quantite") int quantite, Authentication authentication) {
-        if (quantite < 1) {
+    	
+    	if (quantite < 1) {
             model.addAttribute("erreurQuantite", "Quantité non conforme");
             return "redirect:/produit";  // Remplacez par la page de produit appropriée
         }
@@ -54,6 +55,7 @@ public class PanierController {
 
         // Mettre à jour le stock
         categoriePlace.setStock(categoriePlace.getStock() - quantite);
+        
         categoriePlaceRepository.save(categoriePlace);
 
         DetailCommande detailCommande = new DetailCommande();
@@ -65,12 +67,15 @@ public class PanierController {
             panier = new Panier();
             panier.setUser(user);
             panier.setDetailCommande(new ArrayList<>());
+            
         }
-
+        
         panier.getDetailCommande().add(detailCommande);
         detailCommande.setPanier(panier);
         panierRepository.save(panier);
+        
         detailCommandeRepository.save(detailCommande);
+        System.out.println(user.getId());
 
         return "redirect:/produit";
     }

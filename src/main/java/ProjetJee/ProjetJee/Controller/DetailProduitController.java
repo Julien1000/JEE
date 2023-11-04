@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ProjetJee.ProjetJee.Entity.Categorie;
 import ProjetJee.ProjetJee.Entity.DetailProduit;
@@ -64,7 +65,8 @@ public class DetailProduitController {
 	@PostMapping("/saveDetailProduit")
 	public String saveProduct(@RequestParam(value = "id", required = false) Long id, @RequestParam("date") Date date,
 			@RequestParam("adresse") String adresse, @RequestParam("produit") Long produitId,
-			@RequestParam("image") MultipartFile file) throws IOException {
+			@RequestParam("image") MultipartFile file,
+			RedirectAttributes redirectAttributes) throws IOException {
 
 		DetailProduit detailProduit;
 
@@ -98,9 +100,16 @@ public class DetailProduitController {
 			// Assignation de l'image compressée au produit.
 			detailProduit.setImageLieu(bytes);
 		}
-
+		try {
+			detailProduitRepository.save(detailProduit);
+			// Message de succès en cas de soumission réussie
+			redirectAttributes.addFlashAttribute("successMessage", "Detail ajouté avec succès !");
+		} catch (Exception e) {
+			// Message d'erreur en cas d'échec de la soumission
+			redirectAttributes.addFlashAttribute("errorMessage",
+					"Une erreur s'est produite lors de l'ajout du détail.");
+		}
 		// Sauvegardez le produit, qu'il soit nouveau ou modifié.
-		detailProduitRepository.save(detailProduit);
 
 		return "redirect:/addDetailProduit";
 	}

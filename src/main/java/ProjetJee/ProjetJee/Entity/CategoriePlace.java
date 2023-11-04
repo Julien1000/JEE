@@ -7,16 +7,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import jakarta.validation.constraints.NotNull;
+
 @Entity
 public class CategoriePlace {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	@NotNull
 	private long prix;
-	
+	@NotNull
 	private int stock;
-	
+	@NotNull
 	private String nomCategoriePlace;
 	
 	@ManyToOne
