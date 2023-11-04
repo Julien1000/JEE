@@ -51,8 +51,8 @@
 							<img th:src="@{/displayImage/{id}(id=${produit.id})}" alt="image" class="h-full w-full object-cover object-center group-hover:opacity-75">
 						</div>
 						<h3 class="mt-4 text-sm text-gray-700" th:text="${produit.name}"></h3>
-						<p class="mt-1 text-lg font-medium text-gray-900" th:text="${produit.prix + '€'}"></p>
-						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/deleteProduct/{id}(id=${produit.id})}" onclick="return confirm('Are you sure you want to delete this product?')">Supprimer</a>
+<!--						<p class="mt-1 text-lg font-medium text-gray-900" th:text="${produit.prix + '€'}"></p>
+-->						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/deleteProduct/{id}(id=${produit.id})}" onclick="return confirm('Are you sure you want to delete this product?')">Supprimer</a>
 							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/editProduct/{id}(id=${produit.id})}">Modifier</a>
 						</div>
 				
