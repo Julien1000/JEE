@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface CategoriePlaceRepository extends CrudRepository<CategoriePlace, Long> {
     List<CategoriePlace> findByDetailProduit(DetailProduit detailProduit);
+    List<CategoriePlace> findByDetailProduitId(long detailProduitID);
 }
