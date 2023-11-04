@@ -13,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class DetailCommande {
@@ -24,8 +26,11 @@ public class DetailCommande {
 
 	@ManyToOne
 	@JoinColumn(name = "id_CategoriePlace")
+	@NotBlank
+	@NotNull
 	private CategoriePlace categoriePlace;
-
+	@NotBlank
+	@NotNull
 	private int quantite;
 	
 	@ManyToOne

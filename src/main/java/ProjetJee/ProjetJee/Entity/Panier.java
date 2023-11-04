@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Panier {
@@ -19,6 +21,8 @@ public class Panier {
 
     @OneToOne
     @JoinColumn(name = "id_User")
+	@NotBlank
+	@NotNull
     private User user;
     
 	

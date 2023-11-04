@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ProjetJee.ProjetJee.Repository.ProduitRepository;
 import ProjetJee.ProjetJee.Repository.CategoriePlaceRepository;
@@ -88,7 +89,8 @@ public class ProduitController {
 	    @RequestParam("name") String name,
 	    @RequestParam("categorie") Long categorieId,
 	    @RequestParam("image") MultipartFile file,
-		@RequestParam("description") String description
+		@RequestParam("description") String description,
+		RedirectAttributes redirectAttributes
 
 	) throws IOException {
 
@@ -128,7 +130,16 @@ public class ProduitController {
 		produit.setDescription(description);
 
 	    // Sauvegardez le produit, qu'il soit nouveau ou modifié.
-	    produitRepository.save(produit);
+		try {
+		    produitRepository.save(produit);
+			// Message de succès en cas de soumission réussie
+			redirectAttributes.addFlashAttribute("successMessage", "Produit ajouté avec succès !");
+		} catch (Exception e) {
+			// Message d'erreur en cas d'échec de la soumission
+			redirectAttributes.addFlashAttribute("errorMessage",
+					"Une erreur s'est produite lors de l'ajout du produit.");
+		}
+
 
 	    return "redirect:/produit";
 	}
