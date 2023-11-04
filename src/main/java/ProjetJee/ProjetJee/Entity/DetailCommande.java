@@ -26,10 +26,8 @@ public class DetailCommande {
 
 	@ManyToOne
 	@JoinColumn(name = "id_CategoriePlace")
-	@NotBlank
 	@NotNull
 	private CategoriePlace categoriePlace;
-	@NotBlank
 	@NotNull
 	private int quantite;
 	

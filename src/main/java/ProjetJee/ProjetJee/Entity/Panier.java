@@ -21,7 +21,6 @@ public class Panier {
 
     @OneToOne
     @JoinColumn(name = "id_User")
-	@NotBlank
 	@NotNull
     private User user;
     

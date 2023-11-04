@@ -10,8 +10,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
   
-	@NotBlank
-	@NotNull
+//	@NotBlank
+//	@NotNull
 	private String name;
     @Column(nullable = false, unique = true)
     private String username;
