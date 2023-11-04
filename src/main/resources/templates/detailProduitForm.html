@@ -12,7 +12,15 @@
 </header>
 
 <body class="body_add_produit">
+	<!-- Affiche un message de succès s'il existe -->
+	<div th:if="${successMessage}" class="success-message">
+		<p th:text="${successMessage}"></p>
+	</div>
 
+	<!-- Affiche un message d'erreur s'il existe -->
+	<div th:if="${errorMessage}" class="error-message">
+		<p th:text="${errorMessage}"></p>
+	</div>
 	<!-- <div style="margin-top: 200px;">
 	    <form th:action="@{/saveProduit}" method="post" enctype="multipart/form-data"  style="display: block;">
 	       Nom du produit :  <input type="text" th:name="name" th:value="${produit.name}" />
@@ -63,6 +71,7 @@
 								<span>Téléchargez un fichier</span>
 							  </label>
 							  <p class="pl-1">ou glissez-le</p>
+
 							</div>
 						</div>
 		

@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -19,8 +21,11 @@ public class Commande {
     private Long idCommande;
     @ManyToOne
     @JoinColumn(name="id_user")
+	@NotBlank
+	@NotNull
     private User user;
-    
+	@NotBlank
+	@NotNull
     private int status;
     @OneToMany(mappedBy = "commande")
     private List<DetailCommande> detailCommande;

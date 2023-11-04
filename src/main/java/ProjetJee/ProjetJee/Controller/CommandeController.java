@@ -119,7 +119,6 @@ public class CommandeController {
             commande.setStatus(4);
             commandeRepository.save(commande);
         }
-        System.out.println("caca");
         return "redirect:/commande/afficher";
     }
 
