@@ -18,7 +18,6 @@ public class CategoriePlace {
 	private long prix;
 	@NotNull
 	private int stock;
-	@NotBlank
 	@NotNull
 	private String nomCategoriePlace;
 	

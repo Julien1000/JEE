@@ -1,68 +1,171 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Mon Panier</title>
+    <meta charset="UTF-8" />
+    <title>Mon panier</title>
+    <link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}">
+	<link rel="stylesheet" href="/css/categorieList.css" th:href="@{/css/categorieList.css}">
 </head>
+
 <body>
-    <h1>Mon Panier</h1>
-    <table>
-        <tr>
-            <th>Produit</th>
-            <th>Catégorie</th>
-            <th>Quantité</th>
-            <th>Prix unitaire</th>
-            <th>Prix total</th>
-        </tr>
-        <tr th:each="detail : ${detailPanierList}">
-            <td th:text="${detail.produit.name}"></td>
-            <td th:text="${detail.categoriePlace.nomCategoriePlace}"></td>
-            <td th:text="${detail.quantite}"></td>
-            <td th:text="${detail.categoriePlace.prix}"></td>
-            <td th:text="${detail.quantite * detail.categoriePlace.prix}"></td>
-            <td><form th:action="@{/supprimerPanier}" method="post">
-			    <button type="submit">Supprimer Panier</button>
-			</form>
-			</td>
-        </tr>
-    </table>
-    
-    <form th:action="'/enregistrerPanier'" method="post">
-        <button type="submit">Valider Panier</button>
-    </form>
-    
-    
-    <h1>Liste des Commandes</h1>
-    <div th:each="status : ${statusList}">
-        <h2 th:switch="${status}">
-            <span th:case="1">Commandes en cours de validation</span>
-            <span th:case="2">Commandes en cours de préparation</span>
-            <span th:case="3">Commandes en cours de livraison</span>
-            <span th:case="4">Commandes livrées aux clients</span>
-        </h2>
-        <table border="1">
-            <tr>
-                <th>ID Commande</th>
-                <th>Utilisateur</th>
-                <th>Status</th>
-                <th>Détails</th>
-                <th>Action</th>
-            </tr>
-            <tr th:each="commande : ${commandes}" th:if="${commande.status == status}">
-                <td th:text="${commande.idCommande}"></td>
-                <td th:text="${commande.user.username}"></td>
-                <td th:text="${commande.status}"></td>
-                <td>
-                    <ul>
-                        <li th:each="detail : ${commande.detailCommande}">
-                            Produit: <span th:text="${detail.categoriePlace.detailProduit.produit.name}"></span>,
-                            Quantité: <span th:text="${detail.quantite}"></span>
-                        </li>
-                    </ul>
-                    
-                </td>
-                </tr>
-        </table>
-        	
-    </div>
+	    <header class="absolute inset-x-0 top-0 z-50">
+        <div th:replace="~{navbar :: navbar}"></div>
+
+    </header>
+	<div class="mx-auto mb-12 mt-24 w-full px-4 xl:mb-0 xl:w-8/12">
+		<div class="relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-white shadow-lg">
+			<div class="mb-0 rounded-t border-0 px-4 py-3">
+				<div class="flex flex-wrap items-center">
+					<div class="relative w-full max-w-full flex-1 flex-grow px-4">
+						<h3 class="text-blueGray-700 text-base font-semibold">Mon Panier</h3>
+					</div>
+				</div>
+			</div>
+
+			<div class="block w-full overflow-x-auto">
+				<table class="w-full border-collapse items-center bg-transparent">
+					<thead class="w-full bg-gray-100 text-gray-500">
+						<tr>
+							<th
+								class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">
+								Produit</th>
+							<th
+								class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">
+								Catégorie</th>
+							<th
+								class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">
+								Quantité</th>
+							<th
+								class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">
+								Prix unitaire</th>
+							<th
+								class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">
+								Prix total</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="detail : ${detailPanierList}">
+							<th th:text="${detail.produit.name}"
+								class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs">
+							</th>
+							<td th:text="${detail.categoriePlace.nomCategoriePlace}"
+								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+							</td>
+							<td th:text="${detail.quantite}"
+								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+							</td>
+							<td th:text="${detail.categoriePlace.prix}"
+								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+							</td>
+							<td th:text="${detail.quantite * detail.categoriePlace.prix}"
+								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<form th:action="'/enregistrerPanier'" method="post">
+
+		<button type="submit"
+			class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+			Valider Panier
+		</button>
+	</form>
+
+
+	<div class="mx-auto mb-12 mt-24 w-full px-4 xl:mb-0 xl:w-8/12">
+		<div class="relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-white shadow-lg">
+			<div class="mb-0 rounded-t border-0 px-4 py-3">
+				<div class="flex flex-wrap items-center">
+					<div class="relative w-full max-w-full flex-1 flex-grow px-4">
+						<h3 class="text-blueGray-700 text-base font-semibold">Commandes passées</h3>
+					</div>
+				</div>
+			</div>
+			<div class="block w-full overflow-x-auto">
+				<table class="w-full border-collapse items-center bg-transparent">
+					<thead class="w-full bg-gray-100 text-gray-500">
+						<tr>
+							<th
+								class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">
+								Produits</th>
+							<th
+								class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">
+								Prix total</th>
+							<th
+								class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">
+								Statut</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="commande : ${commandes}">
+							<th
+								class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs">
+								<span th:each="detailProduit : ${commande.detailProduit}"
+									th:text="${detailProduit.produit.name}"
+									class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></span>
+							</th>
+
+							<td
+								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+								<span th:with="totalPrice=0.0">
+									<span th:each="detailProduit : ${commande.detailProduit}">
+										<span
+											th:with="unitPrice=${detailProduit.produit.prix}, quantity=${detailProduit.quantite}">
+											<span th:with="productTotal=${unitPrice * quantity}">
+												<span th:with="totalPrice=${totalPrice + productTotal}"></span>
+											</span>
+										</span>
+									</span>
+									<span th:text="${#numbers.formatDecimal(totalPrice, 2)}"
+										class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></span>
+								</span>
+							</td>
+							<td th:switch="${commande.status}"
+								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+								<span th:case="1">Commandes en cours de validation</span>
+								<span th:case="2">Commandes en cours de préparation</span>
+								<span th:case="3">Commandes en cours de livraison</span>
+								<span th:case="4">Commandes livrées</span>
+							</td>
+						</tr>
+					</tbody>
+					<!--			<div th:each="status : ${statusList}">
+		<h2 th:switch="${status}">
+			<span th:case="1">Commandes en cours de validation</span>
+			<span th:case="2">Commandes en cours de préparation</span>
+			<span th:case="3">Commandes en cours de livraison</span>
+			<span th:case="4">Commandes livrées aux clients</span>
+		</h2>
+		<table border="1">
+			<tr>
+				<th>ID Commande</th>
+				<th>Utilisateur</th>
+				<th>Status</th>
+				<th>Détails</th>
+				<th>Action</th>
+			</tr>
+			<tr th:each="commande : ${commandes}" th:if="${commande.status == status}">
+				<td th:text="${commande.idCommande}"></td>
+				<td th:text="${commande.user.username}"></td>
+				<td th:text="${commande.status}"></td>
+				<td>
+					<ul>
+						<li th:each="detail : ${commande.detailCommande}">
+							Produit: <span th:text="${detail.categoriePlace.detailProduit.produit.name}"></span>,
+							Quantité: <span th:text="${detail.quantite}"></span>
+						</li>
+					</ul>
+
+				</td>
+			</tr>
+		</table>
+-->
+			</div>
 </body>
+
 </html>

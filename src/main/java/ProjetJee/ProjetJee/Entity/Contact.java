@@ -16,14 +16,11 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @NotBlank
     @Email(message = "Email should be valid")
     private String email;
     @NotNull
-    @NotBlank
     private String motif;
     @NotNull
-    @NotBlank
     private String description;
 
     // Ajoutez les getters et setters
