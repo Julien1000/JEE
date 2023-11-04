@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8" />
     <title>Liste des formulaires de contact</title>
+    <link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}">
+	<link rel="stylesheet" href="/css/categorieList.css" th:href="@{/css/categorieList.css}">
 </head>
 <body>
-    <h1>Liste des formulaires de contact</h1>
+    <header class="absolute inset-x-0 top-0 z-50">
+        <div th:replace="~{navbar :: navbar}"></div>
+
+    </header>
+    <!-- <h1>Liste des formulaires de contact</h1>
     <table>
         <thead>
             <tr>
@@ -24,6 +31,43 @@
                 </td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
+    <div class="mx-auto mb-12 mt-24 w-full px-4 xl:mb-0 xl:w-8/12">
+        <div class="relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-white shadow-lg">
+          <div class="mb-0 rounded-t border-0 px-4 py-3">
+            <div class="flex flex-wrap items-center">
+              <div class="relative w-full max-w-full flex-1 flex-grow px-4">
+                <h3 class="text-blueGray-700 text-base font-semibold">Liste des demandes de contact</h3>
+              </div>
+            </div>
+          </div>
+      
+          <div class="block w-full overflow-x-auto">
+            <table class="w-full border-collapse items-center bg-transparent">
+              <thead class="w-full bg-gray-100 text-gray-500">
+                <tr>
+                  <th class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">Email</th>
+                  <th class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">Motif</th>
+                  <th class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">Demande</th>
+                  <th class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">Action</th>
+                </tr>
+              </thead>
+      
+              <tbody>
+                <tr th:each="contact : ${contacts}">
+                  <th  th:text="${contact.email}" class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></th>
+                  <td th:text="${contact.motif}" class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs"></td>
+                  <td th:text="${contact.description}" class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs"></td>
+                  <td class="align-center whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-xs">
+                    <a th:href="@{/deleteContact/{id}(id=${contact.id})}">
+                    <button class="mb-1 mr-1 rounded bg-indigo-500 px-3 py-1 text-xs font-bold uppercase text-white outline-none transition-all duration-150 ease-linear focus:outline-none active:bg-indigo-500 hover:bg-indigo-600" type="button">Supprimer</button>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 </body>
 </html>

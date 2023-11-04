@@ -4,8 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Accueil</title>
 	<link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}">
-	<link rel="stylesheet" href="/css/form.css" th:href="@{/css/form.css}">
-	<script src="/js/index.js" th:src="@{/js/index.js}" type="text/javascript"></script>
+	<link rel="stylesheet" href="/css/categorieList.css" th:href="@{/css/categorieList.css}">
 </head>
 
 <body>
@@ -15,8 +14,7 @@
 				<div th:replace="~{navbar :: navbar}"></div>
 
 		    </header>
-    <h2 style="margin-top: 200px;">Categories</h2>
-    <table>
+    <!-- <table>
         <thead>
             <tr>
                 <th>ID</th>
@@ -31,6 +29,53 @@
         		<td><a th:href="@{'/deleteCategorie/' + ${categorie.id}}">Delete</a></td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
+    <div class="mx-auto mb-12 mt-24 w-full px-4 xl:mb-0 xl:w-8/12">
+        <div class="relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-white shadow-lg">
+          <div class="mb-0 rounded-t border-0 px-4 py-3">
+            <div class="flex flex-wrap items-center">
+              <div class="relative w-full max-w-full flex-1 flex-grow px-4">
+                <h3 class="text-blueGray-700 text-base font-semibold">Catégories</h3>
+              </div>
+              <div class="relative w-full max-w-full flex-1 flex-grow px-4 text-right z-51">
+                <a th:href="@{'/addCategorie'}">
+                <button class="mb-1 mr-1 rounded bg-indigo-500 px-3 py-1 text-xs font-bold uppercase text-white outline-none transition-all duration-150 ease-linear focus:outline-none active:bg-indigo-500 hover:bg-indigo-600" type="button">Ajouter une catégorie</button>
+                </a>
+              </div>
+            </div>
+          </div>
+      
+          <div class="block w-full overflow-x-auto">
+            <table class="w-full border-collapse items-center bg-transparent">
+              <thead class="w-full bg-gray-100 text-gray-500">
+                <tr>
+                  <th class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">Nom de la Catégorie</th>
+                  <th class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">Id Catégorie</th>
+                  <th class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">Modifier</th>
+                  <th class="bg-blueGray-50 text-blueGray-500 border-blueGray-100 whitespace-nowrap border border-l-0 border-r-0 border-solid px-6 py-3 text-left align-middle text-xs font-semibold uppercase">Supprimer</th>
+                </tr>
+              </thead>
+      
+              <tbody>
+                <tr th:each="categorie : ${categories}">
+                  <th  th:text="${categorie.name}" class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></th>
+                  <td th:text="${categorie.id}" class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs"></td>
+                  <td class="align-center whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-xs">
+                    <a th:href="@{'/editCategorie/' + ${categorie.id}}">
+                    <button class="mb-1 mr-1 rounded bg-indigo-500 px-3 py-1 text-xs font-bold uppercase text-white outline-none transition-all duration-150 ease-linear focus:outline-none active:bg-indigo-500 hover:bg-indigo-600" type="button">Modifier</button>
+                    </a>
+                  </td>
+                  <td class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+                    <a th:href="@{'/deleteCategorie/' + ${categorie.id}}">
+                    <button class="mb-1 mr-1 rounded bg-indigo-500 px-3 py-1 text-xs font-bold uppercase text-white outline-none transition-all duration-150 ease-linear focus:outline-none active:bg-indigo-500 hover:bg-indigo-600" type="button">Supprimer</button>
+                  </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
 </body>
 </html>

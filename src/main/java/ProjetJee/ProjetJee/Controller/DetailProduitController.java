@@ -55,10 +55,10 @@ public class DetailProduitController {
 		// Ajouter la variable isAdmin au modèle
 		model.addAttribute("isUserLoggedIn", isUserLoggedIn);
 		model.addAttribute("isAdmin", isAdmin);
-		Long produitID = produits.get(0).getId();
-		model.addAttribute("idProduit", produitID);
-		String produitName = produits.get(0).getName();
-		model.addAttribute("nameProduit", produitName);
+		Long produitId1 = produits.get(0).getId();
+		model.addAttribute("idProduit1", produitId1);
+		String produitName1 = produits.get(0).getName();
+		model.addAttribute("nameProduit1", produitName1);
 		return "detailProduitForm";
 	}
 
