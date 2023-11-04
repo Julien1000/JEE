@@ -8,6 +8,7 @@
       th:href="@{/css/produitPerso.css}"
     />
     <script src="/js/produitPerso.js" th:src="@{/js/produitPerso.js}" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   </head>
 
@@ -50,18 +51,28 @@
       <div class="pt-6"></div>
 
       <!-- Image gallery -->
+      <div class="flex">
       <div
         class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8"
       >
         <div
-          class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg"
+          class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg col-start-1"
         >
           <img
             th:src="@{/displayImage/{id}(id=${produit.id})}"
             class="h-full w-full object-cover object-center"
           />
         </div>
+        <div
+          class="image_lieu aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg col-end-4"
+        >
+          <!-- <img
+            th:src="@{/displayImage/{id}(id=${produit.id})}"
+            class="h-full w-full object-cover object-center"
+          /> -->
+        </div>
       </div>
+    </div>
 
       <!-- Product info -->
       <div
@@ -86,28 +97,48 @@
           <form method="post" action="/ajouterPanier" class="mt-10">
 		    
 		    
+            <div class="mt-10">
+              <div class="flex items-center justify-between">
+		            <h3 class="text-sm font-medium text-gray-900">Lieu</h3>
+		        </div>
+            <select id="detailProduit" name="detailProduit">
+              <option value="">Sélectionnez un lieu</option>
+              <!--            <th:each="prod : ${produit}">
+-->
+              <option th:each="detailProduit : ${detailProduit}" th:value="${detailProduit.id}"
+                th:text="${detailProduit.adresse + ' le ' + detailProduit.date}">
+              </option>
+              <!--            </th:each>
+-->
+            </select>
+
+            </div>
 		    <!-- Catégorie -->
 		    <div class="mt-10">
 		        <div class="flex items-center justify-between">
 		            <h3 class="text-sm font-medium text-gray-900">Catégorie</h3>
+                <h3 class="text-sm font-medium text-gray-900">Prix :</h3>
 		        </div>
 		        <fieldset class="mt-4">
 		            <legend class="sr-only">Choose a category</legend>
-		            <div class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
+		            <!-- <div class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
 		                <div th:each="categoriePlace : ${categoriePlaces}">
-		                    <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6">
+		                    <label class=" category_choose group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6">
 		                        <input type="radio" th:name="idCategoriePlace" th:value="${categoriePlace.id}" th:data-prix="${categoriePlace.prix}"  class="sr-only" aria-labelledby="size-choice-label" />
 		                        <span th:id="size-choice-label" th:text="${categoriePlace.nomCategoriePlace}"></span>
 		                        <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
 		                    </label>
                         <span th:class="${categoriePlace.nomCategoriePlace}" th:id="${categoriePlace.prix}"></span>
 		                </div>
-		            </div>
+                    <p class="text-3xl tracking-tight text-gray-900 w-full lg:ml-160_pourcent sm:ml-635_pourcent" id="prix_affiche"></p>
+		            </div> -->
+
+                <div>
+                  <div class="categories-date grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
+                  </div>
+                  <p class="text-3xl tracking-tight text-gray-900 w-full flex justify-end" id="prix_affiche"></p>
+              </div>
 		        </fieldset>
-            <div>
-              <h3>Prix :</h3>
-              <p class="text-3xl tracking-tight text-gray-900" id="prix_affiche"></p>
-            </div>
 		    </div>
 		    
 		    <!-- Quantité -->
@@ -182,27 +213,6 @@
 <!-- 
 	</div> -->
   </body>
-  <script>
-    function changeQuantity(element, operation) {
-	    var productId = element.getAttribute('data-product-id');
-	    var stock = element.getAttribute('data-stock');
-	    var quantityInput = document.getElementById('quantity' + productId);
-	    var currentQuantity = parseInt(quantityInput.value);
-	    
-	    if (operation === 'plus' && currentQuantity < stock) {
-	        quantityInput.value = currentQuantity + 1;
-	    } else if (operation === 'minus' && currentQuantity > 0) {
-	        quantityInput.value = currentQuantity - 1;
-	    }
-	}
-	
-	function addToCart(element) {
-	    var productId = element.getAttribute('data-product-id');
-	    var productPrix = element.getAttribute('data-product-prix');
-	    var quantity = document.getElementById('quantity' + productId).value;
-	    console.log('Produit ID:', productId, 'Quantité:', quantity, 'Prix', productPrix);
-	}
-</script>
 
 </html>
 

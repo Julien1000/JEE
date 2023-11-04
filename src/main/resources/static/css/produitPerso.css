@@ -869,6 +869,10 @@ video {
     font-size: 1.875rem;
     line-height: 2.25rem
   }
+
+  .sm\:ml-91_pourcent{
+    margin-left: 91%
+  }
 }
 
 @media (min-width: 1024px){
@@ -945,6 +949,12 @@ video {
   .lg\:pt-6{
     padding-top: 1.5rem
   }
+
+  .lg\:ml-87_pourcent{
+    margin-left: 87%
+  }
+
+  
 }
 
 .flex{
@@ -998,4 +1008,20 @@ video {
   
   .focus-visible\:outline-indigo-600:focus-visible{
     outline-color: #4f46e5
+  }
+
+  .ml-87_pourcent {
+    margin-left: 87%;
+  }
+  
+  .col-start-1 {
+    grid-column-start: 1;
+  }
+
+  .col-end-4 {
+    grid-column-end: 4;
+  }
+
+  .justify-end {
+    justify-content: flex-end;
   }
