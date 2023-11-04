@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8" />
-    <title>Mon panier</title>
-    <link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}">
+	<meta charset="UTF-8" />
+	<title>Mon panier</title>
+	<link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}">
 	<link rel="stylesheet" href="/css/categorieList.css" th:href="@{/css/categorieList.css}">
 </head>
 
 <body>
-	    <header class="absolute inset-x-0 top-0 z-50">
-        <div th:replace="~{navbar :: navbar}"></div>
+	<header class="absolute inset-x-0 top-0 z-50">
+		<div th:replace="~{navbar :: navbar}"></div>
 
-    </header>
+	</header>
 	<div class="mx-auto mb-12 mt-24 w-full px-4 xl:mb-0 xl:w-8/12">
 		<div class="relative mb-6 flex w-full min-w-0 flex-col break-words rounded bg-white shadow-lg">
 			<div class="mb-0 rounded-t border-0 px-4 py-3">
@@ -105,26 +106,28 @@
 						<tr th:each="commande : ${commandes}">
 							<th
 								class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs">
-								<span th:each="detailProduit : ${commande.detailProduit}"
-									th:text="${detailProduit.produit.name}"
+								<span th:each="detailCommande : ${commande.detailCommande}"
+									th:text="${detailCommande.categoriePlace.detailProduit.produit.name}"
 									class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></span>
 							</th>
 
 							<td
 								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
 								<span th:with="totalPrice=0.0">
-									<span th:each="detailProduit : ${commande.detailProduit}">
+									<span th:each="detailCommande : ${commande.detailCommande}">
 										<span
-											th:with="unitPrice=${detailProduit.produit.prix}, quantity=${detailProduit.quantite}">
+											th:with="unitPrice=${detailCommande.categoriePlace.prix}, quantity=${detailCommande.quantite}">
 											<span th:with="productTotal=${unitPrice * quantity}">
-												<span th:with="totalPrice=${totalPrice + productTotal}"></span>
+												<span th:with="totalPrice=${totalPrice + productTotal}">
+												<span th:text="${totalPrice}"
+														class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></span>
+												</span>
 											</span>
 										</span>
 									</span>
-									<span th:text="${#numbers.formatDecimal(totalPrice, 2)}"
-										class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></span>
 								</span>
 							</td>
+
 							<td th:switch="${commande.status}"
 								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
 								<span th:case="1">Commandes en cours de validation</span>

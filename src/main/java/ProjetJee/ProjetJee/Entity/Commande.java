@@ -23,6 +23,7 @@ public class Commande {
     @JoinColumn(name="id_user")
 	@NotNull
     private User user;
+
 	@NotNull
     private int status;
     @OneToMany(mappedBy = "commande")
