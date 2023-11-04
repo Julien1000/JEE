@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const fileUploadDiv = document.querySelector(".input_file_area");
   const file_text = document.querySelector(".text_image");
   const imageDisplay = document.getElementById('imageDisplay');
+  const imageDisplay2 = document.getElementById('imageDisplay2');
   imageDisplay.style.display = "none";
 
   fileUploadDiv.addEventListener("click", function () {
@@ -48,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     handleFile(file, fileName);
   });
+
 
   fileUploadDiv.addEventListener("dragover", function (e) {
     e.preventDefault();
@@ -74,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function handleFile(file, fileName) {
     imageDisplay.style.display = "block";
+    imageDisplay2.style.display = "none";
     file_text.textContent = fileName;
     file_text.classList.add("relative", "cursor-pointer", "rounded-md", "bg-white", "font-semibold", "text-indigo-600", "focus-within:outline-none", "focus-within:ring-2", "focus-within:ring-indigo-600", "focus-within:ring-offset-2", "hover:text-indigo-500");
 
@@ -89,4 +92,48 @@ document.addEventListener("DOMContentLoaded", function () {
     reader.readAsDataURL(file);
   }
 
+});
+
+// On attend que le document ait chargé avec DOMContentLoaded
+document.addEventListener("DOMContentLoaded", function () {
+  // // Sélectionnez l'input de type date
+  var dateInput = document.querySelector('input[type="date"]');
+
+  // Obtenez la date d'aujourd'hui
+  var today = new Date();
+
+  // Formatez la date au format yyyy-mm-dd
+  var formattedDate =
+    today.getFullYear() +
+    "-" +
+    String(today.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(today.getDate()).padStart(2, "0");
+
+    console.log(formattedDate);
+
+  // Définissez l'attribut min de l'input sur la date d'aujourd'hui
+  dateInput.min = formattedDate;
+  dateInput.value = formattedDate;
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const imageDisplay2 = document.getElementById('imageDisplay2');
+  const fileInput = document.querySelector(".input_file");
+
+  imageDisplay2.style.display = "none";
+
+  // Vérifiez l'URL actuelle
+  const path = window.location.pathname;
+  console.log(path);
+
+  if (path.startsWith('/editProduct')) {
+    console.log("path.startsWith('/editProduit')");
+    imageDisplay2.style.display = "block";
+    fileInput.removeAttribute('required');
+  } else if (path.startsWith('/addProduit')) {
+    // Si l'URL commence par '/addProduit', faites quelque chose d'autre
+    console.log("path.startsWith('/addProduit')");
+  }
 });

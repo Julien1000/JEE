@@ -36,7 +36,7 @@ public class IndexController {
 	@Autowired
 	private ProduitRepository produitRepository;
     @GetMapping("/index")
-    public String afficherMaPage(Model model,Authentication authentication) {
+    public String afficherMaPage(Model model, Authentication authentication) {
 	    boolean isAdmin = false;
 	    boolean isUserLoggedIn = false;
         // Vérifier si l'utilisateur est authentifié
