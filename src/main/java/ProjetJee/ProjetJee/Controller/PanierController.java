@@ -61,7 +61,6 @@ public class PanierController {
         DetailCommande detailCommande = new DetailCommande();
         detailCommande.setCategoriePlace(categoriePlace);
         detailCommande.setQuantite(quantite);
-
         Panier panier = panierRepository.findByUserId(user.getId());
         if (panier == null) {
             panier = new Panier();
@@ -113,7 +112,7 @@ public class PanierController {
 
     @GetMapping("/monPanier")
     public String monPanier(Model model, Authentication authentication) {
-        User user = userRepository.findByUsername(authentication.getName());
+        User user = userRepository.findByUsernameOrEmail(authentication.getName(), authentication.getName());
         Panier panier = panierRepository.findByUserId(user.getId());
 
         if (panier != null && panier.getDetailCommande() != null) {
