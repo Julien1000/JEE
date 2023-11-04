@@ -1,2 +1,4 @@
 # JEE
-Projet JEE 2023/2024
+Projet JEE Spring 2023/2024
+
+Application web de vente de billet d'évènement
