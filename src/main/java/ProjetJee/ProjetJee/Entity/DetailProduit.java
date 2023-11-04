@@ -17,7 +17,6 @@ public class DetailProduit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank
 	@NotNull
 	private String adresse;
 	@NotNull

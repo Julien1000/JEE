@@ -21,10 +21,9 @@ public class Commande {
     private Long idCommande;
     @ManyToOne
     @JoinColumn(name="id_user")
-	@NotBlank
 	@NotNull
     private User user;
-	@NotBlank
+
 	@NotNull
     private int status;
     @OneToMany(mappedBy = "commande")
