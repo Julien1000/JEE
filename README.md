@@ -81,7 +81,9 @@ Chargement des données
 
 # Lancement du projet
 Avant de lancer le projet il faut se rendre dans le fichier src/main/ressources/application.properties et mettre l'identifiant et le mot de passe de votre mysql.  
-Dans eclipse, cliquez sur run une fois dans le fichier src/main/java/ProjetJEE/ProjetJEE/ProjetJeeApplication.java.
+Dans eclipse, cliquez sur run une fois dans le fichier src/main/java/ProjetJEE/ProjetJEE/ProjetJeeApplication.java.  
+
+Puis dans un navigateur rendez-vous sur : localhost:8080/
 
 # Utilisation
 Peu importe si les données ont été initalisée avec le fichier sql ou non, il est possible d'utiliser l'application :  
