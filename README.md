@@ -89,7 +89,10 @@ Compte utilisateur :
 - password : test
 
 Il est aussi possible de se créer un compte utilisateur via le formulaire d'inscription.  
-Pour se connecter, vous pouvez utiliser l'email ou le nom d'utilisateur d'un compte ainsi que son mot de passe dans le formulaire de connexion.
+Pour se connecter, vous pouvez utiliser l'email ou le nom d'utilisateur d'un compte ainsi que son mot de passe dans le formulaire de connexion.  
+
+Pour pouvoir être ajouté au panier, un produit doit avoir une catégorie de place.  
+Il faut donc d'abord créer une catégorie, puis créer un produit, puis créer un detail de produit pour ce produit et enfin une catégorie de place pour le detail du produit du produit en question.
 
 # Nous contacter
 
