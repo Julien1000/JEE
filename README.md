@@ -57,8 +57,8 @@ src/main/ressources :
 # Améliorations depuis la soutenance
 - Remaniement de la base de données pour qu'elle soit plus adaptée à notre thème de vente de billet
 - Ajout d'images représentant les différents stades pour choisir sa catégorie de place
-- Choix parmi différentes date, différents lieux et différentes catégories de places pour un seul et même évènement
-- Ajout du formulaire de contact
+- Choix parmi différentes dates, différents lieux et différentes catégories de place pour un seul et même évènement
+- Ajout du formulaire de contact et de la liste des demandes pour l'administrateur
 - Panier fonctionnel
 - Correction et optimisation de la barre de recherche
 
