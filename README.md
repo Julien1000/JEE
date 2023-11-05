@@ -46,9 +46,9 @@ src/main/java/ProjetJee/ProjetJee :
 - [UserDetail] contient
   
 src/main/ressources
-/static :
- -[css] contient tous les fichiers css
- -[js] contient tous les fichiers javascript
- -[img] contient les images du projet
- /templates contient les différents templates des pages du projet
+- /static :
+ - [css] contient tous les fichiers css
+ - [js] contient tous les fichiers javascript
+ - [img] contient les images du projet
+- /templates contient les différents templates des pages du projet
 
