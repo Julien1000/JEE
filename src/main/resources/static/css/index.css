@@ -1067,10 +1067,6 @@ object {
   height: 100%;
 }
 
-header {
-  height: 200px; /* ou une autre valeur en pixels */
-}
-
 .pt-24 {
   padding-top: 6rem;
 }
