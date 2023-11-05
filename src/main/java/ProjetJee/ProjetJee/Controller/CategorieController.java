@@ -98,6 +98,8 @@ public class CategorieController {
 	public String editCategorieForm(@PathVariable("id") Long id, Model model, Authentication authentication) {
 		Categorie existingCategorie = categorieRepository.findById(id).orElse(null);
 		model.addAttribute("categorie", existingCategorie);
+		List<Categorie> categories = (List<Categorie>) categorieRepository.findAll();
+		model.addAttribute("categories", categories);
 		boolean isAdmin = false;
 		boolean isUserLoggedIn = false;
 		// Vérifier si l'utilisateur est authentifié
