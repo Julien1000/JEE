@@ -109,9 +109,18 @@
 		</div>
 		<form th:action="'/commande/changerStatut6'" method="post">
 			<button
-				class="mb-1 mr-1 rounded bg-indigo-500 px-3 py-1 text-xs font-bold uppercase text-white outline-none transition-all duration-150 ease-linear focus:outline-none active:bg-indigo-500 hover:bg-indigo-600"
-				type="submit">Demasquer toutes les commande</button>
+				class="mb-1 mr-1 rounded bg-indigo-500 px-3 py-2 text-xs font-bold uppercase text-white outline-none transition-all duration-150 ease-linear focus:outline-none active:bg-indigo-500 hover:bg-indigo-600"
+				type="submit">Démasquer toutes les commandes</button>
+			<a th:href="@{'/commande/afficherStats'}">
+				<button
+					class="mb-1 mr-1 rounded bg-indigo-500 px-3 py-2 text-xs font-bold uppercase text-white outline-none transition-all duration-150 ease-linear focus:outline-none active:bg-indigo-500 hover:bg-indigo-600"
+					type="button"
+				>
+					Afficher les statistiques des commandes
+				</button>
+			</a>
 		</form>
+
 	</div>
 
 	<!--      <table border="1">

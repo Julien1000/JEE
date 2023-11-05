@@ -74,11 +74,12 @@
 					  <div th:if="${isUserLoggedIn != null && isAdmin}" class="py-1">
 						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addProduit}" tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100"  role="menuitem" >+ Produit</a>
 						<a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/addCategorie}"  tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100"  role="menuitem" >+ Catégorie</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addDetailProduit}" tabindex="4" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Detail produit</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/ajouterCategoriePlace}" tabindex="5" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Categorie place</a>
 						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" tabindex="2" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All produit</a>
 						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" tabindex="3" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All categorie</a>
-						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addDetailProduit}" tabindex="4" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Add detail produit</a>
-						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/ajouterCategoriePlace}" tabindex="5" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Add categorie place</a>
-						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" tabindex="6" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Statistiques commandes</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficher}" tabindex="7" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Gérer les commandes</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficherStats}" tabindex="6" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Statistiques commandes</a>
 
 					  </div>
 					</div>
@@ -129,6 +130,7 @@
 
 
 	        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+			<a th:href="@{/monPanier}">
 	          <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
 	            <span class="absolute -inset-1.5"></span>
 	            <span class="sr-only">View cart</span>
@@ -136,6 +138,7 @@
 					<path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
 				</svg>
 	          </button>
+			</a>
 	  
 	          <!-- Profile dropdown -->
 	          <div class="relative ml-3">
@@ -201,8 +204,13 @@
 						  <div th:if="${isUserLoggedIn != null && isAdmin}" class="py-1">
 							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addProduit}" tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100"  role="menuitem" >+ Produit</a>
 							<a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/addCategorie}"  tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100"  role="menuitem" >+ Catégorie</a>
+							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addDetailProduit}" tabindex="4" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Detail produit</a>
+							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/ajouterCategoriePlace}" tabindex="5" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Categorie place</a>
 							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" tabindex="2" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All produit</a>
 							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" tabindex="3" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All categorie</a>
+							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficher}" tabindex="7" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Gérer les commandes</a>
+							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficherStats}" tabindex="6" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Statistiques commandes</a>
+						  </div>
 						  </div>
 						</div>
 					  </div>

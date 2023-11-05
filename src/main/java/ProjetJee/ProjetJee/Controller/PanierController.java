@@ -76,7 +76,7 @@ public class PanierController {
             return "redirect:/produit/perso/"+idProduit +"?erreur=erreurQuantite"; // Remplacez par la page de produit appropriée
         }
 
-        User user = userRepository.findByUsername(authentication.getName());
+    	User user = userRepository.findByUsernameOrEmail(authentication.getName(), authentication.getName());
         CategoriePlace categoriePlace = categoriePlaceRepository.findById(idCategoriePlace)
                 .orElseThrow(() -> new RuntimeException("CategoriePlace non trouvée"));
 
@@ -115,7 +115,7 @@ public class PanierController {
 
     @PostMapping("/enregistrerPanier")
     public String enregistrerPanier(Authentication authentication) {
-        User user = userRepository.findByUsername(authentication.getName());
+    	User user = userRepository.findByUsernameOrEmail(authentication.getName(), authentication.getName());
         Panier panier = panierRepository.findByUserId(user.getId());
 
         if (panier == null || panier.getDetailCommande() == null || panier.getDetailCommande().isEmpty()) {
@@ -193,7 +193,7 @@ public class PanierController {
     }
     @PostMapping("/supprimerPanier")
     public String supprimerPanier(Authentication authentication) {
-        User user = userRepository.findByUsername(authentication.getName());
+    	User user = userRepository.findByUsernameOrEmail(authentication.getName(), authentication.getName());
         Panier panier = panierRepository.findByUserId(user.getId());
 
         if (panier != null && panier.getDetailCommande() != null) {
