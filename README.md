@@ -24,7 +24,7 @@ Utilisateur :
  - Créer un compte et se connecter
 
 # Technologies utilisées
-[Spring] - est un framework JEE utilisé pour la structure du projet
+- [Spring] - est un framework JEE utilisé pour la structure du projet
 [HTML] - est utilisé pour structurer le contenu d'une page web
 [tailwind/CSS] - est un framework css utilisé pour styliser et mettre en forme les pages
 [Javascript] - est utilisé pour rendre dynamique les pages
