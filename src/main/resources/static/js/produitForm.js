@@ -76,7 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function handleFile(file, fileName) {
     imageDisplay.style.display = "block";
-    imageDisplay2.style.display = "none";
+    if (imageDisplay2) {
+      imageDisplay2.style.display = "none";
+    }
     file_text.textContent = fileName;
     file_text.classList.add("relative", "cursor-pointer", "rounded-md", "bg-white", "font-semibold", "text-indigo-600", "focus-within:outline-none", "focus-within:ring-2", "focus-within:ring-indigo-600", "focus-within:ring-offset-2", "hover:text-indigo-500");
 
