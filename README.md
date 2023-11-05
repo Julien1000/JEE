@@ -80,11 +80,13 @@ Peu importe si les données ont été initalisée avec le fichier sql ou non, il
 Compte administrateur :
 - username : admin
 - email : admin@gmail.com
-- password : admin  
+- password : admin
+
 Compte utilisateur :
 - username : test
 - email :test@gmail.com
-- password : test  
+- password : test
+
 Il est aussi possible de se créer un compte utilisateur via le formulaire d'inscription
 
 # Nous contacter
