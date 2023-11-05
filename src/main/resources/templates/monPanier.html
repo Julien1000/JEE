@@ -149,37 +149,7 @@
 							</td>
 						</tr>
 					</tbody>
-					<!--			<div th:each="status : ${statusList}">
-		<h2 th:switch="${status}">
-			<span th:case="1">Commandes en cours de validation</span>
-			<span th:case="2">Commandes en cours de préparation</span>
-			<span th:case="3">Commandes en cours de livraison</span>
-			<span th:case="4">Commandes livrées aux clients</span>
-		</h2>
-		<table border="1">
-			<tr>
-				<th>ID Commande</th>
-				<th>Utilisateur</th>
-				<th>Status</th>
-				<th>Détails</th>
-				<th>Action</th>
-			</tr>
-			<tr th:each="commande : ${commandes}" th:if="${commande.status == status}">
-				<td th:text="${commande.idCommande}"></td>
-				<td th:text="${commande.user.username}"></td>
-				<td th:text="${commande.status}"></td>
-				<td>
-					<ul>
-						<li th:each="detail : ${commande.detailCommande}">
-							Produit: <span th:text="${detail.categoriePlace.detailProduit.produit.name}"></span>,
-							Quantité: <span th:text="${detail.quantite}"></span>
-						</li>
-					</ul>
-
-				</td>
-			</tr>
-		</table>
--->
+				</table>
 
 			</div>
 </body>

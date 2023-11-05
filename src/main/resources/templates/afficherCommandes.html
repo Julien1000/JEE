@@ -34,14 +34,6 @@
 						</h2>
 					</div>
 				</div>
-				<!--    <h1>Liste des Commandes</h1>
---> <!--   <div th:each="status : ${statusList}">
-        <h2 th:switch="${status}">
-            <span th:case="1">Commandes en cours de validation</span>
-            <span th:case="2">Commandes en cours de préparation</span>
-            <span th:case="3">Commandes en cours de livraison</span>
-            <span th:case="4">Commandes livrées aux clients</span>
-        </h2>-->
 				<div class="block w-full overflow-x-auto">
 					<table class="w-full border-collapse items-center bg-transparent">
 						<thead class="w-full bg-gray-100 text-gray-500">
@@ -122,45 +114,6 @@
 		</form>
 
 	</div>
-
-	<!--      <table border="1">
-            <tr>
-                <th>ID Commande</th>
-                <th>Utilisateur</th>
-                <th>Status</th>
-                <th>Détails</th>
-                <th>Action</th>
-            </tr>-->
-	<!--	<tr th:each="commande : ${commandes}" th:if="${commande.status == status}">
-		<td th:text="${commande.idCommande}"></td>
-		<td th:text="${commande.user.username}"></td>
-		<td th:text="${commande.status}"></td>
-		<td>
-			<ul>
-				<li th:each="detail : ${commande.detailCommande}">
-					Produit: <span th:text="${detail.categoriePlace.detailProduit.produit.name}"></span>,
-					Quantité: <span th:text="${detail.quantite}"></span>
-				</li>
-			</ul>
-		</td>
-		<td th:if="${status != 4}">
-			<form th:action="'/commande/changerStatut' + (${status} + 1) + '/' + ${commande.idCommande}" method="post">
-				<button type="submit" th:text="'Passer au Statut ' + (${status} + 1)"></button>
-			</form>
-		</td>
-		<td th:if="${status == 4}">
-			<form th:action="'/commande/changerStatut' + (${status} + 1) + '/' + ${commande.idCommande}" method="post">
-				<button type="submit">Masquer la commande</button>
-			</form>
-		</td>
-
-	</tr>
-	</table>
-
-	</div>
-	<form th:action="'/commande/changerStatut6'" method="post">
-		<button type="submit">demasquer toutes les commande</button>
-	</form>-->
 </body>
 
 </html>
