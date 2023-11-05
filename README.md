@@ -37,7 +37,6 @@ Utilisateur :
 - [Thymeleaf] est utilisé pour la communication avec la base de donées et les vues
 
 # Arborescence
-
 src/main/java/ProjetJee/ProjetJee : 
 - [Config] contient les controllers responsables de la configuration avant lancement du projet
 - [Controller] contient tous les controllers du projet
@@ -63,7 +62,9 @@ Télécharger l'archive via le lien puis de la dézipper :
 # Initialisation de la base de données
 Dans mysql :  
 Création de la base de donnée
-- CREATE DATABASE IF NOT EXISTS JEE;  
+- CREATE DATABASE IF NOT EXISTS JEE;
+  
+Cette étape permet d'insérer des objets dans la base de données pour une démonstration.  
 Le projet peut-être utilisé sans cette étape mais il est préférable de le faire pour une utilisation plus réaliste.  
 Utilisation de la base de donnée
 - use JEE
@@ -73,6 +74,18 @@ Chargement des données
 # Lancement du projet
 Avant de lancer le projet il faut se rendre dans le fichier src/main/ressources/application.properties et mettre l'identifiant et le mot de passe de votre mysql.  
 Dans eclipse, cliquez sur run une fois dans le fichier src/main/java/ProjetJEE/ProjetJEE/ProjetJeeApplication.java.
+
+# Utilisation
+Peu importe si les données ont été initalisée avec le fichier sql ou non, il est possible d'utiliser l'application :  
+Compte administrateur :  
+- username : admin
+- email : admin@gmail.com
+- password : admin
+Compte utilisateur :
+- username : test
+- email :test@gmail.com
+- password : test  
+Il est aussi possible de se créer un compte utilisateur via le formulaire d'inscription
 
 # Nous contacter
 
