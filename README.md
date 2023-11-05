@@ -24,14 +24,14 @@ Utilisateur :
  - Créer un compte et se connecter
 
 # Technologies utilisées
-- [Spring] - est un framework JEE utilisé pour la structure du projet
-[HTML] - est utilisé pour structurer le contenu d'une page web
-[tailwind/CSS] - est un framework css utilisé pour styliser et mettre en forme les pages
-[Javascript] - est utilisé pour rendre dynamique les pages
-[SpringSecurity] - est utilisé pour la sécurité du site
-[mysql] - est utilisé pour sotcker les différentes données 
-[Chart.js] - est une bibliothèque utilisée pour créer des graphes et des visualisations de données
-[Hibernate] - est utilisé pour la communication avec la base de donnée
+- [Spring] est un framework JEE utilisé pour la structure du projet
+- [HTML] est utilisé pour structurer le contenu d'une page web
+- [tailwind/CSS] est un framework css utilisé pour styliser et mettre en forme les pages
+- [Javascript] est utilisé pour rendre dynamique les pages
+- [SpringSecurity] est utilisé pour la sécurité du site
+- [mysql] est utilisé pour sotcker les différentes données 
+- [Chart.js] est une bibliothèque utilisée pour créer des graphes et des visualisations de données
+- [Hibernate] est utilisé pour la communication avec la base de donnée
 
 # Arborescence
 
