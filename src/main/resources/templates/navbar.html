@@ -17,18 +17,11 @@
 	          <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" id="mobile-menu-button" aria-controls="mobile-menu" aria-expanded="false">
 	            <span class="absolute -inset-0.5"></span>
 	            <span class="sr-only">Open main menu</span>
-<!-- 	            
-	              Icon when menu is closed.
-	  
-	              Menu open: "hidden", Menu closed: "block" -->
 	            
 	            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
 	              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 	            </svg>
 	            
-	              <!-- Icon when menu is open.
-	  
-	              Menu open: "block", Menu closed: "hidden" -->
 	        
 	            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
 	              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -38,27 +31,19 @@
 		
 	        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 	          <div class="flex flex-shrink-0 items-center">
+				<a th:href="@{/index}">
 	            <img class="h-12 w-auto" th:src="@{/img/logo_ticketwave.png}" alt="Your Company">
+				</a>
 	          </div>
 	          <div class="hidden sm:ml-6 sm:block">
 	            <div class="flex space-x-4">
-	              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 	              <a th:href="@{/index}" th:classappend="${activePage == '@{/index}'} ? 'button-active' : 'button-inactive'" class="navbar-button block rounded-md px-3 py-2 text-base font-medium" >Accueil</a>
 	             <div th:each="categorie : ${categories}">
 			            <a th:href="@{/produit/{idCategorie}(idCategorie=${categorie.id})}" th:text="${categorie.name}" th:classappend="${activePage == '@{/produit/{idCategorie}(idCategorie=${categorie.id})}'} ? 'button-active' : 'button-inactive'" class="navbar-button block rounded-md px-3 py-2 text-base font-medium" ></a>
 			      </div>
 
 
-			      <!-- <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addProduit}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >+ Produit</a>
-			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addCategorie}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >+ Categorie</a>
-			      <a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/logout}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Déconnexion</a>
-			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >All Categorie</a>
-			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >All Produit</a>
-			      
-				  <a th:if="${isUserLoggedIn == null}" th:href="@{/login}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Connexion</a>
-				  <a th:if="${isUserLoggedIn == null}" th:href="@{/register}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >S'inscrire</a> -->
-
-
+			     
 
 			  <div th:if="${isUserLoggedIn != null && isAdmin}" class="flex items-center justify-center z-50">
 				<div th:if="${isUserLoggedIn != null && isAdmin}" class=" relative inline-block text-left dropdown">
@@ -94,22 +79,6 @@
 
 	        </div>
 
-<!-- 
-				<a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/logout}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Déconnexion</a>
-				<a th:if="${isUserLoggedIn == null}" th:href="@{/login}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Connexion</a>
-				<a th:if="${isUserLoggedIn == null}" th:href="@{/register}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >S'inscrire</a> -->
-
-	        <!--
-				BARRE DE RECHERCHE 
-				<div id="search-container">
-			    <input type="text" name="q" id="searchbar" placeholder="Rechercher un produit" />
-			</div>
--->
-			<!-- <div id="search-container">
-			  <input type="text" name="q" id="searchbar" placeholder="Rechercher un produit" />
-			  <ol id='results-list' class="left-0 absolute bg-white border-gray-200 border-dashed"></ol>
-			</div> -->
-
 			<div class='hidden sm:block mx-auto searchbar_container'>
 				<div class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-slate-700 searchbar_under_container">
 					<div class="grid place-items-center h-full w-12 text-gray-300">
@@ -141,7 +110,6 @@
 	          </button>
 			</a>
 	  
-	          <!-- Profile dropdown -->
 	          <div class="relative ml-3">
 	            <div>
 	              <button type="button" class="relative flex rounded-full bg-gray-800 text-gray-400 text-sm hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
@@ -153,18 +121,7 @@
 	              </button>
 	            </div>
 	  
-	            <!--
-	              Dropdown menu, show/hide based on menu state.
-	  
-	              Entering: "transition ease-out duration-100"
-	                From: "transform opacity-0 scale-95"
-	                To: "transform opacity-100 scale-100"
-	              Leaving: "transition ease-in duration-75"
-	                From: "transform opacity-100 scale-100"
-	                To: "transform opacity-0 scale-95"
-	            -->
 	            <div class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" id="user-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-	              <!-- Active: "bg-gray-100", Not Active: "" -->
 				  <a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/contact}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="3" id="user-menu-item-2">Nous contacter</a>
 				  <a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/logout}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="0" id="user-menu-item-0">Déconnexion</a>
 				  <a th:if="${isUserLoggedIn == false or isUserLoggedIn == null}" th:href="@{/login}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="1" id="user-menu-item-1">Connexion</a>
@@ -175,22 +132,14 @@
 	      </div>
 	    </div>
 	  
-	    <!-- Mobile menu, show/hide based on menu state. -->
 	    <div class="hidden sm:hidden" id="mobile-menu">
 	      <div class="space-y-1 px-2 pb-3 pt-2">
-	        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 			<div>
 	        <a th:href="@{/index}" class="bg-gray-300 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Accueil</a>
 			</div>
 			<div th:each="categorie : ${categories}">
 	            <a th:href="@{/produit/{idCategorie}(idCategorie=${categorie.id})}" th:text="${categorie.name}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"></a>
 	      	</div>
-		  <!-- <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addProduit}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >+ Produit</a>
-			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addCategorie}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >+ Categorie</a>
-			      <a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/logout}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >Déconnexion</a>
-			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >All Categorie</a>
-			      <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" >All Produit</a>
-			       -->
 				   <div th:if="${isUserLoggedIn != null && isAdmin}" class="flex items-center justify-center z-50">
 					<div th:if="${isUserLoggedIn != null && isAdmin}" class=" relative inline-block text-left dropdown">
 					  <span th:if="${isUserLoggedIn != null && isAdmin}" class="rounded-md shadow-sm">

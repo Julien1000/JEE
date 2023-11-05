@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
   $(document).on("click", ".category_choose", function () {
     console.log("DOM loaded");
-    // Sélectionnez tous les boutons radio
+    // Sélectionner tous les boutons radio
     var radios = document.querySelectorAll('input[type="radio"]');
-    // Ajoutez un gestionnaire d'événements 'change' à chaque bouton radio
+    // Ajouter un gestionnaire d'événements 'change' à chaque bouton radio
     radios.forEach(function (radio) {
       radio.addEventListener("change", function () {
         console.log("change");
         var price = this.dataset.prix;
 
-        // Affichez le prix dans le p
+        // Afficher le prix dans le p
         var pElement = document.getElementById("prix_affiche");
         pElement.innerText = price + " €";
       });
@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var categories = document.querySelectorAll(".category_choose");
 
-    // Ajoutez un gestionnaire d'événements 'click' à chaque élément de catégorie
+    // Ajouter un gestionnaire d'événements 'click' à chaque élément de catégorie
     categories.forEach(function (categorie) {
       categorie.addEventListener("click", function () {
-        // Lorsqu'un élément de catégorie est cliqué, parcourez tous les éléments de catégorie
+        // Lorsqu'un élément de catégorie est cliqué, parcourir tous les éléments de catégorie
         categories.forEach(function (otherCategorie) {
-          // Réinitialisez le style de tous les autres éléments de catégorie
+          // Réinitialiser le style de tous les autres éléments de catégorie
           otherCategorie.classList.remove(
             "bg-indigo-600",
             "text-white",
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
           );
         });
 
-        // Changez le style de l'élément de catégorie cliqué
+        // Changer le style de l'élément de catégorie cliqué
         this.classList.add(
           "bg-indigo-600",
           "text-white",
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#detailProduit").on("change", function () {
     var detailProduitId = $(this).val();
     if (detailProduitId) {
-      // Effectuez une requête AJAX pour obtenir les détailsProduit en fonction du produit sélectionné
+      // Effectuer une requête AJAX pour obtenir les détailsProduit en fonction du produit sélectionné
       $.get("/getCategoryByDetail/" + detailProduitId, function (data) {
         $(".categories-date").empty();
         $(".image_lieu").empty();
@@ -84,10 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
       $(".categories-date").empty();
       $(".image_lieu").empty();
     }
-    // $('#categories-date').on('change', function () {
-    //   var selectedDetailProduit = $(this).val();
-    //   $('#selectedDetailProduit').val(selectedDetailProduit);
-    // });
   });
 
   function changeQuantity(element, operation) {

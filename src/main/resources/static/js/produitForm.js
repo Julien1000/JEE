@@ -84,9 +84,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const reader = new FileReader();
 
-    // Définissez la fonction à exécuter lorsque le fichier a été lu
+    // Définisser la fonction à exécuter lorsque le fichier a été lu
     reader.onload = function (e) {
-      // Mettez à jour l'élément d'affichage de l'image avec l'image lue
+      // Mettre à jour l'élément d'affichage de l'image avec l'image lue
       imageDisplay.src = e.target.result;
     };
 
@@ -101,10 +101,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // // Sélectionnez l'input de type date
   var dateInput = document.querySelector('input[type="date"]');
 
-  // Obtenez la date d'aujourd'hui
+  // Obtenir la date d'aujourd'hui
   var today = new Date();
 
-  // Formatez la date au format yyyy-mm-dd
+  // Formater la date au format yyyy-mm-dd
   var formattedDate =
     today.getFullYear() +
     "-" +
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log(formattedDate);
 
-  // Définissez l'attribut min de l'input sur la date d'aujourd'hui
+  // Définisser l'attribut min de l'input sur la date d'aujourd'hui
   dateInput.min = formattedDate;
   dateInput.value = formattedDate;
 });
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   imageDisplay2.style.display = "none";
 
-  // Vérifiez l'URL actuelle
+  // Vérifier l'URL actuelle
   const path = window.location.pathname;
   console.log(path);
 
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
     imageDisplay2.style.display = "block";
     fileInput.removeAttribute('required');
   } else if (path.startsWith('/addProduit')) {
-    // Si l'URL commence par '/addProduit', faites quelque chose d'autre
+    // Si l'URL commence par '/addProduit', faire quelque chose d'autre
     console.log("path.startsWith('/addProduit')");
   }
 });

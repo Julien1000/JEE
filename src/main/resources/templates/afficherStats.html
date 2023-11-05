@@ -32,19 +32,6 @@
   </header>
 
   <body class="mt-10">
-    <!-- <h2 class="stats-text">Statistiques des Commandes</h2> -->
-    <!-- <p class="stats-text">
-      Nombre de commandes avec statut 1:
-      <span id="status1" th:text="${nombreCommandesStatus1}"></span>
-    </p>
-    <p class="stats-text">
-      Nombre de commandes avec statut 2:
-      <span id="status2" th:text="${nombreCommandesStatus2}"></span>
-    </p>
-    <p class="stats-text">
-      Nombre de commandes avec statut 3:
-      <span id="status3" th:text="${nombreCommandesStatus3}"></span>
-    </p> -->
     <div class="mb-0 rounded-t border-0 pr-4_4 pl-4 pt-24">
         <div class="flex flex-wrap items-center">
           <div
@@ -134,9 +121,6 @@
     <h2 class="mx-2 text-2xl font-semibold text-black">
       Produits Vendus par Catégorie :
     </h2>
-    <!-- <div th:each="entry : ${produitsParCategorie}" class="stats-text">
-      <p th:text="${entry.key} + ': ' + ${entry.value}"></p>
-    </div> -->
 
     <div class="mx-4 max-w-full py-6 sm:mx-auto sm:px-6 lg:px-8">
       <div class="sm:flex sm:space-x-4">
@@ -168,9 +152,6 @@
       var valeurs = /*[[${produitsParCategorie.values()}]]*/ "default";
       /*]]>*/
     </script>
-    <!-- <h2>
-      Total de Produits Vendus: <span th:text="${totalProduitsVendus}"></span>
-    </h2> -->
 
     <div class="relative z-51 mx-4 max-w-full py-6 sm:mx-auto sm:px-6 lg:px-8">
       <div class="sm:flex sm:space-x-4">
@@ -196,12 +177,6 @@
     <h3 class="mx-2 text-2xl font-semibold text-black">
       Top 5 des Produits les Plus Vendus
     </h3>
-    <!-- <ul>
-      <li th:each="entry, stat : ${top5ProduitsNoms}" th:index="index">
-        <span th:text="${entry}"></span> :
-        <span th:text="${top5ProduitsQuantites[__${stat.index}__]}"></span>
-      </li>
-    </ul> -->
     <ul role="list" class="divide-y divide-gray-100 w-6/12">
       <li
         th:each="entry, stat : ${top5ProduitsNoms}"

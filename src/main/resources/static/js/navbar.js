@@ -22,19 +22,19 @@ document.addEventListener("DOMContentLoaded", function () {
     mobileMenu.classList.toggle("hidden");
   });
 
-  // Sélectionnez tous les boutons de la navbar
+  // Sélectionner tous les boutons de la navbar
   const buttons = document.querySelectorAll(".navbar-button");
 
   // Gestionnaire d'événement clic pour chaque bouton
   buttons.forEach((button) => {
     button.addEventListener("click", function () {
-      // Retirez la classe "button-active" de tous les boutons
+      // Retirer la classe "button-active" de tous les boutons
       buttons.forEach((btn) => {
         btn.classList.remove("button-active");
         btn.classList.add("button-inactive");
       });
 
-      // Ajoutez la classe "button-active" au bouton actuel
+      // Ajouter la classe "button-active" au bouton actuel
       button.classList.add("button-active");
     });
   });
@@ -47,9 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const positionProduitsList = () => {
     const rect = searchBar.getBoundingClientRect();
-    // produitsList.style.top = rect.bottom + window.scrollY + "px";
-    // produitsList.style.left = rect.left + window.scrollX + "px";
-    // produitsList.style.width = rect.width + "px";
     produitsList.classList.add("absolute", "w-full", "top-full", "z-9999", "block");
   };
 
