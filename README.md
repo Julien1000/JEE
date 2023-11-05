@@ -61,7 +61,7 @@ Télécharger l'archive via le lien puis de la dézipper :
 - cd JEE
 
 # Initialisation de la base de données
-Dans mysql : 
+Dans mysql :  
 Création de la base de donnée
 - CREATE DATABASE IF NOT EXISTS JEE;  
 Le projet peut-être utilisé sans cette étape mais il est préférable de le faire pour une utilisation plus réaliste.  
