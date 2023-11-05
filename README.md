@@ -44,7 +44,7 @@ src/main/java/ProjetJee/ProjetJee :
 - [Repository] contient tous les repository du projet
 - [SecurityConfig] contient tous les fichiers nécéssaires à la configuration de la sécurité du projet
 - [Service] contient tous les services du projet
-- [UserDetail] contient
+- [UserDetail] contient le service pour le chargement des utilisateurs
   
 src/main/ressources :  
 /static :
