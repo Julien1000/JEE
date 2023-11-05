@@ -52,8 +52,31 @@
 						</div>
 						<h3 class="mt-4 text-sm text-gray-700" th:text="${produit.name}"></h3>
 <!--						<p class="mt-1 text-lg font-medium text-gray-900" th:text="${produit.prix + '€'}"></p>
--->						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/deleteProduct/{id}(id=${produit.id})}" onclick="return confirm('Are you sure you want to delete this product?')">Supprimer</a>
-							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/editProduct/{id}(id=${produit.id})}">Modifier</a>
+-->						
+							<!-- <a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/deleteProduct/{id}(id=${produit.id})}" onclick="return confirm('Are you sure you want to delete this product?')">Supprimer</a>
+							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/editProduct/{id}(id=${produit.id})}">Modifier</a> -->
+						
+							<div class="pt-4">
+								<a
+								th:if="${isUserLoggedIn != null && isAdmin}"
+								  th:href="@{/deleteProduct/{id}(id=${produit.id})}"
+								  onclick="return confirm('Are you sure you want to delete this product?')"
+								  ><button
+								  class="mr-3 py-1 mb-1 rounded bg-indigo-500 px-3 text-xs font-bold uppercase text-white outline-none transition-all duration-150 ease-linear hover:bg-indigo-600 focus:outline-none active:bg-indigo-500"
+								  type="button"
+								>
+								  Supprimer
+								</button></a
+								>
+								<a 
+								th:if="${isUserLoggedIn != null && isAdmin}"
+								th:href="@{/editProduct/{id}(id=${produit.id})}"><button
+								  class="py-1 mb-1 mr-1 ml-3 rounded bg-indigo-500 px-3 text-xs font-bold uppercase text-white outline-none transition-all duration-150 ease-linear hover:bg-indigo-600 focus:outline-none active:bg-indigo-500"			
+								  type="button"
+								>
+								  Modifier
+								</button></a>
+							  </div>
 						</div>
 				
 						<!-- More products... -->

@@ -1322,3 +1322,7 @@ video {
   height: 3rem;
 }
 
+
+.z-60{
+  z-index: 60
+}

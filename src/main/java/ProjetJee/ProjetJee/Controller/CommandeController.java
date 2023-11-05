@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -156,10 +157,9 @@ public class CommandeController {
         }
         return "redirect:/commande/afficher";
     }
-
+    
     @GetMapping("/afficherStats")
     public String afficherStats(Model model, Authentication authentication) {
-    	
         List<Commande> commandes = commandeRepository.findAll();
 
         int nombreCommandesStatus1 = 0;
@@ -218,8 +218,9 @@ public class CommandeController {
         model.addAttribute("totalProduitsVendus", produitsVendus.values().stream().mapToInt(Integer::intValue).sum());
         model.addAttribute("top5ProduitsNoms", top5ProduitsNoms);
         model.addAttribute("top5ProduitsQuantites", top5ProduitsQuantites);
+        
         boolean isAdmin = false;
-	    boolean isUserLoggedIn = false;
+	      boolean isUserLoggedIn = false;
         // Vérifier si l'utilisateur est authentifié
         if (authentication != null && authentication.isAuthenticated()) {
             // Ajouter le nom de l'utilisateur au modèle
@@ -236,7 +237,7 @@ public class CommandeController {
     	    model.addAttribute("produits", produits);
         }
         List<Categorie> categories = (List<Categorie>) categorieRepository.findAll();
-		model.addAttribute("categories", categories);
+		    model.addAttribute("categories", categories);
         // Ajouter la variable isAdmin au modèle
         model.addAttribute("isUserLoggedIn", isUserLoggedIn);
         model.addAttribute("isAdmin", isAdmin);
