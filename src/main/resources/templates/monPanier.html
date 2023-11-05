@@ -183,5 +183,16 @@
 
 			</div>
 </body>
+  <script>
+    var successMessage = "[[${successMessage}]]";
 
+    if (successMessage) {
+        alert(successMessage); // Affichez la popup d'erreur
+    }
+    var errorMessage = "[[${errorMessage}]]";
+
+    if (errorMessage) {
+        alert(errorMessage); // Affichez la popup d'erreur
+    }
+</script>
 </html>
