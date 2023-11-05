@@ -108,18 +108,20 @@ public class PanierController {
         
         detailCommandeRepository.save(detailCommande);
         System.out.println(user.getId());
-
-        return "redirect:/produit";
+    	redirectAttributes.addFlashAttribute("successMessage", "Produit ajouté au panier");
+        return "redirect:/produit/perso/"+idProduit;
     }
 
 
     @PostMapping("/enregistrerPanier")
-    public String enregistrerPanier(Authentication authentication) {
+
+    public String enregistrerPanier(Authentication authentication,RedirectAttributes redirectAttributes) {
     	User user = userRepository.findByUsernameOrEmail(authentication.getName(), authentication.getName());
+
         Panier panier = panierRepository.findByUserId(user.getId());
 
         if (panier == null || panier.getDetailCommande() == null || panier.getDetailCommande().isEmpty()) {
-            System.out.println("Le panier est vide ou n'existe pas.");
+        	redirectAttributes.addFlashAttribute("erreurMessage", "Panier vide");
             return "redirect:/monPanier";
         }
 
@@ -138,9 +140,8 @@ public class PanierController {
 
         panierRepository.delete(panier);
 
-        System.out.println("Commande enregistrée avec succès et panier vidé.");
-
-        return "redirect:/index";
+    	redirectAttributes.addFlashAttribute("successMessage", "Commande validée");
+        return "redirect:/monPanier";
     }
 
     @GetMapping("/monPanier")
@@ -206,7 +207,7 @@ public class PanierController {
             panierRepository.delete(panier);
         }
 
-        return "redirect:/produit";  // Remplacez par la page de redirection appropriée
+        return "redirect:/monPanier";  
     }
     @Transactional
     @PostMapping("/supprimerElementDuPanier")
