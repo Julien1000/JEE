@@ -3,6 +3,7 @@ package ProjetJee.ProjetJee.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,7 @@ public class CategoriePlaceController {
 	private CategorieRepository categorieRepository;
 
     @GetMapping("/ajouterCategoriePlace")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String ajouterCategoriePlace(Model model, Authentication authentication) {
         model.addAttribute("categoriePlace", new CategoriePlace());
         model.addAttribute("produit", produitRepository.findAll());
@@ -61,18 +63,19 @@ public class CategoriePlaceController {
     }
 
     @PostMapping("/ajouterCategoriePlace")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String sauvegarderCategoriePlace(@ModelAttribute CategoriePlace categoriePlace, RedirectAttributes redirectAttributes) {
         // Code pour sauvegarder la CategoriePlace dans la base de données
         // Assurez-vous de gérer les détailsProduit associés ici
-//		try {
+	try {
 	        categoriePlaceRepository.save(categoriePlace);
 			// Message de succès en cas de soumission réussie
-			redirectAttributes.addFlashAttribute("successMessage", "Catégorie ajouté avec succès !");
-//		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("successMessage", "Catégorie de place ajoutée avec succès !");
+		} catch (Exception e) {
 //			// Message d'erreur en cas d'échec de la soumission
-//			redirectAttributes.addFlashAttribute("errorMessage",
-//					"Une erreur s'est produite lors de l'ajout de la catégorie.");
-//		}
+			redirectAttributes.addFlashAttribute("errorMessage",
+					"Une erreur s'est produite lors de l'ajout de la catégorie de place.");
+		}
         return "redirect:/ajouterCategoriePlace";
     }
 }

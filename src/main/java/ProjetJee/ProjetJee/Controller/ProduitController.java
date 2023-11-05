@@ -82,6 +82,7 @@ public class ProduitController {
 	}
 
 	@PostMapping("/saveProduit")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String saveProduct(
 	    @RequestParam(value="id", required=false) Long id,
 	    @RequestParam("name") String name,

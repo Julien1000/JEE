@@ -2,6 +2,7 @@ package ProjetJee.ProjetJee.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -70,6 +71,7 @@ public class ContactController {
     }
     
     @GetMapping("/contactList")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showContactList(Model model, Authentication authentication) {
         Iterable<Contact> contacts = contactRepository.findAll();
         model.addAttribute("contacts", contacts);
@@ -98,6 +100,7 @@ public class ContactController {
     }
 
     @GetMapping("/deleteContact/{id}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteContact(@PathVariable Long id) {
         contactRepository.deleteById(id);
         return "redirect:/contactList";

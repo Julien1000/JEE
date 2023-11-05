@@ -12,15 +12,7 @@
 
 <body class="body_add_produit">
 
-	<!-- Affiche un message de succès s'il existe -->
-	<div th:if="${successMessage}" class="success-message">
-		<p th:text="${successMessage}"></p>
-	</div>
 
-	<!-- Affiche un message d'erreur s'il existe -->
-	<div th:if="${errorMessage}" class="error-message">
-		<p th:text="${errorMessage}"></p>
-	</div>
 
 	<form th:action="@{/submit-contact}" method="post" th:object="${contact}"
 		class="form_add_produit flex flex-col items-center justify-center mb-52 pt-10">
@@ -76,5 +68,17 @@
 		</div>
 	</form>
 </body>
+  <script>
+    var succesMessage = "[[${successMessage}]]";
+
+    if (successMessage) {
+        alert(successMessage); // Affichez la popup d'erreur
+    }
+    var errorMessage = "[[${errorMessage}]]";
+
+    if (errorMessage) {
+        alert(errorMessage); // Affichez la popup d'erreur
+    }
+</script>
 
 </html>

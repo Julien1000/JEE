@@ -5,6 +5,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import ProjetJee.ProjetJee.Entity.*;
 import ProjetJee.ProjetJee.Repository.*;
 
@@ -35,12 +37,38 @@ public class PanierController {
     private ProduitRepository produitRepository;
 
     @PostMapping("/ajouterPanier")
-    public String ajouterElementAuPanier(Model model, @RequestParam("idCategoriePlace") Long idCategoriePlace,
-                                         @RequestParam("quantite") int quantite, Authentication authentication) {
-    	
+    public String ajouterElementAuPanier(Model model, @RequestParam(name = "idCategoriePlace", required=false) Long idCategoriePlace,
+                                         @RequestParam(name = "quantite", required=false) String quantiteStr, 
+                                         @RequestParam(name = "idProduit") Long idProduit,
+                                         Authentication authentication,RedirectAttributes redirectAttributes) {
+        if (idCategoriePlace == null) {
+            // Le paramètre idCategoriePlace est manquant, affichez la popup d'erreur.
+        	redirectAttributes.addFlashAttribute("erreur", "Veuillez sélectionner une catégorie.");
+            return "redirect:/produit/perso/"+idProduit+"?erreur=erreurSelection"; // Remplacez par la page de produit appropriée
+        }
+    	Integer quantite = null;
+        if (quantiteStr != null && !quantiteStr.isEmpty() && quantiteStr != "") {
+            try {
+                quantite = Integer.parseInt(quantiteStr);
+                if (quantite <= 0) {
+                    // La quantité est invalide, affichez la popup d'erreur.
+                	redirectAttributes.addFlashAttribute("erreur", "Quantité non valide.");
+                    return "redirect:/produit/perso/"+idProduit+"?erreur=erreurQuantite"; // Remplacez par la page de produit appropriée
+                }
+            } catch (NumberFormatException e) {
+                // La chaîne n'est pas un entier valide, affichez la popup d'erreur.
+            	redirectAttributes.addFlashAttribute("erreur", "Quantité non valide.");
+                return "redirect:/produit/perso/"+idProduit+"?erreur=erreurQuantite"; // Remplacez par la page de produit appropriée
+            }
+        }else {
+        	redirectAttributes.addFlashAttribute("erreur", "Quantité non valide.");
+            return "redirect:/produit/perso/"+idProduit+"?erreur=erreurQuantite"; // Remplacez par la page de produit appropriée
+
+        }
+
     	if (quantite < 1) {
-            model.addAttribute("erreurQuantite", "Quantité non conforme");
-            return "redirect:/produit";  // Remplacez par la page de produit appropriée
+    		redirectAttributes.addFlashAttribute("erreur", "Quantité non conforme");
+            return "redirect:/produit/perso/"+idProduit +"?erreur=erreurQuantite"; // Remplacez par la page de produit appropriée
         }
 
         User user = userRepository.findByUsername(authentication.getName());
@@ -49,8 +77,8 @@ public class PanierController {
 
         // Vérifier si la quantité demandée est disponible
         if (categoriePlace.getStock() < quantite) {
-            model.addAttribute("erreurStock", "Stock insuffisant");
-            return "redirect:/produit";  // Remplacez par la page de produit appropriée
+        	redirectAttributes.addFlashAttribute("erreur", "Stock insuffisant");
+            return "redirect:/produit/perso/"+idProduit + "?erreur=erreurStock"; // Remplacez par la page de produit appropriée
         }
 
         // Mettre à jour le stock
