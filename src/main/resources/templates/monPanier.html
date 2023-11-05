@@ -115,30 +115,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="commande : ${commandes}">
-							<th
-								class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs">
-								<span th:each="detailCommande : ${commande.detailCommande}"
-									th:text="${detailCommande.categoriePlace.detailProduit.produit.name}"
-									class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></span>
-							</th>
+						 <tr th:each="commande : ${commandes}"
+						      th:unless="${#lists.isEmpty(commande.detailCommande) || #strings.isEmpty(commande.detailCommande[0].categoriePlace.detailProduit.produit.name)}">
+						    <th class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs">
+						      <span th:each="detailCommande : ${commande.detailCommande}"
+						            th:if="${not #strings.isEmpty(detailCommande.categoriePlace.detailProduit.produit.name)}"
+						            th:text="${detailCommande.categoriePlace.detailProduit.produit.name}"
+						            class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></span>
+						    </th>
 
-							<td
-								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
-								<span th:with="totalPrice=0.0">
-									<span th:each="detailCommande : ${commande.detailCommande}">
-										<span
-											th:with="unitPrice=${detailCommande.categoriePlace.prix}, quantity=${detailCommande.quantite}">
-											<span th:with="productTotal=${unitPrice * quantity}">
-												<span th:with="totalPrice=${totalPrice + productTotal}">
-													<span th:text="${totalPrice}"
-														class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></span>
-												</span>
-											</span>
-										</span>
-									</span>
-								</span>
-							</td>
+							 <td class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
+						      <div th:with="totalPrice=${T(com.myapp.util.MathUtil).calculateTotal(commande.detailCommande)}">
+						        <span th:text="${totalPrice}"
+						              class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></span>
+						      </div>
+						    </td>
 
 							<td th:switch="${commande.status}"
 								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
