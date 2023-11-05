@@ -51,6 +51,7 @@ public class CategorieController {
 	}
 
 	@PostMapping(path = "/saveCategorie")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String saveCategorie(@ModelAttribute Categorie categorie, RedirectAttributes redirectAttributes) {
 		try {
 			categorieRepository.save(categorie);

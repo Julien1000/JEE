@@ -21,15 +21,7 @@
 	        
 	    </form>
 	</div> -->
-		<!-- Affiche un message de succès s'il existe -->
-	<div th:if="${successMessage}" class="success-message">
-		<p th:text="${successMessage}"></p>
-	</div>
 
-	<!-- Affiche un message d'erreur s'il existe -->
-	<div th:if="${errorMessage}" class="error-message">
-		<p th:text="${errorMessage}"></p>
-	</div>
 
     <div class="flex justify-center items-center pt-28 z-0">
       <form
@@ -77,4 +69,17 @@
       </form>
     </div>
   </body>
+  <script>
+    var successMessage = "[[${successMessage}]]";
+
+    if (successMessage) {
+        alert(successMessage); // Affichez la popup d'erreur
+    }
+    var errorMessage = "[[${errorMessage}]]";
+
+    if (errorMessage) {
+        alert(errorMessage); // Affichez la popup d'erreur
+    }
+</script>
+
 </html>

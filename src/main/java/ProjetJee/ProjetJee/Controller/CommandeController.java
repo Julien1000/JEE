@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -40,17 +41,43 @@ public class CommandeController {
     
     @Autowired
     private DetailCommandeRepository detailCommandeRepository;
+    
+    @Autowired 
+    private CategorieRepository categorieRepository;
 
     @GetMapping("/afficher")
-    public String afficherCommandes(Model model) {
+    public String afficherCommandes(Model model,Authentication authentication) {
         List<Commande> commandes = commandeRepository.findAll();
         model.addAttribute("commandes", commandes);
         model.addAttribute("statusList", Arrays.asList(1, 2, 3, 4));
+        boolean isAdmin = false;
+	    boolean isUserLoggedIn = false;
+        // Vérifier si l'utilisateur est authentifié
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Ajouter le nom de l'utilisateur au modèle
+            model.addAttribute("currentUser", authentication.getName());
+            isUserLoggedIn = true;
+            
+            // Vérifier si l'utilisateur a le rôle "ROLE_ADMIN"
+            isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+            List<Categorie> categorie = (List<Categorie>) categorieRepository.findAll();
+    		model.addAttribute("categories", categorie);
+    		List<Produit> produits = (List<Produit>) produitRepository.findAll();
+    	    model.addAttribute("produits", produits);
+        }
+        List<Categorie> categories = (List<Categorie>) categorieRepository.findAll();
+		model.addAttribute("categories", categories);
+        // Ajouter la variable isAdmin au modèle
+        model.addAttribute("isUserLoggedIn", isUserLoggedIn);
+        model.addAttribute("isAdmin", isAdmin);
 
         return "afficherCommandes";
     }
     
     @GetMapping("/creer")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String creerFormulaire(Model model) {
         List<Produit> produits = (List<Produit>) produitRepository.findAll();
         model.addAttribute("produits", produits);
@@ -85,6 +112,7 @@ public class CommandeController {
 //        return "redirect:/validerPanier/afficher"; // ajustez selon vos besoins
 //    }
     @PostMapping("/changerStatut2/{idCommande}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String changerStatut2(@PathVariable Long idCommande) {
         Commande commande = commandeRepository.findById(idCommande)
                 .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
@@ -93,6 +121,7 @@ public class CommandeController {
         return "redirect:/commande/afficher";
     }
     @PostMapping("/changerStatut3/{idCommande}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String changerStatut3(@PathVariable Long idCommande) {
         Commande commande = commandeRepository.findById(idCommande)
                 .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
@@ -101,6 +130,7 @@ public class CommandeController {
         return "redirect:/commande/afficher";
     }
     @PostMapping("/changerStatut4/{idCommande}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String changerStatut4(@PathVariable Long idCommande) {
         Commande commande = commandeRepository.findById(idCommande)
                 .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
@@ -109,6 +139,7 @@ public class CommandeController {
         return "redirect:/commande/afficher";
     }
     @PostMapping("/changerStatut5/{idCommande}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String changerStatut5(@PathVariable Long idCommande) {
         Commande commande = commandeRepository.findById(idCommande)
                 .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
@@ -126,8 +157,6 @@ public class CommandeController {
         return "redirect:/commande/afficher";
     }
     
-    @Autowired
-	private CategorieRepository categorieRepository;
     @GetMapping("/afficherStats")
     public String afficherStats(Model model, Authentication authentication) {
         List<Commande> commandes = commandeRepository.findAll();

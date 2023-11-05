@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ProjetJee.ProjetJee.Repository.ProduitRepository;
+import ProjetJee.ProjetJee.Service.ProduitService;
 import ProjetJee.ProjetJee.Repository.CategoriePlaceRepository;
 import ProjetJee.ProjetJee.Repository.CategorieRepository;
 import ProjetJee.ProjetJee.Repository.DetailProduitRepository;
@@ -44,7 +45,12 @@ public class ProduitController {
 	private ProduitRepository produitRepository;
 	@Autowired
 	private CategorieRepository categorieRepository;
+	private final ProduitService produitService;
 
+    @Autowired
+    public ProduitController(ProduitService produitService) {
+        this.produitService = produitService;
+    }
 	@Autowired
 	private CategoriePlaceRepository categoriePlaceRepository;
 
@@ -82,6 +88,7 @@ public class ProduitController {
 	}
 
 	@PostMapping("/saveProduit")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String saveProduct(
 	    @RequestParam(value="id", required=false) Long id,
 	    @RequestParam("name") String name,
@@ -181,11 +188,11 @@ public class ProduitController {
 	}
 
 	@GetMapping("/deleteProduct/{id}")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public String deleteProduct(@PathVariable Long id) {
-		produitRepository.deleteById(id);
-		return "redirect:/produit";
-	}
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String deleteProduct(@PathVariable Long id) {
+        produitService.deleteProduitAndRelatedEntities(id);
+        return "redirect:/produit";
+    }
 
 	@GetMapping("/produit/perso/{id}")
 	public String persoProduct(@PathVariable Long id, Model model, Authentication authentication) {

@@ -14,7 +14,7 @@
 
     <title>Ajouter un produit</title>
   </head>
-  <header class="absolute inset-x-0 top-0 z-50 w-full">
+	  <header class="absolute inset-x-0 top-0 z-50 w-full">
     <div th:replace="~{navbar :: navbar}"></div>
   </header>
 
@@ -280,4 +280,16 @@
       </div>
     </form>
   </body>
+    <script>
+    var successMessage = "[[${successMessage}]]";
+
+    if (successMessage) {
+        alert(successMessage); // Affichez la popup d'erreur
+    }
+    var errorMessage = "[[${errorMessage}]]";
+
+    if (errorMessage) {
+        alert(errorMessage); // Affichez la popup d'erreur
+    }
+</script>
 </html>

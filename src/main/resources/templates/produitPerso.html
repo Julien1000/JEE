@@ -148,7 +148,7 @@
 		            <input type="number" id="quantite" th:name="quantite" min="1" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"/>
 		        </div>
 		    </div>
-		    
+		    <input type="hidden" th:name="idProduit "th:value="${produit.id}">
 		    <!-- Bouton Ajouter au Panier -->
 		    <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
 		        Ajouter au panier
@@ -212,7 +212,19 @@
 		<!-- </div> -->
 <!-- 
 	</div> -->
+
+
+	
   </body>
+    <!-- Insérez ce code JavaScript à la fin de votre fichier HTML -->
+<script>
+    var erreur = "[[${erreur}]]";
+
+    if (erreur) {
+        alert(erreur); // Affichez la popup d'erreur
+    }
+</script>
+
 
 </html>
 
