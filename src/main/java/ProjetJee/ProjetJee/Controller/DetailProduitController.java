@@ -85,16 +85,15 @@ public class DetailProduitController {
 			detailProduit = new DetailProduit();
 		}
 
-//	    // Mettez à jour les attributs du produit.
+	    // Mettez à jour les attributs du produit.
 		detailProduit.setDate(date);
 		detailProduit.setAdresse(adresse);
 
 		// Gérer l'affectation de la catégorie.
 		Produit produit = produitRepository.findById(produitId).orElse(null);
 		if (produit == null) {
-			// Vous pouvez gérer l'erreur ici si la catégorie n'est pas trouvée.
-			// Par exemple, rediriger vers un message d'erreur ou une page spécifique.
-			return "errorPage"; // Assurez-vous d'avoir une vue ou une page pour gérer cette erreur.
+
+			return "errorPage"; 
 		} else {
 			detailProduit.setProduit(produit);
 		}

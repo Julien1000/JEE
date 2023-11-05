@@ -1,16 +1,10 @@
 package ProjetJee.ProjetJee.Entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class User {
-    @Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", username=" + username + ", email=" + email + ", password="
-				+ password + ", role=" + role + "]";
-	}
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -58,22 +58,22 @@ public class PanierController {
                 if (quantite <= 0) {
                     // La quantité est invalide, affichez la popup d'erreur.
                 	redirectAttributes.addFlashAttribute("erreur", "Quantité non valide.");
-                    return "redirect:/produit/perso/"+idProduit+"?erreur=erreurQuantite"; // Remplacez par la page de produit appropriée
+                    return "redirect:/produit/perso/"+idProduit+"?erreur=erreurQuantite";
                 }
             } catch (NumberFormatException e) {
                 // La chaîne n'est pas un entier valide, affichez la popup d'erreur.
             	redirectAttributes.addFlashAttribute("erreur", "Quantité non valide.");
-                return "redirect:/produit/perso/"+idProduit+"?erreur=erreurQuantite"; // Remplacez par la page de produit appropriée
+                return "redirect:/produit/perso/"+idProduit+"?erreur=erreurQuantite"; 
             }
         }else {
         	redirectAttributes.addFlashAttribute("erreur", "Quantité non valide.");
-            return "redirect:/produit/perso/"+idProduit+"?erreur=erreurQuantite"; // Remplacez par la page de produit appropriée
+            return "redirect:/produit/perso/"+idProduit+"?erreur=erreurQuantite"; 
 
         }
 
     	if (quantite < 1) {
     		redirectAttributes.addFlashAttribute("erreur", "Quantité non conforme");
-            return "redirect:/produit/perso/"+idProduit +"?erreur=erreurQuantite"; // Remplacez par la page de produit appropriée
+            return "redirect:/produit/perso/"+idProduit +"?erreur=erreurQuantite"; 
         }
 
     	User user = userRepository.findByUsernameOrEmail(authentication.getName(), authentication.getName());
@@ -83,7 +83,7 @@ public class PanierController {
         // Vérifier si la quantité demandée est disponible
         if (categoriePlace.getStock() < quantite) {
         	redirectAttributes.addFlashAttribute("erreur", "Stock insuffisant");
-            return "redirect:/produit/perso/"+idProduit + "?erreur=erreurStock"; // Remplacez par la page de produit appropriée
+            return "redirect:/produit/perso/"+idProduit + "?erreur=erreurStock"; 
         }
 
         // Mettre à jour le stock

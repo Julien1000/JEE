@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ProjetJee.ProjetJee.Entity.Categorie;
@@ -66,7 +65,6 @@ public class CategoriePlaceController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String sauvegarderCategoriePlace(@ModelAttribute CategoriePlace categoriePlace, RedirectAttributes redirectAttributes) {
         // Code pour sauvegarder la CategoriePlace dans la base de données
-        // Assurez-vous de gérer les détailsProduit associés ici
 	try {
 	        categoriePlaceRepository.save(categoriePlace);
 			// Message de succès en cas de soumission réussie

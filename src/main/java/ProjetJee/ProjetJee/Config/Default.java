@@ -1,7 +1,5 @@
 package ProjetJee.ProjetJee.Config;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -15,86 +13,78 @@ import jakarta.annotation.PostConstruct;
 @Component
 public class Default {
 
-	  @Autowired
-	    private UserRepository userRepository;
-	  @Autowired
-	  private RoleRepository roleRepository;
-		@Autowired
-		private PasswordEncoder passwordEncoder;
-		@PostConstruct
-	    public void createInitialRole() {
-	        // On vérifie que l'utilisateur existe
-	    	
-	    	Role existe  = roleRepository.findByName("ROLE_ADMIN");
-	      
-	        
-	        // L'utilisateur n'existe pas
-	        if (existe == null) {
-	            Role role = new Role();
-	            role.setName("ROLE_ADMIN");
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private RoleRepository roleRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
+	@PostConstruct
+	public void createInitialRole() {
 
-	            roleRepository.save(role);
-	        }
-	        
-	    	Role existe2  = roleRepository.findByName("ROLE_USER");
-	      
-	        
-	        // L'utilisateur n'existe pas
-	        if (existe2 == null) {
-	            Role role2 = new Role();
-	            role2.setName("ROLE_USER");
+		Role existe = roleRepository.findByName("ROLE_ADMIN");
 
+		if (existe == null) {
+			Role role = new Role();
+			role.setName("ROLE_ADMIN");
 
-	            roleRepository.save(role2);
-	        }
-	    }
-	    @PostConstruct
-	    public void createInitialUser() {
-	        // On vérifie que l'utilisateur existe
-	    	
-	    	User existe  = userRepository.findByUsernameOrEmail("admin","admin@gmail.com");
-	      
-	        
-	        // L'utilisateur n'existe pas
-	        if (existe == null) {
-	            User utilisateur = new User();
-	            utilisateur.setName("admin");
-	            utilisateur.setUsername("admin");
-	            utilisateur.setEmail("admin@gmail.com");
-	            // Récupérer le Role depuis la base de données
-	            Role role = roleRepository.findByName("ROLE_ADMIN");
+			roleRepository.save(role);
+		}
 
-	            // Affecter le rôle à l'utilisateur
-	            utilisateur.setRole(role);	  
-	            String motDePasse = "admin";
-	            String encodedPassword = passwordEncoder.encode(motDePasse);
+		Role existe2 = roleRepository.findByName("ROLE_USER");
 
-	            utilisateur.setPassword(encodedPassword);
+		if (existe2 == null) {
+			Role role2 = new Role();
+			role2.setName("ROLE_USER");
 
-	            userRepository.save(utilisateur);
-	        }
-	        
-	        User existe2  = userRepository.findByUsernameOrEmail("test","test@gmail.com");
-	      
-	        
-	        // L'utilisateur n'existe pas
-	        if (existe2 == null) {
-	            User utilisateur2 = new User();
-	            utilisateur2.setName("test");
-	            utilisateur2.setUsername("test");
-	            utilisateur2.setEmail("test@gmail.com");
-	            // Récupérer le Role depuis la base de données
-	            Role role2 = roleRepository.findByName("ROLE_USER");
+			roleRepository.save(role2);
+		}
+	}
 
-	            // Affecter le rôle à l'utilisateur
-	            utilisateur2.setRole(role2);	  
-	            String motDePasse = "test";
-	            String encodedPassword = passwordEncoder.encode(motDePasse);
+	@PostConstruct
+	public void createInitialUser() {
 
-	            utilisateur2.setPassword(encodedPassword);
+		User existe = userRepository.findByUsernameOrEmail("admin", "admin@gmail.com");
 
-	            userRepository.save(utilisateur2);
-	        }
-	    }
+		// L'utilisateur n'existe pas
+		if (existe == null) {
+			User utilisateur = new User();
+			utilisateur.setName("admin");
+			utilisateur.setUsername("admin");
+			utilisateur.setEmail("admin@gmail.com");
+			// Récupérer le Role depuis la base de données
+			Role role = roleRepository.findByName("ROLE_ADMIN");
+
+			// Affecter le rôle à l'utilisateur
+			utilisateur.setRole(role);
+			String motDePasse = "admin";
+			String encodedPassword = passwordEncoder.encode(motDePasse);
+
+			utilisateur.setPassword(encodedPassword);
+
+			userRepository.save(utilisateur);
+		}
+
+		User existe2 = userRepository.findByUsernameOrEmail("test", "test@gmail.com");
+
+		// L'utilisateur n'existe pas
+		if (existe2 == null) {
+			User utilisateur2 = new User();
+			utilisateur2.setName("test");
+			utilisateur2.setUsername("test");
+			utilisateur2.setEmail("test@gmail.com");
+			// Récupérer le Role depuis la base de données
+			Role role2 = roleRepository.findByName("ROLE_USER");
+
+			// Affecter le rôle à l'utilisateur
+			utilisateur2.setRole(role2);
+			String motDePasse = "test";
+			String encodedPassword = passwordEncoder.encode(motDePasse);
+
+			utilisateur2.setPassword(encodedPassword);
+
+			userRepository.save(utilisateur2);
+		}
+	}
 }

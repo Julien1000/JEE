@@ -1,6 +1,5 @@
 package ProjetJee.ProjetJee.Controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -18,14 +17,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import ProjetJee.ProjetJee.Entity.Categorie;
 import ProjetJee.ProjetJee.Entity.Commande;
 import ProjetJee.ProjetJee.Entity.DetailCommande;
 import ProjetJee.ProjetJee.Entity.Produit;
 
-import ProjetJee.ProjetJee.Repository.DetailCommandeRepository;
 import ProjetJee.ProjetJee.Repository.ProduitRepository;
 import ProjetJee.ProjetJee.Repository.CategorieRepository;
 import ProjetJee.ProjetJee.Repository.CommandeRepository;
@@ -40,8 +37,6 @@ public class CommandeController {
     @Autowired 
     private ProduitRepository produitRepository;
     
-    @Autowired
-    private DetailCommandeRepository detailCommandeRepository;
     
     @Autowired 
     private CategorieRepository categorieRepository;
@@ -84,34 +79,7 @@ public class CommandeController {
         model.addAttribute("produits", produits);
         return "creerCommande";
     }
-//    @PostMapping("/saveCommande")
-//    public String saveCommande(
-//        @RequestParam("idUtilisateur") Long idUtilisateur,
-//        @RequestParam("idProduits") List<Long> idProduits,
-//        @RequestParam("quantites") List<Integer> quantites
-//    ) {
-//
-//        Commande commande = new Commande();
-//        commande.setIdUtilisateur(idUtilisateur);
-//        commande.setStatus(1); // ou une autre valeur selon votre logique métier
-//        commandeRepository.save(commande);
-//
-//        List<DetailCommande> detailsCommande = new ArrayList<>();
-//        for (int i = 0; i < idProduits.size(); i++) {
-//            DetailCommande detailCommande = new DetailCommande();
-//            Produit produit = produitRepository.findById(idProduits.get(i))
-//                    .orElseThrow(() -> new RuntimeException("Produit non trouvé"));
-//            detailCommande.setProduit(produit);
-//            detailCommande.setQuantite(quantites.get(i));
-//            detailCommande.setValiderPanier(commande); // Définir la commande dans DetailCommande
-//            detailCommandeRepository.save(detailCommande);
-//            detailsCommande.add(detailCommande);
-//        }
-//        commande.setDetailCommande(detailsCommande);
-//        commandeRepository.save(commande);
-//
-//        return "redirect:/validerPanier/afficher"; // ajustez selon vos besoins
-//    }
+
     @PostMapping("/changerStatut2/{idCommande}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String changerStatut2(@PathVariable Long idCommande) {
