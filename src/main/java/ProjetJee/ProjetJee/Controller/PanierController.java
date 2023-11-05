@@ -2,6 +2,7 @@ package ProjetJee.ProjetJee.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ProjetJee.ProjetJee.Entity.*;
 import ProjetJee.ProjetJee.Repository.*;
+import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +31,9 @@ public class PanierController {
     private DetailCommandeRepository detailCommandeRepository;
     @Autowired
     private CommandeRepository commandeRepository;
+    
+    @Autowired 
+    private CategorieRepository categorieRepository;
     
     @Autowired 
     private DetailProduitRepository detailProduitRepository;
@@ -142,6 +147,23 @@ public class PanierController {
     public String monPanier(Model model, Authentication authentication) {
         User user = userRepository.findByUsernameOrEmail(authentication.getName(), authentication.getName());
         Panier panier = panierRepository.findByUserId(user.getId());
+		boolean isAdmin = false;
+	    boolean isUserLoggedIn = false;
+        // Vérifier si l'utilisateur est authentifié
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Ajouter le nom de l'utilisateur au modèle
+            model.addAttribute("currentUser", authentication.getName());
+            isUserLoggedIn = true;
+            
+            // Vérifier si l'utilisateur a le rôle "ROLE_ADMIN"
+            isAdmin = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_ADMIN"::equals);
+            List<Categorie> categorie = (List<Categorie>) categorieRepository.findAll();
+    		model.addAttribute("categories", categorie);
+    		List<Produit> produits = (List<Produit>) produitRepository.findAll();
+    	    model.addAttribute("produits", produits);
+        }
 
         if (panier != null && panier.getDetailCommande() != null) {
             List<Map<String, Object>> detailPanierList = new ArrayList<>();
@@ -149,6 +171,7 @@ public class PanierController {
             for (DetailCommande detailCommande : panier.getDetailCommande()) {
                 Map<String, Object> detailPanier = new HashMap<>();
                 detailPanier.put("quantite", detailCommande.getQuantite());
+                detailPanier.put("id", detailCommande.getId());
                 detailPanier.put("categoriePlace", categoriePlaceRepository.findById(detailCommande.getCategoriePlace().getId()).orElse(null));
                 DetailProduit detailProduit = detailProduitRepository.findById(detailCommande.getCategoriePlace().getDetailProduit().getId()).orElse(null);
                 detailPanier.put("detailProduit", detailProduit);
@@ -160,7 +183,8 @@ public class PanierController {
             model.addAttribute("detailPanierList", detailPanierList);
         }
         List<Commande> commandes = commandeRepository.findByUser(user);
-
+        model.addAttribute("isUserLoggedIn", isUserLoggedIn);
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("commandes", commandes);
         model.addAttribute("statusList", Arrays.asList(1, 2, 3, 4));
         
@@ -184,5 +208,39 @@ public class PanierController {
 
         return "redirect:/produit";  // Remplacez par la page de redirection appropriée
     }
+    @Transactional
+    @PostMapping("/supprimerElementDuPanier")
+    public String supprimerElementDuPanier(@RequestParam(name = "detailCommandeId") Long detailCommandeId, Authentication authentication, RedirectAttributes redirectAttributes) {
+        User user = userRepository.findByUsername(authentication.getName());
+        Panier panier = panierRepository.findByUserId(user.getId());
+
+        if (panier != null && panier.getDetailCommande() != null) {
+            // Trouver le DetailCommande à supprimer
+            DetailCommande detailToRemove = panier.getDetailCommande().stream()
+                    .filter(detail -> detail.getId().equals(detailCommandeId))
+                    .findFirst()
+                    .orElse(null);
+
+            if (detailToRemove != null) {
+                // Mettre à jour le stock
+                CategoriePlace categoriePlace = detailToRemove.getCategoriePlace();
+                categoriePlace.setStock(categoriePlace.getStock() + detailToRemove.getQuantite());
+                categoriePlaceRepository.save(categoriePlace);
+
+                // Supprimer le DetailCommande du panier et de la base de données
+                panier.getDetailCommande().remove(detailToRemove);
+                detailCommandeRepository.delete(detailToRemove);
+                panierRepository.save(panier);  // Enregistrer le panier mis à jour
+            } else {
+                redirectAttributes.addFlashAttribute("erreur", "L'élément à supprimer n'a pas été trouvé dans le panier.");
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("erreur", "Le panier est vide ou n'existe pas.");
+        }
+
+        return "redirect:/monPanier";  // Redirection vers la page du panier
+    }
+
+
 
 }
