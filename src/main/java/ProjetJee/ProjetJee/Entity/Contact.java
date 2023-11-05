@@ -5,7 +5,6 @@ package ProjetJee.ProjetJee.Entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,8 +21,6 @@ public class Contact {
     private String motif;
     @NotNull
     private String description;
-
-    // Ajoutez les getters et setters
 
     public Long getId() {
         return id;

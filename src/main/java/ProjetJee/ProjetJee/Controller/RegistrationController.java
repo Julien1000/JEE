@@ -60,7 +60,7 @@ public class RegistrationController {
         // Enregistrer l'utilisateur dans la base de données
         userRepository.save(user);
 
-        // Rediriger l'utilisateur vers la page d'accueil
+        // Rediriger l'utilisateur vers le login
         return "redirect:/login";
     }
 }

@@ -13,7 +13,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -32,7 +31,7 @@ public class DetailCommande {
 	private int quantite;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_commande") // Assurez-vous que le nom de la colonne est correct
+	@JoinColumn(name = "id_commande") 
 	private Commande commande;
 	
 	@ManyToOne
@@ -87,7 +86,6 @@ public class DetailCommande {
 	}
 
 	public void setCommande(Commande commande) {
-		// TODO Auto-generated method stub
 		this.commande = commande;
 	}
 

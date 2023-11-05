@@ -1,14 +1,9 @@
 package ProjetJee.ProjetJee.Controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.zip.GZIPOutputStream;
 
-import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -34,7 +27,6 @@ import ProjetJee.ProjetJee.Entity.Categorie;
 import ProjetJee.ProjetJee.Entity.CategoriePlace;
 import ProjetJee.ProjetJee.Entity.DetailProduit;
 import ProjetJee.ProjetJee.Entity.Produit;
-import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
@@ -115,9 +107,7 @@ public class ProduitController {
 		// Gérer l'affectation de la catégorie.
 		Categorie cat = categorieRepository.findById(categorieId).orElse(null);
 		if (cat == null) {
-			// Vous pouvez gérer l'erreur ici si la catégorie n'est pas trouvée.
-			// Par exemple, rediriger vers un message d'erreur ou une page spécifique.
-			return "errorPage"; // Assurez-vous d'avoir une vue ou une page pour gérer cette erreur.
+			return "errorPage"; 
 		} else {
 			produit.setCategorie(cat);
 		}
@@ -180,7 +170,7 @@ public class ProduitController {
 
 		if (produit.isPresent() && produit.get().getImage() != null) {
 			return ResponseEntity.ok()
-					.contentType(MediaType.IMAGE_JPEG) // Assurez-vous de définir le type de contenu approprié
+					.contentType(MediaType.IMAGE_JPEG) 
 					.body(produit.get().getImage());
 		} else {
 			return ResponseEntity.notFound().build();
@@ -224,24 +214,13 @@ public class ProduitController {
 			model.addAttribute("produit", produit);
 
 			List<DetailProduit> allDetailProduits = (List<DetailProduit>) detailProduitRepository.findAll();
-			// for (DetailProduit detailProduit : allDetailProduits) {
-			// if(detailProduit.getProduit().getId() != produit.getId()) {
-			// allDetailProduits.remove(detailProduit);
-			// }
-			// }
+
 			allDetailProduits = allDetailProduits.stream()
 					.filter(detailProduit -> detailProduit.getProduit().getId() == produit.getId())
 					.collect(Collectors.toList());
 			model.addAttribute("detailProduit", allDetailProduits);
 			model.addAttribute("detailProduit", allDetailProduits);
 
-			// DetailProduit detailProduit = detailProduitRepository.findByProduit(produit);
-			// model.addAttribute("detailProduit", detailProduit);
-
-			// Récupérer les CategoriePlace associées
-			// List<CategoriePlace> categoriePlaces =
-			// categoriePlaceRepository.findByDetailProduit(detailProduit);
-			// model.addAttribute("categoriePlaces", categoriePlaces);
 			Long categorieId = produit.getCategorie().getId();
 			model.addAttribute("idCategorie", categorieId);
 		} else {
@@ -282,10 +261,9 @@ public class ProduitController {
 			model.addAttribute("idCategorie1", categorieId1);
 			String categorieName1 = produitPresent.getCategorie().getName();
 			model.addAttribute("nameCategorie1", categorieName1);
-			return "produitForm"; // utilisez le même formulaire que pour ajouter un produit, mais avec les
-									// données pré-remplies.
+			return "produitForm"; 
 		} else {
-			return "redirect:/produit"; // ou redirigez vers une page d'erreur si vous le souhaitez.
+			return "redirect:/produit"; 
 		}
 	}
 
@@ -328,7 +306,7 @@ public class ProduitController {
 
 		if (detailProduit.isPresent() && detailProduit.get().getImageLieu() != null) {
 			return ResponseEntity.ok()
-					.contentType(MediaType.IMAGE_JPEG) // Assurez-vous de définir le type de contenu approprié
+					.contentType(MediaType.IMAGE_JPEG) 
 					.body(detailProduit.get().getImageLieu());
 		} else {
 			return ResponseEntity.notFound().build();
