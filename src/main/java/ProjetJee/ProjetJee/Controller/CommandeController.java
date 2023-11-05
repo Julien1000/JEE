@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -219,7 +220,7 @@ public class CommandeController {
         model.addAttribute("top5ProduitsQuantites", top5ProduitsQuantites);
         
         boolean isAdmin = false;
-	    boolean isUserLoggedIn = false;
+	      boolean isUserLoggedIn = false;
         // Vérifier si l'utilisateur est authentifié
         if (authentication != null && authentication.isAuthenticated()) {
             // Ajouter le nom de l'utilisateur au modèle
@@ -235,6 +236,8 @@ public class CommandeController {
     		List<Produit> produits = (List<Produit>) produitRepository.findAll();
     	    model.addAttribute("produits", produits);
         }
+        List<Categorie> categories = (List<Categorie>) categorieRepository.findAll();
+		    model.addAttribute("categories", categories);
         // Ajouter la variable isAdmin au modèle
         model.addAttribute("isUserLoggedIn", isUserLoggedIn);
         model.addAttribute("isAdmin", isAdmin);
