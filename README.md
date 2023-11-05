@@ -5,7 +5,7 @@ BERNARD Adrien, DUPONT Hippolyte, PAPINI Julien, HERAS ESPINOSA Alejandro
 # Thème : Application web de vente de billet d'évènement
 
 # Fonctionnalitées
-Adminsitrateur :
+Adminstrateur :
  - Ajouter/modifier/supprimer une catégorie d'évènement
  - Ajouter/modifier/supprimer un produit : exemple concert de The Weeknd
  - Ajouter un detail de produit : exemple le 15/08/2023 au Stade de France
@@ -62,7 +62,7 @@ Télécharger l'archive via le lien puis de la dézipper :
 # Initialisation de la base de données
 Dans mysql : 
 Création de la base de donnée
-- CREATE DATABASE IF NOT EXISTS JEE;
+- CREATE DATABASE IF NOT EXISTS JEE;  
 Le projet peut-être utilisé sans cette étape mais il est préférable de le faire pour une utilisation plus réaliste.  
 Utilisation de la base de donnée
 - use JEE
