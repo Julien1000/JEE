@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ProjetJee.ProjetJee.Entity.Categorie;
 import ProjetJee.ProjetJee.Entity.DetailProduit;
 import ProjetJee.ProjetJee.Entity.Produit;
+import ProjetJee.ProjetJee.Repository.CategorieRepository;
 import ProjetJee.ProjetJee.Repository.DetailProduitRepository;
 import ProjetJee.ProjetJee.Repository.ProduitRepository;
 
@@ -32,6 +33,9 @@ public class DetailProduitController {
 
 	@Autowired
 	private DetailProduitRepository detailProduitRepository;
+	
+	@Autowired
+	private CategorieRepository categorieRepository;
 
 	@GetMapping(path = "/addDetailProduit")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -39,6 +43,8 @@ public class DetailProduitController {
 		List<Produit> produits = (List<Produit>) produitRepository.findAll();
 		model.addAttribute("produit", produits);
 		model.addAttribute("detailProduit", new DetailProduit());
+		List<Categorie> categories = (List<Categorie>) categorieRepository.findAll();
+		model.addAttribute("categories", categories);
 		boolean isAdmin = false;
 		boolean isUserLoggedIn = false;
 		// Vérifier si l'utilisateur est authentifié

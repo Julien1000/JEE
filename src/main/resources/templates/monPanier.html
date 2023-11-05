@@ -62,6 +62,13 @@
 							<td th:text="${detail.quantite * detail.categoriePlace.prix}"
 								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
 							</td>
+							<td>
+								<form th:action="@{/supprimerElementDuPanier}" method="post">
+			                        <input type="hidden" th:name="detailCommandeId" th:value="${detail.id}" />
+			                        <input type="submit" value="Supprimer cet élément" />
+			                    </form>
+			                    
+			                </td>
 						</tr>
 					</tbody>
 				</table>
