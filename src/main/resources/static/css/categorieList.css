@@ -801,3 +801,8 @@ video {
 .z-51 {
   z-index: 51;
 }
+
+.bg-indigo-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(79 70 229 / var(--tw-bg-opacity));
+}

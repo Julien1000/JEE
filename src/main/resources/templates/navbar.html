@@ -74,12 +74,13 @@
 					  <div th:if="${isUserLoggedIn != null && isAdmin}" class="py-1">
 						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addProduit}" tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100"  role="menuitem" >+ Produit</a>
 						<a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/addCategorie}"  tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100"  role="menuitem" >+ Catégorie</a>
-						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addDetailProduit}" tabindex="4" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Detail produit</a>
-						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/ajouterCategoriePlace}" tabindex="5" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Categorie place</a>
-						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" tabindex="2" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All produit</a>
-						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" tabindex="3" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All categorie</a>
-						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficher}" tabindex="7" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Gérer les commandes</a>
-						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficherStats}" tabindex="6" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Statistiques commandes</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addDetailProduit}" tabindex="2" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Detail produit</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/ajouterCategoriePlace}" tabindex="3" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Categorie place</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" tabindex="4" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All produit</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" tabindex="5" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All categorie</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficher}" tabindex="6" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Gérer les commandes</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficherStats}" tabindex="7" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Statistiques commandes</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/contactList}" tabindex="8" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Demandes de contact</a>
 
 					  </div>
 					</div>
@@ -203,13 +204,14 @@
 						<div th:if="${isUserLoggedIn != null && isAdmin}" class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none" aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
 						  <div th:if="${isUserLoggedIn != null && isAdmin}" class="py-1">
 							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addProduit}" tabindex="0" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100"  role="menuitem" >+ Produit</a>
-							<a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/addCategorie}"  tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100"  role="menuitem" >+ Catégorie</a>
-							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addDetailProduit}" tabindex="4" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Detail produit</a>
-							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/ajouterCategoriePlace}" tabindex="5" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Categorie place</a>
-							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" tabindex="2" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All produit</a>
-							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" tabindex="3" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All categorie</a>
-							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficher}" tabindex="7" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Gérer les commandes</a>
-							<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficherStats}" tabindex="6" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Statistiques commandes</a>
+						<a th:if="${isUserLoggedIn != null && isUserLoggedIn}" th:href="@{/addCategorie}"  tabindex="1" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100"  role="menuitem" >+ Catégorie</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/addDetailProduit}" tabindex="2" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Detail produit</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/ajouterCategoriePlace}" tabindex="3" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >+ Categorie place</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/produit}" tabindex="4" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All produit</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/categorie}" tabindex="5" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >All categorie</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficher}" tabindex="6" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Gérer les commandes</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/commande/afficherStats}" tabindex="7" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Statistiques commandes</a>
+						<a th:if="${isUserLoggedIn != null && isAdmin}" th:href="@{/contactList}" tabindex="8" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-100" role="menuitem" >Demandes de contact</a>
 						  </div>
 						  </div>
 						</div>

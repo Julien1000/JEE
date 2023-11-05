@@ -212,7 +212,7 @@ public class PanierController {
     @Transactional
     @PostMapping("/supprimerElementDuPanier")
     public String supprimerElementDuPanier(@RequestParam(name = "detailCommandeId") Long detailCommandeId, Authentication authentication, RedirectAttributes redirectAttributes) {
-        User user = userRepository.findByUsername(authentication.getName());
+    	User user = userRepository.findByUsernameOrEmail(authentication.getName(), authentication.getName());
         Panier panier = panierRepository.findByUserId(user.getId());
 
         if (panier != null && panier.getDetailCommande() != null) {
