@@ -46,12 +46,13 @@ src/main/java/ProjetJee/ProjetJee :
 - [Service] contient tous les services du projet
 - [UserDetail] contient
   
-src/main/ressources
-- /static :
+src/main/ressources :  
+/static :
  - [css] contient tous les fichiers css
  - [js] contient tous les fichiers javascript
  - [img] contient les images du projet
-- /templates/ contient les différents templates des pages du projet
+   
+/templates/ contient les différents templates des pages du projet
 
 # Récupération de l'archive 
 Télécharger l'archive via le lien puis de la dézipper :
@@ -62,21 +63,21 @@ Télécharger l'archive via le lien puis de la dézipper :
 Dans mysql : 
 Création de la base de donnée
 - CREATE DATABASE IF NOT EXISTS JEE;
-Le projet peut-être utilisé sans cette étape mais il est préférable de le faire pour une utilisation plus réaliste.
+Le projet peut-être utilisé sans cette étape mais il est préférable de le faire pour une utilisation plus réaliste.  
 Utilisation de la base de donnée
 - use JEE
 Chargement des données
 - source JEE.sql
 
 # Lancement du projet
-Avant de lancer le projet il faut se rendre dans le fichier src/main/ressources/application.properties et mettre l'identifiant et le mot de passe de votre mysql.
+Avant de lancer le projet il faut se rendre dans le fichier src/main/ressources/application.properties et mettre l'identifiant et le mot de passe de votre mysql.  
 Dans eclipse, cliquez sur run une fois dans le fichier src/main/java/ProjetJEE/ProjetJEE/ProjetJeeApplication.java.
 
 # Nous contacter
 
-Adrien : bernardadr@cy-tech.fr
-Hippolyte : duponthipp@cy-tech.fr
-Julien : papinijuli@cy-tech.fr
-Alejandro : herasespin@cy-tech.fr
+Adrien : bernardadr@cy-tech.fr  
+Hippolyte : duponthipp@cy-tech.fr  
+Julien : papinijuli@cy-tech.fr  
+Alejandro : herasespin@cy-tech.fr  
 
 
