@@ -115,13 +115,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="commande : ${commandes}">
-							<th
-								class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs">
-								<span th:each="detailCommande : ${commande.detailCommande}"
-									th:text="${detailCommande.categoriePlace.detailProduit.produit.name}"
-									class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></span>
-							</th>
+						 <tr th:each="commande : ${commandes}"
+						      th:unless="${#lists.isEmpty(commande.detailCommande) || #strings.isEmpty(commande.detailCommande[0].categoriePlace.detailProduit.produit.name)}">
+						    <th class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs">
+						      <span th:each="detailCommande : ${commande.detailCommande}"
+						            th:if="${not #strings.isEmpty(detailCommande.categoriePlace.detailProduit.produit.name)}"
+						            th:text="${detailCommande.categoriePlace.detailProduit.produit.name}"
+						            class="text-blueGray-700 whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 text-left align-middle text-xs"></span>
+						    </th>
 
 							<td
 								class="whitespace-nowrap border-l-0 border-r-0 border-t-0 p-4 px-6 align-middle text-xs">
