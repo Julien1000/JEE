@@ -1,5 +1,6 @@
 # JEE
-Projet JEE 2023/2024 Groupe : Les Éclairs Cosmiques.  
+Projet JEE 2023/2024  
+Groupe : Les Éclairs Cosmiques.  
 BERNARD Adrien, DUPONT Hippolyte, PAPINI Julien, HERAS ESPINOSA Alejandro
 
 # Thème : Application web de vente de billet d'évènement
