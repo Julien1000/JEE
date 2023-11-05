@@ -158,11 +158,8 @@ public class CommandeController {
         return "redirect:/commande/afficher";
     }
     
-    @Autowired
-	private CategorieRepository categorieRepository;
     @GetMapping("/afficherStats")
     public String afficherStats(Model model, Authentication authentication) {
-
         List<Commande> commandes = commandeRepository.findAll();
 
         int nombreCommandesStatus1 = 0;
@@ -221,7 +218,7 @@ public class CommandeController {
         model.addAttribute("totalProduitsVendus", produitsVendus.values().stream().mapToInt(Integer::intValue).sum());
         model.addAttribute("top5ProduitsNoms", top5ProduitsNoms);
         model.addAttribute("top5ProduitsQuantites", top5ProduitsQuantites);
-
+        
         boolean isAdmin = false;
 	      boolean isUserLoggedIn = false;
         // Vérifier si l'utilisateur est authentifié
