@@ -54,8 +54,16 @@ src/main/ressources :
    
 /templates/ contient les différents templates des pages du projet
 
+# Améliorations depuis la soutenance
+- Remaniement de la base de données pour qu'elle soit plus adaptée à notre thème de vente de billet
+- Ajout d'images représentant les différents stades pour choisir sa catégorie de place
+- Choix parmi différentes date, différents lieux et différentes catégories de places pour un seul et même évènement
+- Ajout du formulaire de contact
+- Panier fonctionnel
+- Correction et optimisation de la barre de recherche
+
 # Récupération de l'archive 
-Télécharger l'archive via le lien puis de la dézipper :
+Télécharger l'archive via le lien puis la dézipper :
 - unzip JEE
 - cd JEE
 
@@ -67,9 +75,9 @@ Création de la base de donnée
 Cette étape permet d'insérer des objets dans la base de données pour une démonstration.  
 Le projet peut-être utilisé sans cette étape mais il est préférable de le faire pour une utilisation plus réaliste.  
 Utilisation de la base de donnée
-- use JEE
+- use JEE;
 Chargement des données
-- source JEE.sql
+- source JEE.sql;
 
 # Lancement du projet
 Avant de lancer le projet il faut se rendre dans le fichier src/main/ressources/application.properties et mettre l'identifiant et le mot de passe de votre mysql.  
