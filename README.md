@@ -77,10 +77,10 @@ Dans eclipse, cliquez sur run une fois dans le fichier src/main/java/ProjetJEE/P
 
 # Utilisation
 Peu importe si les données ont été initalisée avec le fichier sql ou non, il est possible d'utiliser l'application :  
-Compte administrateur :  
+Compte administrateur :
 - username : admin
 - email : admin@gmail.com
-- password : admin
+- password : admin  
 Compte utilisateur :
 - username : test
 - email :test@gmail.com
