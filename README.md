@@ -93,7 +93,7 @@ Compte administrateur :
 
 Compte utilisateur :
 - username : test
-- email :test@gmail.com
+- email : test@gmail.com
 - password : test
 
 Il est aussi possible de se créer un compte utilisateur via le formulaire d'inscription.  
