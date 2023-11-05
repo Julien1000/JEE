@@ -32,6 +32,23 @@ Utilisateur :
 - [mysql] est utilisé pour sotcker les différentes données 
 - [Chart.js] est une bibliothèque utilisée pour créer des graphes et des visualisations de données
 - [Hibernate] est utilisé pour la communication avec la base de donnée
+- [Thymeleaf] est utilisé pour la communication avec la base de donées et les vues
 
 # Arborescence
+
+src/main/java/ProjetJee/ProjetJee : 
+- [Config] contient les controllers responsables de la configuration avant lancement du projet
+- [Controller] contient tous les controllers du projet
+- [Entity] contient tous les fichiers des entitées de la base de données
+- [Repository] contient tous les repository du projet
+- [SecurityConfig] contient tous les fichiers nécéssaires à la configuration de la sécurité du projet
+- [Service] contient tous les services du projet
+- [UserDetail] contient
+  
+src/main/ressources
+/static :
+ -[css] contient tous les fichiers css
+ -[js] contient tous les fichiers javascript
+ -[img] contient les images du projet
+ /templates contient les différents templates des pages du projet
 
