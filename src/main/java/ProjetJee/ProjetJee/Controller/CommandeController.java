@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +48,7 @@ public class CommandeController {
     }
     
     @GetMapping("/creer")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String creerFormulaire(Model model) {
         List<Produit> produits = (List<Produit>) produitRepository.findAll();
         model.addAttribute("produits", produits);
@@ -81,6 +83,7 @@ public class CommandeController {
 //        return "redirect:/validerPanier/afficher"; // ajustez selon vos besoins
 //    }
     @PostMapping("/changerStatut2/{idCommande}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String changerStatut2(@PathVariable Long idCommande) {
         Commande commande = commandeRepository.findById(idCommande)
                 .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
@@ -89,6 +92,7 @@ public class CommandeController {
         return "redirect:/commande/afficher";
     }
     @PostMapping("/changerStatut3/{idCommande}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String changerStatut3(@PathVariable Long idCommande) {
         Commande commande = commandeRepository.findById(idCommande)
                 .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
@@ -97,6 +101,7 @@ public class CommandeController {
         return "redirect:/commande/afficher";
     }
     @PostMapping("/changerStatut4/{idCommande}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String changerStatut4(@PathVariable Long idCommande) {
         Commande commande = commandeRepository.findById(idCommande)
                 .orElseThrow(() -> new RuntimeException("Commande non trouvée"));
@@ -105,6 +110,7 @@ public class CommandeController {
         return "redirect:/commande/afficher";
     }
     @PostMapping("/changerStatut5/{idCommande}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String changerStatut5(@PathVariable Long idCommande) {
         Commande commande = commandeRepository.findById(idCommande)
                 .orElseThrow(() -> new RuntimeException("Commande non trouvée"));

@@ -63,6 +63,7 @@ public class DetailProduitController {
 	}
 
 	@PostMapping("/saveDetailProduit")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String saveProduct(@RequestParam(value = "id", required = false) Long id, @RequestParam("date") Date date,
 			@RequestParam("adresse") String adresse, @RequestParam("produit") Long produitId,
 			@RequestParam("image") MultipartFile file,

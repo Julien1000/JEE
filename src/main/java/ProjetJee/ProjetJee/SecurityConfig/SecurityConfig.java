@@ -31,8 +31,18 @@ public class SecurityConfig {
                         .requestMatchers("/img/**").permitAll()
 
                          .requestMatchers("/panier").hasRole("USER")
+                         
+                         
                          .requestMatchers("/addProduit").hasRole("ADMIN")
                          .requestMatchers("/addCategorie").hasRole("ADMIN")
+                         .requestMatchers("/addDetailProduit").hasRole("ADMIN")
+                         .requestMatchers("/ajouterCategoriePlace").hasRole("ADMIN")
+                         .requestMatchers("/commande/**").hasRole("ADMIN")
+                         .requestMatchers("/produit").hasRole("ADMIN")
+                         .requestMatchers("/categorie").hasRole("ADMIN")
+
+
+
                          .anyRequest().authenticated()
 
 
